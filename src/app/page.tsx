@@ -40,10 +40,10 @@ export default function Home() {
                     <div className="flex p-10 flex-col bg-white rounded-2xl">
                         <Link 
                             className="flex flex-col items-center justify-center"
-                            href="/prestamo-de-material"
+                            href="/prestamo-de-portatiles"
                         >
                             <IoIosLaptop color={"#1B669A"} size={30}/>
-                            <p  className="text-[#1B669A]">Préstamo de ordenadores</p>
+                            <p  className="text-[#1B669A]">Préstamo de portátiles</p>
                         </Link>
                     </div>
                     <div className="flex p-10 flex-col bg-white rounded-2xl">

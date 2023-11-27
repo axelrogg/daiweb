@@ -34,18 +34,64 @@ export default function RootLayout({
                         />
                     </Link>
                     <ul className="flex m1-4">
-                        <div className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
-                            <li>Inicio</li>
+                        <Link href="/" className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
+                            Inicio
+                        </Link>
+                        <div className="relative group flex-col m-4 items-center justify-center rounded hover:bg-[#cfd1d3] hover:text-black">
+                            <Link href="/" className="flex p-2 justify-center">
+                                Servicios
+                            </Link>
+                            <div className="absolute hidden rounded py-2 mb-4 group-hover:block shadow w-64">
+                                {/* The negative bottom margin allows the triangle
+                                    to be tucked below the dropdown menu */}
+                                <div className="
+                                    w-0 h-0
+                                    ml-4 mb-[-3px]
+                                    bg-transparent
+                                    border-l-[10px] border-l-transparent rounded-l
+                                    border-b-[15px] border-b-[#cfd1d3] rounded-b
+                                    border-r-[10px] border-r-transparent rounded-r">
+                                </div>
+                                <div className="flex flex-col bg-[#cfd1d3] rounded">
+                                    <Link
+                                        className="pt-4 pb-2 px-4"
+                                        href="/reserva-de-taquillas"
+                                    >
+                                        Reserva de taquillas
+                                    </Link>
+                                    <Link
+                                        className="py-2 px-4"
+                                        href="/prestamo-de-portatiles"
+                                    >
+                                        Préstamo de portátiles
+                                    </Link>
+                                    <Link
+                                        className="py-2 px-4"
+                                        href="/prestamo-de-material"
+                                    >
+                                        Pŕestamo de material
+                                    </Link>
+                                    <Link
+                                        className="py-2 px-4"
+                                        href="/reserva-de-espacios"
+                                    >
+                                        Reserva de espacios
+                                    </Link>
+                                    <Link
+                                        className="pb-4 pt-2 px-4"
+                                        href="/quejas-y-sugerencias"
+                                    >
+                                        Quejas y sugerencias
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
-                            <li>Servizos</li>
-                        </div>
-                        <div className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
-                            <li>Noticias</li>
-                        </div>
-                        <div className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
-                            <li>Contacto</li>
-                        </div>
+                        <Link href="/blog" className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
+                            Blog
+                        </Link>
+                        <Link href="/contacto" className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
+                            Contacto
+                        </Link>
                         <li className="flex m-4 items-center">
                             <IoIosSearch size={20}/>
                         </li>
