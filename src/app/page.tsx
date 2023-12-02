@@ -9,8 +9,8 @@ import {
 
 export default function Home() {
     return (
-        <div className="flex min-h-screen flex-col items-center">
-            <div className="flex w-fit px-8 my-10 justify-around items-center">
+        <>
+            <div className="flex justify-around items-center">
                 <div className="w-fit px-5">
                     <h1 className="text-6xl font-bold">
                         Delegación do <br/>
@@ -75,7 +75,6 @@ export default function Home() {
                     </Link>
                 </div>
             </div>
-
-        </div>
+        </>
     );
 }

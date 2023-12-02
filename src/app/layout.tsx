@@ -21,7 +21,7 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={lexend.className}>
-                <nav className="flex w-screen items-center justify-around p-8">
+                <nav className="flex w-full items-center justify-around p-8">
                     <Link
                         href="/"
                     >
@@ -33,7 +33,7 @@ export default function RootLayout({
                             priority
                         />
                     </Link>
-                    <ul className="flex m1-4">
+                    <ul className="flex ml-4">
                         <Link href="/" className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black">
                             Inicio
                         </Link>
@@ -54,31 +54,31 @@ export default function RootLayout({
                                 </div>
                                 <div className="flex flex-col bg-[#cfd1d3] rounded">
                                     <Link
-                                        className="pt-4 pb-2 px-4"
+                                        className="pt-4 pb-2 px-4 rounded-t hover:bg-[#1b1b1b] hover:text-white"
                                         href="/reserva-de-taquillas"
                                     >
                                         Reserva de taquillas
                                     </Link>
                                     <Link
-                                        className="py-2 px-4"
+                                        className="py-2 px-4 hover:bg-[#1b1b1b] hover:text-white"
                                         href="/prestamo-de-portatiles"
                                     >
                                         Préstamo de portátiles
                                     </Link>
                                     <Link
-                                        className="py-2 px-4"
+                                        className="py-2 px-4 hover:bg-[#1b1b1b] hover:text-white"
                                         href="/prestamo-de-material"
                                     >
                                         Pŕestamo de material
                                     </Link>
                                     <Link
-                                        className="py-2 px-4"
+                                        className="py-2 px-4 hover:bg-[#1b1b1b] hover:text-white"
                                         href="/reserva-de-espacios"
                                     >
                                         Reserva de espacios
                                     </Link>
                                     <Link
-                                        className="pb-4 pt-2 px-4"
+                                        className="pb-4 pt-2 px-4 rounded-b hover:bg-[#1b1b1b] hover:text-white"
                                         href="/quejas-y-sugerencias"
                                     >
                                         Quejas y sugerencias
@@ -97,7 +97,10 @@ export default function RootLayout({
                         </li>
                     </ul>
                 </nav>
-                {children}
+
+                <div className="flex flex-col items-center">
+                    {children}
+                </div>
             </body>
         </html>
     );
