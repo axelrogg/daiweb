@@ -6,10 +6,10 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "media.vanityfair.com",
                 port: "",
-                pathname: "/photos/**"
-            }
-        ]
-    }
+                pathname: "/photos/**",
+            },
+        ],
+    },
 };
 
 module.exports = nextConfig;
