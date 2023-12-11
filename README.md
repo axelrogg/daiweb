@@ -11,4 +11,3 @@ bun dev
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador (de preferencia Google Chrome)
 para ver el resultado.
 
-Puedes empezar viendo/modificando `app/page.tsx`.
