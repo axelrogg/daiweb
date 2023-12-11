@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
     IoIosCalendar,
-    IoIosSearch,
-    IoIosChatboxes,
     IoIosConstruct,
     IoIosKey,
     IoIosLaptop,
@@ -47,13 +45,13 @@ export default function Home() {
                         Contacto
                     </Link>
                     <Link
-                        href="/sign-in"
+                        href="/auth/sign-in"
                         className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
                     >
                         Ingresar
                     </Link>
                     <Link
-                        href="/sign-up"
+                        href="/auth/sign-up"
                         className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
                     >
                         Crear cuenta
