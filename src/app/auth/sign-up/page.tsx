@@ -1,9 +1,9 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSignUp } from "@clerk/nextjs";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function SignUpPage() {
@@ -38,19 +38,16 @@ export default function SignUpPage() {
                 password,
             });
 
-            // send the email.
             await signUp.prepareEmailAddressVerification({
                 strategy: "email_code",
             });
 
-            // change the UI to our pending section.
             setPendingVerification(true);
         } catch (err: any) {
             console.error(JSON.stringify(err, null, 2));
         }
     };
 
-    // This verifies the user using email code that is delivered.
     const onPressVerify = async (event: FormEvent) => {
         event.preventDefault();
         if (!isLoaded) {
@@ -68,7 +65,7 @@ export default function SignUpPage() {
             }
             if (completeSignUp.status === "complete") {
                 await setActive({ session: completeSignUp.createdSessionId });
-                router.push("/");
+                router.push("/dashboard");
             }
         } catch (err: any) {
             console.error(JSON.stringify(err, null, 2));

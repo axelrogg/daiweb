@@ -72,56 +72,6 @@ export default function Home() {
                     <p>some fun illustration here</p>
                 </div>
             </div>
-
-            <div className="my-10 flex flex-col items-center">
-                <h2 className="text-4xl font-bold my-10">Servicios</h2>
-                <div className="grid grid-cols-2 gap-4 items-center justify-center">
-                    <div className="flex p-10 flex-col bg-white rounded-2xl">
-                        <Link
-                            className="flex flex-col items-center justify-center"
-                            href="/reserva-de-taquillas"
-                        >
-                            <IoIosKey color={"#1B669A"} size={30} />
-                            <p className="text-[#1B669A]">
-                                Reserva de taquillas
-                            </p>
-                        </Link>
-                    </div>
-                    <div className="flex p-10 flex-col bg-white rounded-2xl">
-                        <Link
-                            className="flex flex-col items-center justify-center"
-                            href="/prestamo-de-portatiles"
-                        >
-                            <IoIosLaptop color={"#1B669A"} size={30} />
-                            <p className="text-[#1B669A]">
-                                Préstamo de portátiles
-                            </p>
-                        </Link>
-                    </div>
-                    <div className="flex p-10 flex-col bg-white rounded-2xl">
-                        <Link
-                            className="flex flex-col items-center justify-center"
-                            href="/prestamo-de-material"
-                        >
-                            <IoIosConstruct color={"#1B669A"} size={30} />
-                            <p className="text-[#1B669A]">
-                                Préstamo de material
-                            </p>
-                        </Link>
-                    </div>
-                    <div className="flex p-10 flex-col bg-white rounded-2xl">
-                        <Link
-                            className="flex flex-col items-center justify-center"
-                            href="/reserva-de-espacios"
-                        >
-                            <IoIosCalendar color={"#1B669A"} size={30} />
-                            <p className="text-[#1B669A]">
-                                Reserva de espacios
-                            </p>
-                        </Link>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 }

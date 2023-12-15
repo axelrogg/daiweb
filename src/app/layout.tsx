@@ -18,7 +18,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <ClerkProvider>
+        <ClerkProvider afterSignInUrl="/dashboard">
             <html lang="es">
                 <body className={lexend.className}>{children}</body>
             </html>

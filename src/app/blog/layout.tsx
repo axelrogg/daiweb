@@ -1,6 +1,3 @@
-"use client";
-
-import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,12 +6,6 @@ export default function AuthLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const { isSignedIn } = useAuth();
-
-    if (isSignedIn) {
-        return <>{children}</>;
-    }
-
     return (
         <div className="flex flex-col min-h-screen items-center">
             <nav className="flex w-full items-center justify-start p-8">
