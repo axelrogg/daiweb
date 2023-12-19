@@ -1,7 +1,9 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
+import { UserWebhookEvent, WebhookEvent } from "@clerk/nextjs/server";
+import { Database } from "@/server/database";
 
+// TODO: Log all events and errors
 export async function POST(req: Request) {
     const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
@@ -30,15 +32,15 @@ export async function POST(req: Request) {
     // Create a new Svix instance with your secret.
     const wh = new Webhook(WEBHOOK_SECRET);
 
-    let evt: WebhookEvent;
+    let event: WebhookEvent;
 
     // Verify the payload with the headers
     try {
-        evt = wh.verify(body, {
+        event = wh.verify(body, {
             "svix-id": svix_id,
             "svix-timestamp": svix_timestamp,
             "svix-signature": svix_signature,
-        }) as WebhookEvent;
+        }) as UserWebhookEvent;
     } catch (err) {
         console.error("Error verifying webhook:", err);
         return new Response("Error occured", {
@@ -46,12 +48,62 @@ export async function POST(req: Request) {
         });
     }
 
-    // Get the ID and type
-    const { id } = evt.data;
-    const eventType = evt.type;
+    const db = new Database();
+    switch (event.type) {
+        case "user.created":
+            if (event.data.email_addresses.length !== 1) {
+                console.error("User has more than 1 email address");
+                return new Response("", { status: 500 });
+            }
+            if (
+                event.data.email_addresses[0].verification?.status !==
+                "verified"
+            ) {
+                console.error("Email address is not verified");
+                return new Response("", { status: 500 });
+            }
+            try {
+                const created_at = new Date(event.data.created_at);
+                let emailIsVerified = false;
+                if (
+                    event.data.email_addresses[0].verification.status ===
+                    "verified"
+                ) {
+                    emailIsVerified = true;
+                }
+                const userId = await db.createUser(
+                    event.data.id,
+                    event.data.email_addresses[0].email_address,
+                    emailIsVerified,
+                    created_at,
+                    created_at
+                );
+                console.log(typeof userId);
+                return new Response("", { status: 200 });
+            } catch (error) {
+                return new Response("", { status: 500 });
+            }
 
-    console.log(`Webhook with ID '${id}' and type '${eventType}'`);
-    console.log("Webhook body:", body);
+        case "user.updated":
+            break;
+        case "user.deleted":
+            if (event.data.deleted === true) {
+                if (!event.data.id) {
+                    return new Response("", { status: 500 });
+                }
+                try {
+                    const deletedUserId = await db.deleteUser(event.data.id);
+                    if (!deletedUserId) {
+                        return new Response("", { status: 500 });
+                    }
+                    return new Response("", { status: 200 });
+                } catch (err: any) {
+                    return new Response("", { status: 500 });
+                }
+            }
+        default:
+            break;
+    }
 
     return new Response("", { status: 200 });
 }
