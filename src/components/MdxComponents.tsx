@@ -5,6 +5,6 @@ export const MdxComponents = {
         <h1 className="text-4xl font-bold my-4">{props.children}</h1>
     ),
     h2: (props: any) => (
-        <h2 className="text-2xl font-bold my-2">{props.children}</h2>
+        <h2 className="text-2xl font-bold my-4">{props.children}</h2>
     ),
 };

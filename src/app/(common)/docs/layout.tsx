@@ -6,8 +6,8 @@ export default function DocsLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex h-screen">
-            <div className="w-1/4 overflow-y-auto border-r border-grey p-8">
+        <div className="flex mx-40">
+            <div className="w-1/5 max-w-1/5 h-screen border-r border-grey py-8 pr-8">
                 <h2 className="mb-4 font-bold">Servicios DAI</h2>
                 <ul>
                     <Link
@@ -18,7 +18,7 @@ export default function DocsLayout({
                     </Link>
                 </ul>
             </div>
-            <div className="px-8">{children}</div>
+            <div className="pl-8 w-4/5 max-w-4/5">{children}</div>
         </div>
     );
 }
