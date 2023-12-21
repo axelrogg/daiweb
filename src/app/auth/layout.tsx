@@ -16,10 +16,11 @@ export default function AuthLayout({
     }
 
     return (
-        <div className="flex flex-col min-h-screen items-center">
-            <nav className="flex w-full items-center justify-start p-8">
+        <div>
+            <nav className="flex mx-40 mb-10 items-center justify-start">
                 <Link href="/">
                     <Image
+                        className="my-5"
                         src="/logo-dai-blanco.svg"
                         alt="DAI logo"
                         width={50}

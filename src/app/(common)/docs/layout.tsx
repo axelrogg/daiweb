@@ -18,7 +18,7 @@ export default function DocsLayout({
                     </Link>
                 </ul>
             </div>
-            <div className="pl-8">{children}</div>
+            <div className="px-8">{children}</div>
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Lexend } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const lexend = Lexend({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
     title: "Delegación de Alumnos de la Escuela de Ingeniería Industrial",
@@ -20,7 +20,7 @@ export default function RootLayout({
     return (
         <ClerkProvider afterSignInUrl="/dashboard">
             <html lang="es">
-                <body className={lexend.className}>{children}</body>
+                <body className={`${inter.className} text-sm`}>{children}</body>
             </html>
         </ClerkProvider>
     );

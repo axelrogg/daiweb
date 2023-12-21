@@ -8,28 +8,30 @@ export default function CommonLayout({
 }) {
     return (
         <div>
-            <nav className="flex w-full items-center justify-around p-8">
-                <Link href="/">
-                    <Image
-                        src="/logo-dai-blanco.svg"
-                        alt="DAI logo"
-                        width={50}
-                        height={50}
-                        priority
-                    />
-                </Link>
-                <ul className="flex ml-4">
+            <nav className="flex mx-40 mb-10 items-center justify-between border-b border-grey">
+                <ul className="flex items-center">
+                    <Link href="/">
+                        <Image
+                            className="my-5 mr-5"
+                            src="/logo-dai-blanco.svg"
+                            alt="DAI logo"
+                            width={50}
+                            height={50}
+                            priority
+                        />
+                    </Link>
                     <Link
                         href="/"
-                        className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
+                        className="flex m-2 p-1 rounded hover:bg-[#cfd1d3] hover:text-black"
                     >
                         Inicio
                     </Link>
-                    <div className="relative group flex-col m-4 items-center justify-center rounded hover:bg-[#cfd1d3] hover:text-black">
-                        <Link href="/docs" className="flex p-2 justify-center">
-                            Docs
-                        </Link>
-                    </div>
+                    <Link
+                        href="/docs"
+                        className="flex m-2 p-1 rounded hover:bg-[#cfd1d3] hover:text-black"
+                    >
+                        Docs
+                    </Link>
                     {/*
                     <Link
                         href="/blog"
@@ -46,15 +48,17 @@ export default function CommonLayout({
                         Contacto
                     </Link>
                     */}
+                </ul>
+                <ul className="flex">
                     <Link
                         href="/auth/sign-in"
-                        className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
+                        className="flex m-2 p-2 rounded-lg bg-[#1b1b1b] hover:bg-[#4f4f4f]"
                     >
                         Ingresar
                     </Link>
                     <Link
                         href="/auth/sign-up"
-                        className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
+                        className="flex items-center my-2 ml-2 p-2 rounded-lg bg-[#1b1b1b] hover:bg-[#4f4f4f]"
                     >
                         Crear cuenta
                     </Link>
