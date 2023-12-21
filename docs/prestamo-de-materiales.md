@@ -1,5 +1,5 @@
 # Préstamo de materiales
 
-Este es un archivo de prueba
+La DAI pone a disposición de los alumnos de la Escuela de Industriales de la Universidad de Vigo un servicio de préstamo de materiales diseñado para ofrecer temporalmente artículos como calculadores, compases, sets de regla, escuadra y cartabón, portátiles, entre otras cosas.
 
-## Este es un subtítulo
+## ¿Cómo solicitar materiales?

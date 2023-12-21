@@ -27,21 +27,25 @@ export default function CommonLayout({
                     </Link>
                     <div className="relative group flex-col m-4 items-center justify-center rounded hover:bg-[#cfd1d3] hover:text-black">
                         <Link href="/docs" className="flex p-2 justify-center">
-                            Servicios
+                            Docs
                         </Link>
                     </div>
+                    {/*
                     <Link
                         href="/blog"
                         className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
                     >
                         Blog
                     </Link>
+                    */}
+                    {/*
                     <Link
                         href="/contacto"
                         className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"
                     >
                         Contacto
                     </Link>
+                    */}
                     <Link
                         href="/auth/sign-in"
                         className="flex m-4 p-2 rounded hover:bg-[#cfd1d3] hover:text-black"

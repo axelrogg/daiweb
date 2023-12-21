@@ -7,7 +7,7 @@ export default function DocsLayout({
 }) {
     return (
         <div className="flex h-screen">
-            <div className="w-1/4 overflow-y-auto border-r border-white p-8">
+            <div className="w-1/4 overflow-y-auto border-r border-grey p-8">
                 <h2 className="mb-4 font-bold">Servicios DAI</h2>
                 <ul>
                     <Link
@@ -18,7 +18,7 @@ export default function DocsLayout({
                     </Link>
                 </ul>
             </div>
-            <div className="p-8">{children}</div>
+            <div className="pl-8">{children}</div>
         </div>
     );
 }
