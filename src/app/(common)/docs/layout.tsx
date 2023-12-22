@@ -8,7 +8,11 @@ export default function DocsLayout({
     return (
         <div className="flex mx-40">
             <div className="w-1/5 max-w-1/5 h-screen border-r border-grey py-8 pr-8">
-                <h2 className="mb-4 font-bold text-xl">Documentación</h2>
+                <div className="mb-4">
+                    <Link className="font-bold text-xl" href="/docs">
+                        Documentación
+                    </Link>
+                </div>
                 <ul className="flex flex-col">
                     <Link
                         className="cursor-pointer hover:text-black font-bold mb-2"
