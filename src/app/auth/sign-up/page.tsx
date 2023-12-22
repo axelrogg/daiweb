@@ -46,13 +46,22 @@ export default function SignUpPage() {
             });
             setPendingVerification(true);
         } catch (err: any) {
+            console.log(err);
             if (err.errors[0].code === "form_password_pwned") {
                 setSignUpErrored(true);
                 setSignUpErrorMessage(
                     "Contraseña comprometida. Por tu seguridad, elige otra."
                 );
+                return;
             }
-            console.error();
+            if (err.errors[0].code === "form_identifier_exists") {
+                setSignUpErrored(true);
+                setSignUpErrorMessage(
+                    "Correo electrónico en uso. Por favor, intenta con otro."
+                );
+                return;
+
+            }
         }
     };
 

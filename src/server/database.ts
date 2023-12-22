@@ -1,5 +1,6 @@
 import {
     MongoClient,
+    MongoServerError,
     ServerApiVersion,
     UpdateFilter,
     UpdateOptions,
@@ -68,23 +69,9 @@ export class Database {
             }
             return true;
         } catch (err: any) {
-            console.log(err);
-            const error = err;
-            if (
-                error.message.includes(
-                    "duplicate key value violates unique constraint"
-                )
-            ) {
-                if (error.constraint_name === "users_email_address_key") {
-                    throw new Error(
-                        "unique constraint violation: email_address already exists"
-                    );
-                }
-                if (error.constraint_name === "users_external_user_id_key") {
-                    throw new Error(
-                        "unique constraint violation: external_user_id already exists"
-                    );
-                }
+            const error = err as MongoServerError;
+            if (error.code === 11000) {
+                throw new Error("unique constraint violation");
             }
             throw error;
         }

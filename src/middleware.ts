@@ -9,7 +9,6 @@ export default authMiddleware({
         "/auth/sign-up",
         "/api/webhook(.*)",
         "/docs",
-        "/docs/:name",
     ],
 });
 

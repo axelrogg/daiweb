@@ -88,9 +88,7 @@ export async function POST(req: Request) {
                 return new Response("", { status: 200 });
             } catch (error: any) {
                 if (
-                    (error as Error).message.includes(
-                        "unique constraint violation"
-                    )
+                    (error as Error).message === "unique constraint violation"
                 ) {
                     return new Response(
                         "User with given credentials already exists",
