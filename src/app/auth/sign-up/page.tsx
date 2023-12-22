@@ -60,7 +60,6 @@ export default function SignUpPage() {
                     "Correo electrónico en uso. Por favor, intenta con otro."
                 );
                 return;
-
             }
         }
     };

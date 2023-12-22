@@ -39,6 +39,13 @@ const transactions = [
     },
 ];
 
+function dateToDMY(date: Date) {
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const year = date.getUTCFullYear();
+    return `${day}-${month}-${year}`;
+}
+
 export default function Dashboard() {
     const { isLoaded, isSignedIn, user } = useUser();
     const { SVG } = useQRCode();
@@ -124,39 +131,57 @@ export default function Dashboard() {
                     </div>
                 )}
                 {showBorrowedItems && (
-                    <table className="table-auto border-collapse my-4">
-                        <thead>
-                            <tr className="flex items-center border-b border-grey">
-                                <th className="flex w-52 justify-start">
-                                    Nombre
-                                </th>
-                                <th className="flex w-52 justify-start">
-                                    Fecha de préstamo
-                                </th>
-                                <th className="flex w-52 justify-start">
-                                    Fecha de entrega
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {transactions.map((value, indx) => (
-                                <tr
-                                    key={indx}
-                                    className="flex items-center border-b border-grey"
-                                >
-                                    <td className="flex w-52 justify-start">
-                                        {value.item_id}
-                                    </td>
-                                    <td className="flex w-52 justify-start">
-                                        {value.transaction_timestamp}
-                                    </td>
-                                    <td className="flex w-52 justify-start">
-                                        {value.expected_return_date}
-                                    </td>
+                    <div className="flex flex-col">
+                        <p>
+                            Aquí se debería mostrar todo lo que alguien tiene en
+                            prestado de la DAI.
+                        </p>
+                        <p>
+                            Sé que en lugar de nombres hay números, pero eso más
+                            fácil que inventarme nombres
+                        </p>
+                        <table className="table-auto border-collapse my-4">
+                            <thead>
+                                <tr className="flex items-center border-b border-grey">
+                                    <th className="flex w-52 justify-start">
+                                        Nombre
+                                    </th>
+                                    <th className="flex w-52 justify-start">
+                                        Fecha de préstamo
+                                    </th>
+                                    <th className="flex w-52 justify-start">
+                                        Fecha de entrega
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {transactions.map((value, indx) => (
+                                    <tr
+                                        key={indx}
+                                        className="flex items-center border-b border-grey"
+                                    >
+                                        <td className="flex w-52 justify-start">
+                                            {value.item_id}
+                                        </td>
+                                        <td className="flex w-52 justify-start">
+                                            {dateToDMY(
+                                                new Date(
+                                                    value.transaction_timestamp
+                                                )
+                                            )}
+                                        </td>
+                                        <td className="flex w-52 justify-start">
+                                            {dateToDMY(
+                                                new Date(
+                                                    value.expected_return_date
+                                                )
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
             </div>
         </div>
