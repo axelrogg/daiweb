@@ -78,10 +78,12 @@ export async function POST(req: Request) {
                     event.data.email_addresses[0].email_address,
                     emailIsVerified,
                     created_at,
-                    false,
+                    false
                 );
                 if (!userWasCreated) {
-                    return new Response("User could not created", {status: 500})
+                    return new Response("User could not created", {
+                        status: 500,
+                    });
                 }
                 return new Response("", { status: 200 });
             } catch (error: any) {
