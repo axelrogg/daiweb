@@ -8,10 +8,16 @@ export default function DocsLayout({
     return (
         <div className="flex mx-40">
             <div className="w-1/5 max-w-1/5 h-screen border-r border-grey py-8 pr-8">
-                <h2 className="mb-4 font-bold">Servicios DAI</h2>
-                <ul>
+                <h2 className="mb-4 font-bold text-xl">Documentación</h2>
+                <ul className="flex flex-col">
                     <Link
-                        className="cursor-pointer hover:text-black"
+                        className="cursor-pointer hover:text-black font-bold mb-2"
+                        href="/docs/introduccion"
+                    >
+                        Introducción
+                    </Link>
+                    <Link
+                        className="cursor-pointer hover:text-black font-bold"
                         href="/docs/prestamo-de-materiales"
                     >
                         Préstamo de materiales
