@@ -1,71 +1,75 @@
-import postgres, { PostgresError } from "postgres";
+import {
+    MongoClient,
+    ServerApiVersion,
+    UpdateFilter,
+    UpdateOptions,
+} from "mongodb";
 
 export class Database {
-    sql: postgres.Sql;
+    private client: MongoClient;
 
     constructor() {
-        this.checkCredentials();
-        this.sql = postgres({
-            host: process.env.DATABASE_HOST!,
-            port: Number(process.env.DATABASE_PORT!),
-            database: process.env.DATABASE_NAME!,
-            username: process.env.DATABASE_USERNAME!,
-            password: process.env.DATABASE_PASSWORD!,
-        });
+        this.client = this.setClient();
     }
 
-    checkCredentials() {
+    setClient() {
         if (
             !(
-                process.env.DATABASE_HOST ||
-                process.env.DATABASE_PORT ||
                 process.env.DATABASE_NAME ||
                 process.env.DATABASE_USERNAME ||
                 process.env.DATABASE_PASSWORD
             )
         ) {
-            throw new Error();
+            throw new Error(
+                "one or more database environment variables are missing"
+            );
         }
+        return new MongoClient(
+            `mongodb+srv://${process.env.DATABASE_USERNAME!}:${process.env
+                .DATABASE_PASSWORD!}@dai-cluster.6t5wtfj.mongodb.net/${process
+                .env.DATABASE_NAME!}?retryWrites=true&w=majority`,
+            {
+                serverApi: {
+                    version: ServerApiVersion.v1,
+                    strict: true,
+                    deprecationErrors: true,
+                },
+            }
+        );
     }
 
     async createUser(
-        externalId: string,
+        externalUserId: string,
         email: string,
         isVerified: boolean,
-        createdAt: Date,
-        lastUpdatedAt: Date
+        accountCreationDate: Date,
+        isStaff: boolean
     ) {
         try {
-            const user = await this.sql<{ id?: number }[]>`
-        WITH new_user AS (
-            INSERT INTO users
-                (
-                    external_user_id,
-                    email_address,
-                    email_is_verified,
-                    account_creation_date,
-                    last_update_date
-                )
-            VALUES  
-                (
-                    ${externalId},
-                    ${email},
-                    ${isVerified},
-                    ${createdAt},
-                    ${lastUpdatedAt}
-                )
-            RETURNING id
-        )
-        INSERT INTO user_profiles (user_id, last_update_date)
-        SELECT id, ${createdAt} FROM new_user
-        RETURNING user_id as id;
-    `;
-            if (user.length !== 1) {
+            const usersCollection = this.client.db("dai").collection("users");
+            const user = await usersCollection.insertOne({
+                externalUserId: externalUserId,
+                email: email,
+                emailIsVerified: isVerified,
+                accountCreationDate: accountCreationDate,
+                lastUpdateDate: accountCreationDate,
+                isStaff: isStaff,
+                profile: {
+                    avatar_url: null,
+                    firstName: null,
+                    lastName: null,
+                    age: null,
+                    lastUpdateDate: accountCreationDate,
+                },
+            });
+
+            if (!user.insertedId) {
                 throw new Error("user was not created");
             }
-            return user[0].id;
-        } catch (err) {
-            const error = err as PostgresError;
+            return true;
+        } catch (err: any) {
+            console.log(err);
+            const error = err;
             if (
                 error.message.includes(
                     "duplicate key value violates unique constraint"
@@ -88,56 +92,56 @@ export class Database {
 
     async deleteUser(externalUserId: string) {
         try {
-            const result = await this.sql<{ id?: number }[]>`
-        WITH deleted_user_profile AS (
-            DELETE FROM user_profiles
-            WHERE
-                user_id = (
-                    SELECT id
-                    FROM users
-                    WHERE external_user_id = ${externalUserId}
-                )
-            RETURNING user_id
-        )
-        DELETE FROM users
-        WHERE
-            id = (SELECT user_id FROM deleted_user_profile)
-        RETURNING id
-        `;
-            if (!result || result.length !== 1) {
-                return null;
+            const usersCollection = this.client.db("dai").collection("users");
+            const deletedUser = await usersCollection.deleteOne({
+                externalUserId: externalUserId,
+            });
+            if (deletedUser.deletedCount !== 1) {
+                return false;
             }
-            return result[0].id;
+            return true;
         } catch (err: any) {
             throw err;
         }
     }
 
-    async updateUserProfile(
+    async updateUser(
         externalUserId: string,
+        email: string,
         firstName: string,
         lastName: string,
-        updateDate: Date
+        lastUpdateDate: Date
     ) {
         try {
-            const result = await this.sql<{ id?: number }[]>`
-            UPDATE user_profiles
-            SET 
-                first_name = ${firstName},
-                last_name = ${lastName},
-                last_update_date = ${updateDate}
-            WHERE
-                user_id = (
-                    SELECT id
-                    FROM users
-                    WHERE external_user_id = ${externalUserId}
-                )
-            RETURNING user_id as id;
-            `;
-            if (!result || result.length !== 1) {
-                return null;
+            const usersCollection = this.client.db("dai").collection("users");
+            const filter: UpdateFilter<{ externalUserId: string }> = {
+                externalUserId: externalUserId,
+            };
+            const updateDocument = {
+                $set: {
+                    email: email,
+                    profile: {
+                        avatarUrl: null,
+                        firstName: firstName,
+                        lastName: lastName,
+                        lastUpdateDate: lastUpdateDate,
+                        age: null,
+                    },
+                },
+            };
+            const options: UpdateOptions = { upsert: false };
+            const updatedUser = await usersCollection.updateOne(
+                filter,
+                updateDocument,
+                options
+            );
+            if (
+                updatedUser.matchedCount !== 1 ||
+                updatedUser.modifiedCount !== 1
+            ) {
+                return false;
             }
-            return result[0].id;
+            return true;
         } catch (err: any) {
             throw err;
         }

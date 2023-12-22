@@ -73,13 +73,16 @@ export async function POST(req: Request) {
                 ) {
                     emailIsVerified = true;
                 }
-                const userId = await db.createUser(
+                const userWasCreated = await db.createUser(
                     event.data.id,
                     event.data.email_addresses[0].email_address,
                     emailIsVerified,
                     created_at,
-                    created_at
+                    false,
                 );
+                if (!userWasCreated) {
+                    return new Response("User could not created", {status: 500})
+                }
                 return new Response("", { status: 200 });
             } catch (error: any) {
                 if (
@@ -98,8 +101,9 @@ export async function POST(req: Request) {
 
         case "user.updated":
             try {
-                const userId = await db.updateUserProfile(
+                const userId = await db.updateUser(
                     event.data.id,
+                    event.data.email_addresses[0].email_address,
                     event.data.first_name,
                     event.data.last_name,
                     new Date(event.data.updated_at)
