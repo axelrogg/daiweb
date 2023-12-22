@@ -139,8 +139,8 @@ export default function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {transactions.map((value) => (
-                                <tr className="flex items-center border-b border-grey">
+                            {transactions.map((value, indx) => (
+                                <tr key={indx} className="flex items-center border-b border-grey">
                                     <td className="flex w-52 justify-start">
                                         {value.item_id}
                                     </td>
