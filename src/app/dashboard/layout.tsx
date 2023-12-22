@@ -8,10 +8,11 @@ export default function AuthLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex flex-col min-h-screen items-center">
-            <nav className="flex w-full justify-around items-center justify-start p-8">
+        <div>
+            <nav className="flex mx-40 mb-10 items-center justify-between border-b border-grey">
                 <Link href="/">
                     <Image
+                        className="my-5"
                         src="/logo-dai-blanco.svg"
                         alt="DAI logo"
                         width={50}
@@ -19,9 +20,7 @@ export default function AuthLayout({
                         priority
                     />
                 </Link>
-                <div className="flex">
-                    <UserButton afterSignOutUrl="/" />
-                </div>
+                <UserButton afterSignOutUrl="/" />
             </nav>
             {children}
         </div>

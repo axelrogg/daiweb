@@ -6,11 +6,14 @@ import { useRouter } from "next/navigation";
 import { useSignIn, useAuth } from "@clerk/nextjs";
 
 export default function SignInPage() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const router = useRouter();
     const { isLoaded, signIn, setActive } = useSignIn();
     const { isSignedIn } = useAuth();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [signInErrored, setSignInErrored] = useState(false);
+    const [signInErrorMessage, setSignInErrorMessage] = useState("");
 
     if (!isLoaded) {
         return null;
@@ -30,15 +33,16 @@ export default function SignInPage() {
                 identifier: email,
                 password,
             });
-            console.log(result);
             if (result.status === "complete") {
                 await setActive({ session: result.createdSessionId });
                 router.push("/dashboard");
-            } else {
-                console.log(result);
             }
         } catch (error: any) {
-            console.log("error", error.errors[0].longMessage);
+            setSignInErrored(true);
+            setSignInErrorMessage(
+                "¡Ups! Algo salió mal. Por favor, revisa tu correo y contraseña."
+            );
+            return;
         }
     }
 
@@ -61,9 +65,11 @@ export default function SignInPage() {
                                     type="email"
                                     value={email}
                                     placeholder="Ingresa tu correo"
-                                    onChange={(element) =>
-                                        setEmail(element.target.value)
-                                    }
+                                    onChange={(element) => {
+                                        setSignInErrored(false);
+                                        setSignInErrorMessage("");
+                                        setEmail(element.target.value);
+                                    }}
                                 />
                             </div>
                             <div className="flex flex-col my-1.5 w-60">
@@ -73,9 +79,11 @@ export default function SignInPage() {
                                     type="password"
                                     value={password}
                                     placeholder="Ingresa tu contraseña"
-                                    onChange={(element) =>
-                                        setPassword(element.target.value)
-                                    }
+                                    onChange={(element) => {
+                                        setSignInErrored(false);
+                                        setSignInErrorMessage("");
+                                        setPassword(element.target.value);
+                                    }}
                                 />
                             </div>
                             <button
@@ -85,6 +93,11 @@ export default function SignInPage() {
                                 Continúa
                             </button>
                         </form>
+                        {signInErrored && (
+                            <div className="flex items-center text-rose-500 my-4">
+                                <p>{signInErrorMessage}</p>
+                            </div>
+                        )}
                         <div className="flex flex-row">
                             <p>¿No tienes una cuenta?&nbsp;</p>
                             <Link

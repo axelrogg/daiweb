@@ -59,8 +59,10 @@ export async function POST(req: Request) {
                 event.data.email_addresses[0].verification?.status !==
                 "verified"
             ) {
-                console.error("Email address is not verified");
-                return new Response("", { status: 500 });
+                return new Response(
+                    "Unverified email addresses are rejected by default",
+                    { status: 422 }
+                );
             }
             try {
                 const created_at = new Date(event.data.created_at);
@@ -78,13 +80,41 @@ export async function POST(req: Request) {
                     created_at,
                     created_at
                 );
-                console.log(typeof userId);
                 return new Response("", { status: 200 });
-            } catch (error) {
-                return new Response("", { status: 500 });
+            } catch (error: any) {
+                if (
+                    (error as Error).message.includes(
+                        "unique constraint violation"
+                    )
+                ) {
+                    return new Response(
+                        "User with given credentials already exists",
+                        { status: 409 }
+                    );
+                }
+                console.error(error);
+                return new Response("Unknown error occured", { status: 500 });
             }
 
         case "user.updated":
+            try {
+                const userId = await db.updateUserProfile(
+                    event.data.id,
+                    event.data.first_name,
+                    event.data.last_name,
+                    new Date(event.data.updated_at)
+                );
+                if (!userId) {
+                    return new Response(
+                        "No user was found with given external id",
+                        { status: 404 }
+                    );
+                }
+                return new Response("", { status: 200 });
+            } catch (err: any) {
+                console.error(err);
+                return new Response("Unknown error occured", { status: 500 });
+            }
             break;
         case "user.deleted":
             if (event.data.deleted === true) {
@@ -94,16 +124,21 @@ export async function POST(req: Request) {
                 try {
                     const deletedUserId = await db.deleteUser(event.data.id);
                     if (!deletedUserId) {
-                        return new Response("", { status: 500 });
+                        return new Response(
+                            "No user was found with given external id",
+                            { status: 404 }
+                        );
                     }
                     return new Response("", { status: 200 });
                 } catch (err: any) {
-                    return new Response("", { status: 500 });
+                    console.error(err);
+                    return new Response("Unknown error occured", {
+                        status: 500,
+                    });
                 }
             }
         default:
-            break;
+            console.error("unrecognized event was sent", [event]);
+            return new Response("Unrecognized event", { status: 500 });
     }
-
-    return new Response("", { status: 200 });
 }

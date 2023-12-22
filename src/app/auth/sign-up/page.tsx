@@ -7,12 +7,15 @@ import { useSignUp } from "@clerk/nextjs";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function SignUpPage() {
+    const router = useRouter();
     const { isLoaded, signUp, setActive } = useSignUp();
+
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const [pendingVerification, setPendingVerification] = useState(false);
     const [code, setCode] = useState("");
-    const router = useRouter();
+    const [signUpErrored, setSignUpErrored] = useState(false);
+    const [signUpErrorMessage, setSignUpErrorMessage] = useState("");
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -26,7 +29,8 @@ export default function SignUpPage() {
                 emailAddress.includes("alumnos.uvigo.es")
             )
         ) {
-            alert(
+            setSignUpErrored(true);
+            setSignUpErrorMessage(
                 "Solo son válidos correos asociados a la Universidad de Vigo"
             );
             return;
@@ -37,14 +41,18 @@ export default function SignUpPage() {
                 emailAddress,
                 password,
             });
-
             await signUp.prepareEmailAddressVerification({
                 strategy: "email_code",
             });
-
             setPendingVerification(true);
         } catch (err: any) {
-            console.error(JSON.stringify(err, null, 2));
+            if (err.errors[0].code === "form_password_pwned") {
+                setSignUpErrored(true);
+                setSignUpErrorMessage(
+                    "Contraseña comprometida. Por tu seguridad, elige otra."
+                );
+            }
+            console.error();
         }
     };
 
@@ -84,9 +92,11 @@ export default function SignUpPage() {
                             <label htmlFor="email">Correo de la uvigo</label>
                             <input
                                 className="my-0.5 rounded text-black py-0.5 px-1.5 bg-[#f2f2f2]"
-                                onChange={(e) =>
-                                    setEmailAddress(e.target.value)
-                                }
+                                onChange={(element) => {
+                                    setSignUpErrored(false);
+                                    setSignUpErrorMessage("");
+                                    setEmailAddress(element.target.value);
+                                }}
                                 id="email"
                                 name="email"
                                 type="email"
@@ -97,7 +107,9 @@ export default function SignUpPage() {
                             <label htmlFor="password">Contraseña</label>
                             <input
                                 className="my-0.5 rounded text-black py-0.5 px-1.5 bg-[#f2f2f2]"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(element) =>
+                                    setPassword(element.target.value)
+                                }
                                 id="password"
                                 name="password"
                                 type="password"
@@ -111,6 +123,11 @@ export default function SignUpPage() {
                             Empieza
                         </button>
                     </form>
+                    {signUpErrored && (
+                        <div className="flex items-center text-rose-500 my-4 w-60">
+                            <p>{signUpErrorMessage}</p>
+                        </div>
+                    )}
                     <div className="flex flex-row">
                         <p>¿Ya tienes una cuenta?&nbsp;</p>
                         <Link
