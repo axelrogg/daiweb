@@ -20,7 +20,11 @@ export default function RootLayout({
     return (
         <ClerkProvider afterSignInUrl="/dashboard">
             <html lang="es">
-                <body className={`${inter.className} text-sm`}>{children}</body>
+                <body
+                    className={`${inter.className} text-sm bg-[#1B669A] text-white`}
+                >
+                    {children}
+                </body>
             </html>
         </ClerkProvider>
     );
