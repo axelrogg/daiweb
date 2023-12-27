@@ -21,12 +21,6 @@ export default function CommonLayout({
                         />
                     </Link>
                     <Link
-                        href="/"
-                        className="flex m-2 p-1 rounded hover:bg-[#cfd1d3] hover:text-black"
-                    >
-                        Inicio
-                    </Link>
-                    <Link
                         href="/docs"
                         className="flex m-2 p-1 rounded hover:bg-[#cfd1d3] hover:text-black"
                     >
@@ -58,7 +52,7 @@ export default function CommonLayout({
                     </Link>
                     <Link
                         href="/auth/sign-up"
-                        className="flex items-center my-2 ml-2 p-2 rounded-lg bg-[#1b1b1b] hover:bg-[#4f4f4f]"
+                        className="flex items-center my-2 ml-2 p-2 rounded-lg bg-[#db4646] hover:bg-[#872b2b]"
                     >
                         Crear cuenta
                     </Link>

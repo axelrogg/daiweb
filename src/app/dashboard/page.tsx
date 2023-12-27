@@ -5,6 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useQRCode } from "next-qrcode";
+import { IoIosWarning } from "react-icons/io";
 
 const transactions = [
     {
@@ -53,22 +54,34 @@ export default function Dashboard() {
 
     const [showQRCode, setShowQRCode] = useState(false);
     const [showBorrowedItems, setShowBorrowedItems] = useState(false);
+    const [showStudentNotVerifiedWarning, setShowStudentNotVerifiedWarning] =
+        useState(false);
 
-    if (!isLoaded || !isSignedIn) {
-        router.replace("/auth/sign-up");
+    if (!isLoaded) {
         return;
+    }
+
+    if (!isSignedIn) {
+        router.replace("/auth/sign-in");
     }
 
     const userIdSuffix = user?.id.slice("user_".length);
 
-    async function onClickShowQRCode() {
+    function onClickShowQRCode() {
         if (showBorrowedItems) {
             setShowBorrowedItems(false);
+        }
+        if (showStudentNotVerifiedWarning) {
+            setShowStudentNotVerifiedWarning(false);
+        }
+        // TODO: Will need to parse public metadata in the future ?
+        if (user?.publicMetadata.studentVerified === "false") {
+            setShowStudentNotVerifiedWarning(true);
         }
         setShowQRCode(!showQRCode);
     }
 
-    async function onClickShowBorrowedItems() {
+    function onClickShowBorrowedItems() {
         if (showQRCode) {
             setShowQRCode(false);
         }
@@ -87,15 +100,15 @@ export default function Dashboard() {
                 )}
             </div>
             <div className="flex justify-center">
-                <div className="flex flex-row my-4 items-center justify-between w-96">
+                <div className="flex flex-row my-4 items-center justify-between">
                     <button
-                        className="bg-black rounded-lg p-2"
+                        className="bg-black rounded-lg p-2 m-4"
                         onClick={onClickShowQRCode}
                     >
                         Ver mi código QR
                     </button>
                     <button
-                        className="bg-black rounded-lg p-2"
+                        className="bg-black rounded-lg p-2 m-4"
                         onClick={onClickShowBorrowedItems}
                     >
                         Ver mis préstamos
@@ -103,11 +116,30 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="flex justify-center">
-                {showQRCode && (
+                {showQRCode && showStudentNotVerifiedWarning && (
+                    <div className="flex flex-col justify-center p-8 rounded-lg">
+                        <div className="flex flex-row items-center mb-4">
+                            <IoIosWarning
+                                size={32}
+                                style={{ color: "#fa6b6b", marginRight: 4 }}
+                            />
+                            <p className="text-[#fa6b6b] text-2xl font-bold">
+                                ¡Ups!
+                            </p>
+                        </div>
+                        <p className="mb-4 text-black">
+                            Parece que tu código QR no está habilitado.
+                        </p>
+                        <button className="bg-black p-2 rounded-lg">
+                            Cómo habilitar mi código QR
+                        </button>
+                    </div>
+                )}
+                {showQRCode && !showStudentNotVerifiedWarning && (
                     <div className="flex flex-col justify-center items-center">
                         <div className="my-4">
                             <SVG
-                                text={userIdSuffix}
+                                text={userIdSuffix!}
                                 options={{
                                     margin: 2,
                                     width: 200,
@@ -133,13 +165,9 @@ export default function Dashboard() {
                 {showBorrowedItems && (
                     <div className="flex flex-col">
                         <p>
-                            Aquí se debería mostrar todo lo que alguien tiene en
-                            prestado de la DAI.
+                            Mock data!!!!!!!!!!!!!!!!!
                         </p>
-                        <p>
-                            Sé que en lugar de nombres hay números, pero eso más
-                            fácil que inventarme nombres
-                        </p>
+
                         <table className="table-auto border-collapse my-4">
                             <thead>
                                 <tr className="flex items-center border-b border-grey">
