@@ -9,17 +9,11 @@ export default function DocsLayout({
         <div className="flex mx-40">
             <div className="w-1/5 max-w-1/5 h-screen border-r border-grey py-8 pr-8">
                 <div className="mb-4">
-                    <Link className="font-bold text-xl" href="/docs">
+                    <Link className="cursor-pointer hover:text-black font-bold text-xl" href="/docs">
                         Documentación
                     </Link>
                 </div>
                 <ul className="flex flex-col">
-                    <Link
-                        className="cursor-pointer hover:text-black font-bold mb-2"
-                        href="/docs/introduccion"
-                    >
-                        Introducción
-                    </Link>
                     <Link
                         className="cursor-pointer hover:text-black font-bold"
                         href="/docs/prestamo-de-materiales"
