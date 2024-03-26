@@ -1,23 +1,23 @@
 name: daiweb Development Deployment
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORGANIZATION_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORGANIZATION_ID }}
+    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
-  push:
-    branches:
-      - dev
+    push:
+        branches:
+            - dev
 jobs:
-  Deploy-Preview:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
+    Deploy-Preview:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: oven-sh/setup-bun@v1
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --debug --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --debug --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --debug --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+            - name: Install Vercel CLI
+              run: npm install --global vercel@latest
+            - name: Pull Vercel Environment Information
+              run: vercel pull --debug --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+            - name: Build Project Artifacts
+              run: vercel build --debug --token=${{ secrets.VERCEL_TOKEN }}
+            - name: Deploy Project Artifacts to Vercel
+              run: vercel deploy --debug --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
