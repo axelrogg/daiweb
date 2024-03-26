@@ -10,8 +10,8 @@ export const metadata: Metadata = {
     authors: [
         {
             name: "Axel Rodríguez Chang",
-        }
-    ]
+        },
+    ],
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
                     content="width=device-width, initial-scale=1.0"
                 />
             </head>
-            <body className={`${inter.className} min-h-screen text-base`}>{children}</body>
+            <body className={`${inter.className} text-base`}>{children}</body>
         </html>
     );
 }

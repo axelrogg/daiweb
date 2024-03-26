@@ -18,6 +18,12 @@ const config = {
             },
         },
         extend: {
+            colors: {
+                accent: "#a636bf",
+                primary: "#00ace0",
+                secondary: "#81d5ee",
+                text: "#060809",
+            },
             keyframes: {
                 "accordion-down": {
                     from: { height: "0" },
