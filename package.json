@@ -4,6 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
+        // script `nbuild` below is not a typo. This is to avoid conflict with
+        // bun's `build` command.
         "nbuild": "next build",
         "start": "next start",
         "devhttps": "next dev --experimental-https",
