@@ -13,9 +13,9 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
-import { SideBar } from "./side-bar";
+import { SideBar } from "./sidebar";
 import { Button } from "./ui/button";
-import { NavBarItem } from "./navbar-item";
+import { SideBarItem } from "./sidebar-item";
 
 export const NavBar = () => (
     <nav className="mb-2 flex justify-between py-5">
@@ -51,14 +51,14 @@ export const NavBar = () => (
                     Documentación
                 </Link>
             </Button>
-            <NavBarItem href="/docs/primeros-pasos/anadir-correo">
-                <EnvelopeIcon className="mr-2 h-6 w-6 stroke-zinc-500" />
+            <SideBarItem href="/docs/primeros-pasos/anadir-correo">
+                <EnvelopeIcon className="mr-3 h-6 w-6 stroke-zinc-500" />
                 Añadir el correo UVigo
-            </NavBarItem>
-            <NavBarItem href="/docs/primeros-pasos/wifi">
-                <WifiIcon className="mr-2 h-6 w-6 stroke-emerald-500" />
+            </SideBarItem>
+            <SideBarItem href="/docs/primeros-pasos/wifi">
+                <WifiIcon className="mr-3 h-6 w-6 stroke-emerald-500" />
                 Activar el WiFi UVigo
-            </NavBarItem>
+            </SideBarItem>
         </SideBar>
     </nav>
 );
