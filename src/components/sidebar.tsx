@@ -3,13 +3,6 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 
-interface SideBarProps {
-    className?: string | undefined;
-    title?: string | undefined;
-    titleHref?: string | undefined;
-    children: React.ReactNode;
-}
-
 export const SideBar = ({
     className,
     children,
@@ -29,3 +22,10 @@ export const SideBar = ({
         </SheetContent>
     </Sheet>
 );
+
+interface SideBarProps {
+    className?: string | undefined;
+    title?: string | undefined;
+    titleHref?: string | undefined;
+    children: React.ReactNode;
+}

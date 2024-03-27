@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 export const SideBarItem = ({
     href,
     children,
-    }: PropsWithChildren<SideBarItemProps>) => (
+}: PropsWithChildren<SideBarItemProps>) => (
     <Button asChild variant="link" className="ml-4 justify-start text-base">
         <Link href={href}>{children}</Link>
     </Button>

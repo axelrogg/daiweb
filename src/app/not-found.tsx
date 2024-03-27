@@ -12,7 +12,7 @@ import Link from "next/link";
  * didn't account for the navbar's presence, introduced by wrapping the
  * component in `DefaultLayout`, which occupies additional space at the top of
  * the viewport.
- * 
+ *
  * To address this, the height is explicitly calculated as `100vh - 155px`.
  * This calculation subtracts the navbar's height from the full viewport height,
  * allowing the content of the `NotFound` page to be fully visible without
@@ -26,8 +26,10 @@ import Link from "next/link";
 export default function NotFound() {
     return (
         <DefaultLayout>
-            <div className="h-[calc(100dvh-155px)] flex flex-col items-center justify-center w-full">
-                <h2 className="text-4xl font-bold text-center">404 Not Found</h2>
+            <div className="flex h-[calc(100dvh-155px)] w-full flex-col items-center justify-center">
+                <h2 className="text-center text-4xl font-bold">
+                    404 Not Found
+                </h2>
                 <p className="my-5">
                     ¡Ups! No pudimos encontrar lo que buscas.
                 </p>
