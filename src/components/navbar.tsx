@@ -51,11 +51,11 @@ export const NavBar = () => (
                     Documentación
                 </Link>
             </Button>
-            <SideBarItem href="/docs/primeros-pasos/anadir-correo">
+            <SideBarItem href="/docs/anadir-correo-uvigo">
                 <EnvelopeIcon className="mr-3 h-6 w-6 stroke-zinc-500" />
                 Añadir el correo UVigo
             </SideBarItem>
-            <SideBarItem href="/docs/primeros-pasos/wifi">
+            <SideBarItem href="/docs/activar-wifi">
                 <WifiIcon className="mr-3 h-6 w-6 stroke-emerald-500" />
                 Activar el WiFi UVigo
             </SideBarItem>
