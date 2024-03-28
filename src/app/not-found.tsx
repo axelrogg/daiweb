@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { DefaultLayout } from "@/layouts/default-layout";
 import Link from "next/link";
 
 /**

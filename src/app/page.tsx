@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
     Card,
     CardContent,
@@ -5,11 +6,10 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { DefaultLayout } from "@/layouts/default-layout";
 import { BookText, Feather } from "lucide-react";
-import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
     return (
         <DefaultLayout>
             <div className="flex flex-col items-center justify-center">

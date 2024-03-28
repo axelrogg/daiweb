@@ -1,4 +1,4 @@
-import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { DefaultLayout } from "@/layouts/default-layout";
 
 export default function DocsLayout({
     children,
