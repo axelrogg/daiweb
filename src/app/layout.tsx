@@ -1,3 +1,4 @@
+import { WithHead } from "@/components/with-head";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -21,19 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <head>
-                <link
-                    rel="icon"
-                    href="/icon.svg"
-                    type="image/svg+xml"
-                    sizes="any"
-                />
-                <meta charSet="UTF-8" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                />
-            </head>
+            <WithHead />
             <body className={`${inter.className} text-base`}>{children}</body>
         </html>
     );
