@@ -52,7 +52,9 @@ const variantIcons: Record<string, React.ReactNode> = {
     error: <NoSymbolIcon className="h-6 w-6" />,
 };
 
-function getCalloutTitle(variant: "info" | "success" | "warning" | "error"): string {
+function getCalloutTitle(
+    variant: "info" | "success" | "warning" | "error"
+): string {
     switch (variant) {
         case "info":
             return "Info";
