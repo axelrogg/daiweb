@@ -2,6 +2,8 @@ import nextMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfigBase = {
+    // `reactStrictMode` is enabled by default but let's make sure it's `true`
+    reactStrictMode: true,
     pageExtensions: ["md", "mdx", "tsx", "ts"],
 };
 
