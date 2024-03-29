@@ -1,9 +1,7 @@
 import { WithHead } from "@/components/with-head";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import fontConfig from "@/config/font";
 
 export const metadata: Metadata = {
     title: "daiweb",
