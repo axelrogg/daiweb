@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 export default function Docs() {
     return (
         <>
-            <h1 className="mb-8 text-5xl font-bold">Documentación</h1>
+            <h1 className="mb-8 text-4xl font-bold">Documentación</h1>
             <p>
                 ¡Bienvenidos a la web de la Delegación de Alumnos de
                 Industriales! En esta sección podrás encontrar información sobre
