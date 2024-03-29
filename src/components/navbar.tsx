@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
     DocumentTextIcon,
@@ -16,18 +15,11 @@ import {
 import { SideBar } from "./sidebar";
 import { Button } from "./ui/button";
 import { SideBarItem } from "./sidebar-item";
+import { MainLogo } from "./main-logo";
 
 export const NavBar = () => (
     <nav className="mb-2 flex justify-between py-5">
-        <Link href="/">
-            <Image
-                src="/logo-dai.svg"
-                alt="DAI logo"
-                width={50}
-                height={50}
-                priority
-            />
-        </Link>
+        <MainLogo />
         <div className="hidden lg:flex">
             <NavigationMenu>
                 <NavigationMenuList>
