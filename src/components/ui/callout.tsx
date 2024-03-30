@@ -61,7 +61,7 @@ function getCalloutTitle(
         case "success":
             return "Enhorabuena";
         case "warning":
-            return "Cuidado";
+            return "Atención";
         case "error":
             return "Error";
         default:
