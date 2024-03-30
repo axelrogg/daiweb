@@ -9,7 +9,7 @@ import {
 import { DefaultLayout } from "@/layouts/default-layout";
 import { DocumentTextIcon, PencilIcon } from "@heroicons/react/24/outline";
 
-export default async function Home() {
+export default async function HomePage() {
     return (
         <DefaultLayout>
             <div className="flex flex-col items-center justify-center">
