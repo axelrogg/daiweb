@@ -23,7 +23,7 @@ import Link from "next/link";
  * @see {@link https://nextjs.org/docs/app/api-reference/file-conventions/not-found}
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/calc}
  */
-export default function NotFound() {
+export default function NotFoundPage() {
     return (
         <DefaultLayout>
             <div className="flex h-[calc(100dvh-155px)] w-full flex-col items-center justify-center">
