@@ -16,7 +16,12 @@ export default async function Home() {
                 <h1 className="mb-5 text-center text-5xl font-bold">
                     Bienvenidos a la nueva DAI
                 </h1>
-                <div className="min-w-full space-y-5">
+                <h2 className="max-w-prose text-center text-xl">
+                    La web de la Delegación de Alumnos de Industriales se
+                    renueva para ofrecerte la mejor experiencia de la
+                    Universidad de Vigo
+                </h2>
+                <div className="min-w-full space-y-5 lg:grid lg:grid-cols-3 lg:gap-4">
                     <Card>
                         <CardContent className="mt-5 flex items-center justify-center">
                             <Link href="/docs">
