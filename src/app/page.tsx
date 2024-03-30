@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { DefaultLayout } from "@/layouts/default-layout";
-import { BookText, Feather } from "lucide-react";
+import { DocumentTextIcon, PencilIcon } from "@heroicons/react/24/outline";
 
 export default async function Home() {
     return (
@@ -20,7 +20,7 @@ export default async function Home() {
                     <Card>
                         <CardContent className="mt-5 flex items-center justify-center">
                             <Link href="/docs">
-                                <BookText className="h-20 w-20" />
+                                <DocumentTextIcon className="h-20 w-20" />
                             </Link>
                         </CardContent>
                         <CardHeader>
@@ -33,7 +33,7 @@ export default async function Home() {
                     <Card>
                         <CardContent className="mt-5 flex items-center justify-center">
                             <Link href="/blog">
-                                <Feather className="h-20 w-20" />
+                                <PencilIcon className="h-20 w-20" />
                             </Link>
                         </CardContent>
                         <CardHeader>
