@@ -78,9 +78,9 @@ const envSecrets = {
  * or are empty.
  */
 function checkEnvironmentVariables() {
-    Object.entries(envSecrets).forEach(([_, secrets]) => {
+    Object.entries(envSecrets).forEach(([category, secrets]) => {
         for (let key in secrets) {
-            if (!envSecrets[key]) {
+            if (!envSecrets[category][key]) {
                 throw new Error(
                     `Environment variable ${key} is not defined. ` +
                         "Please make sure to add it to your .env.local file " +
