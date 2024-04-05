@@ -37,3 +37,6 @@ next-env.d.ts
 
 # todos
 TODO.txt
+
+# bun (windows, modifica el archivo bun.lockb)
+bun.lockb
