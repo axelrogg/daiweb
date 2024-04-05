@@ -9,19 +9,14 @@ const OAUTH_APPROVED_SCOPES = [
     "profile",
 ];
 
-function parseClerkWebhookEvent(event: ClerkWebhookEventType, obj: object) {
-    if (event === "user.deleted") {
-        return parseClerkDeletedUserObject(obj);
-    }
-    if (event === "user.created") {
-        return parseClerkCreatedUserObject(obj);
-    }
-    throw Error(`unsupported webhook event: ${event}`);
-}
-
 function parseClerkDeletedUserObject(obj: object) {
+    const userId = (obj as DeletedObjectJSON).id;
+    if (!userId) {
+        return null;
+    }
+
     return {
-        userId: (obj as DeletedObjectJSON).id,
+        userId: userId,
         deletedAt: new Date(),
     };
 }
@@ -31,26 +26,24 @@ function parseClerkCreatedUserObject(obj: object) {
 
     // This should never trigger
     if (!Array.isArray(rawUserData.external_accounts)) {
-        throw Error("no oauth account linked to clerk account");
+        console.error("no oauth account linked to clerk account", obj);
+        return null;
     }
 
-    try {
-        const oauthParsedData = parseOAuthObject(
-            rawUserData.external_accounts[0]
-        );
-        return {
-            userId: rawUserData.id,
-            createdAt: new Date(rawUserData.created_at),
-            updatedAt: new Date(rawUserData.updated_at),
-            avatarUri: rawUserData.image_url,
-            username: rawUserData.username,
-            lastName: rawUserData.last_name,
-            firstName: rawUserData.first_name,
-            ...oauthParsedData,
-        };
-    } catch (err) {
-        throw err;
+    const oauthParsedData = parseOAuthObject(rawUserData.external_accounts[0]);
+    if (!oauthParsedData) {
+        return null;
     }
+    return {
+        userId: rawUserData.id,
+        createdAt: new Date(rawUserData.created_at),
+        updatedAt: new Date(rawUserData.updated_at),
+        avatarUri: rawUserData.image_url,
+        username: rawUserData.username,
+        lastName: rawUserData.last_name,
+        firstName: rawUserData.first_name,
+        ...oauthParsedData,
+    };
 }
 
 function parseOAuthObject(obj: object) {
@@ -61,7 +54,11 @@ function parseOAuthObject(obj: object) {
     const approvedScopes = rawOauthData.approved_scopes.split(" ");
     for (let i = 0; i < approvedScopes.length; i++) {
         if (!OAUTH_APPROVED_SCOPES.includes(approvedScopes[i])) {
-            throw Error("approved scopes do not match Google's OAuth config");
+            console.error(
+                "approved scopes do not match Google's OAuth config",
+                obj
+            );
+            return null;
         }
     }
 
@@ -79,4 +76,4 @@ function parseOAuthObject(obj: object) {
     };
 }
 
-export { parseClerkWebhookEvent, parseClerkCreatedUserObject };
+export { parseClerkDeletedUserObject, parseClerkCreatedUserObject };

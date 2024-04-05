@@ -1,12 +1,10 @@
-type HTTPResponseStatusCodeTitle =
-    | "OK"
-    | "Bad Request"
-    | "Unprocessable Entity";
+type HTTPResponseStatusCodeText = "OK" | "Bad Request" | "Unprocessable Entity";
+
 type HTTPResponseStatusCode = 200 | 400 | 422;
 
 type HTTPStatusCodeInfo = {
     code: HTTPResponseStatusCode;
-    title: HTTPResponseStatusCodeTitle;
+    text: HTTPResponseStatusCodeText;
 };
 
 type HTTPResponseStatus = {
