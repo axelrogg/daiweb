@@ -83,7 +83,9 @@ function checkEnvironmentVariables() {
             if (!envSecrets[key]) {
                 throw new Error(
                     `Environment variable ${key} is not defined. ` +
-                        "Please make sure to add it to your .env.local file"
+                        "Please make sure to add it to your .env.local file " +
+                        "if you are in development mode or in Vercel's dashboard " +
+                        "if you are deploying to production"
                 );
             }
         }
