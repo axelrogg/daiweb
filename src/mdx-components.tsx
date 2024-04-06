@@ -17,8 +17,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         ol: ({ children }) => (
             <ol className="ml-8 list-outside list-decimal">{children}</ol>
         ),
-        a: ({ children }) => (
-            <a className="text-blue-500 hover:underline ">{children}</a>
+        a: ({ href, children }) => (
+            <a href={href} className="text-blue-500 hover:underline">{children}</a>
         ),
         p: ({ children }) => <p className="my-1 text-base">{children}</p>,
         ...components,
