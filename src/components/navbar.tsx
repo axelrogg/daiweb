@@ -24,7 +24,7 @@ export const NavBar = () => (
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <Link href="/docs" legacyBehavior passHref>
+                        <Link href="/guias" legacyBehavior passHref>
                             <NavigationMenuLink
                                 className={navigationMenuTriggerStyle}
                             >
@@ -38,16 +38,16 @@ export const NavBar = () => (
         </div>
         <SideBar>
             <Button asChild variant="link" className="justify-start text-base">
-                <Link href="/docs">
+                <Link href="/guias">
                     <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
                     Documentación
                 </Link>
             </Button>
-            <SideBarItem href="/docs/anadir-correo-uvigo">
+            <SideBarItem href="/guias/anadir-correo-uvigo">
                 <EnvelopeIcon className="mr-3 h-6 w-6 stroke-zinc-500" />
                 Añadir el correo UVigo
             </SideBarItem>
-            <SideBarItem href="/docs/activar-wifi">
+            <SideBarItem href="/guias/activar-wifi">
                 <WifiIcon className="mr-3 h-6 w-6 stroke-emerald-500" />
                 Activar el WiFi UVigo
             </SideBarItem>
