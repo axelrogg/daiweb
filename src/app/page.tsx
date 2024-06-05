@@ -1,4 +1,3 @@
-
 import { DefaultLayout } from "@/layouts/default-layout";
 
 export default async function HomePage() {

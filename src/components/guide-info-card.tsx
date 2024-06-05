@@ -11,13 +11,13 @@ import { cn } from "@/lib/utils";
 import { PropsWithChildren } from "@/types";
 import { useRouter } from "next/navigation";
 
-export const DocsInfoCard = ({
+export const GuideInfoCard = ({
     title,
     description,
     href,
     className,
     children,
-}: PropsWithChildren<DocsInfoCardProps>) => {
+}: PropsWithChildren<GuideInfoCardProps>) => {
     const { push } = useRouter();
 
     function onClickCard() {
@@ -42,7 +42,7 @@ export const DocsInfoCard = ({
     );
 };
 
-interface DocsInfoCardProps {
+interface GuideInfoCardProps {
     title: string;
     description: string;
     href: string;
