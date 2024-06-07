@@ -1,9 +1,14 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import { WithHead } from "@/components/with-head";
 import "./globals.css";
+import { Viewport } from "next";
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import fontConfig from "@/config/font";
 import clerkConfig from "@/config/clerk";
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1.0,
+}
 
 export const metadata: Metadata = {
     title: "daiweb",
@@ -29,7 +34,6 @@ export default function RootLayout({
             appearance={clerkConfig.appeareance}
         >
             <html lang="en">
-                <WithHead />
                 <body className={`${fontConfig.className} text-base`}>
                     {children}
                 </body>
