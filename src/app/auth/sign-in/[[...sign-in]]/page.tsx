@@ -10,6 +10,9 @@ export default function SignInPage() {
                     <CalloutDescription>
                         Por ahora solo miembros de la DAI con un correo
                         electrónico @dai.uvigo.gal pueden acceder al Dashboard.
+                        <br />
+                        Para más información comunícate con algún miembro de la
+                        DAI o acércate a una de sus sedes.
                     </CalloutDescription>
                 </Callout>
                 <SignIn />

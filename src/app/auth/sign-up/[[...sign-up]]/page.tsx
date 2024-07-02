@@ -9,7 +9,9 @@ export default function SignUpPage() {
                 <Callout variant="warning" className="sm:max-w-96 lg:max-w-96">
                     <CalloutDescription>
                         Por ahora solo miembros de la DAI con un correo
-                        electrónico @dai.uvigo.gal pueden crear una cuenta.
+                        electrónico @dai.uvigo.gal pueden crear una cuenta. Para
+                        más información comunícate con algún miembro de la DAI o
+                        acércate a una de sus sedes.
                     </CalloutDescription>
                 </Callout>
                 <SignUp />
