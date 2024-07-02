@@ -1,5 +1,5 @@
 import { DeletedObjectJSON, UserJSON } from "@clerk/types";
-import { ClerkWebhookEventType, GoogleOAuthJSON } from "@/types";
+import { GoogleOAuthJSON } from "@/types";
 
 const OAUTH_APPROVED_SCOPES = [
     "email",
@@ -14,9 +14,8 @@ function parseClerkDeletedUserObject(obj: object) {
     if (!userId) {
         return null;
     }
-
     return {
-        userId: userId,
+        userExternalId: userId,
         deletedAt: new Date(),
     };
 }
@@ -30,6 +29,7 @@ function parseClerkCreatedUserObject(obj: object) {
         return null;
     }
 
+    // We're only allowing 1 external account: Google.
     const oauthParsedData = parseOAuthObject(rawUserData.external_accounts[0]);
     if (!oauthParsedData) {
         return null;
@@ -50,7 +50,7 @@ function parseOAuthObject(obj: object) {
     const rawOauthData = obj as GoogleOAuthJSON;
 
     // Clerk gives us a string of Google's OAuth approved scopes.
-    // If we don't find all of our scopes, bail. Something must be quite wrong.
+    // If we don't find all of our scopes, throw. Something must be wrong.
     const approvedScopes = rawOauthData.approved_scopes.split(" ");
     for (let i = 0; i < approvedScopes.length; i++) {
         if (!OAUTH_APPROVED_SCOPES.includes(approvedScopes[i])) {
