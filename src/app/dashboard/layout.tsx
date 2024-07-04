@@ -1,5 +1,4 @@
 import { MainLogo } from "@/components/main-logo";
-import { WithFooter } from "@/components/with-footer";
 
 export default function DashboardLayout({
     children,
@@ -12,7 +11,6 @@ export default function DashboardLayout({
                 <MainLogo />
             </nav>
             {children}
-            <WithFooter className="fixed bottom-0 left-0" />
         </div>
     );
 }
