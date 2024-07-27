@@ -14,25 +14,153 @@ export type Database = {
                     created_at: string;
                     event_type: string;
                     id: number;
-                    user_id: number;
+                    user_id: number | null;
                 };
                 Insert: {
                     created_at?: string;
                     event_type: string;
                     id?: number;
-                    user_id: number;
+                    user_id?: number | null;
                 };
                 Update: {
                     created_at?: string;
                     event_type?: string;
                     id?: number;
-                    user_id?: number;
+                    user_id?: number | null;
                 };
                 Relationships: [
                     {
                         foreignKeyName: "public_clerk_webhook_event_user_id_fkey";
                         columns: ["user_id"];
-                        isOneToOne: true;
+                        isOneToOne: false;
+                        referencedRelation: "user";
+                        referencedColumns: ["id"];
+                    },
+                ];
+            };
+            impresiones: {
+                Row: {
+                    created_at: string;
+                    description: string | null;
+                    id: number;
+                    num_pages: number;
+                    user_id: number;
+                    user_responsable: number;
+                };
+                Insert: {
+                    created_at?: string;
+                    description?: string | null;
+                    id?: number;
+                    num_pages: number;
+                    user_id: number;
+                    user_responsable: number;
+                };
+                Update: {
+                    created_at?: string;
+                    description?: string | null;
+                    id?: number;
+                    num_pages?: number;
+                    user_id?: number;
+                    user_responsable?: number;
+                };
+                Relationships: [
+                    {
+                        foreignKeyName: "impresiones_user_id_fkey";
+                        columns: ["user_id"];
+                        isOneToOne: false;
+                        referencedRelation: "user";
+                        referencedColumns: ["id"];
+                    },
+                    {
+                        foreignKeyName: "impresiones_user_responsable_fkey";
+                        columns: ["user_responsable"];
+                        isOneToOne: false;
+                        referencedRelation: "user";
+                        referencedColumns: ["id"];
+                    },
+                ];
+            };
+            prestamos_materiales: {
+                Row: {
+                    created_at: string;
+                    id: number;
+                    is_available: boolean;
+                    material: string;
+                    renewed_count: number;
+                    user_id: number;
+                    user_responsable_id: number;
+                    valid_until: string;
+                };
+                Insert: {
+                    created_at?: string;
+                    id?: number;
+                    is_available: boolean;
+                    material: string;
+                    renewed_count?: number;
+                    user_id: number;
+                    user_responsable_id: number;
+                    valid_until: string;
+                };
+                Update: {
+                    created_at?: string;
+                    id?: number;
+                    is_available?: boolean;
+                    material?: string;
+                    renewed_count?: number;
+                    user_id?: number;
+                    user_responsable_id?: number;
+                    valid_until?: string;
+                };
+                Relationships: [
+                    {
+                        foreignKeyName: "prestamos_user_id_fkey";
+                        columns: ["user_id"];
+                        isOneToOne: false;
+                        referencedRelation: "user";
+                        referencedColumns: ["id"];
+                    },
+                    {
+                        foreignKeyName: "prestamos_user_responsable_fkey";
+                        columns: ["user_responsable_id"];
+                        isOneToOne: false;
+                        referencedRelation: "user";
+                        referencedColumns: ["id"];
+                    },
+                ];
+            };
+            reservas_materiales: {
+                Row: {
+                    created_at: string;
+                    id: number;
+                    is_active: boolean;
+                    material: string;
+                    status: string;
+                    user_id: number;
+                    valid_until: string;
+                };
+                Insert: {
+                    created_at?: string;
+                    id?: number;
+                    is_active: boolean;
+                    material: string;
+                    status: string;
+                    user_id: number;
+                    valid_until: string;
+                };
+                Update: {
+                    created_at?: string;
+                    id?: number;
+                    is_active?: boolean;
+                    material?: string;
+                    status?: string;
+                    user_id?: number;
+                    valid_until?: string;
+                };
+                Relationships: [
+                    {
+                        foreignKeyName: "reservas_materiales_user_id_fkey";
+                        columns: ["user_id"];
+                        isOneToOne: false;
                         referencedRelation: "user";
                         referencedColumns: ["id"];
                     },
@@ -67,38 +195,6 @@ export type Database = {
                     last_updated_at?: string;
                 };
                 Relationships: [];
-            };
-            user_oauth2: {
-                Row: {
-                    created_at: string;
-                    id: number;
-                    provider: string;
-                    provider_id: string;
-                    user_id: number;
-                };
-                Insert: {
-                    created_at?: string;
-                    id?: number;
-                    provider: string;
-                    provider_id: string;
-                    user_id: number;
-                };
-                Update: {
-                    created_at?: string;
-                    id?: number;
-                    provider?: string;
-                    provider_id?: string;
-                    user_id?: number;
-                };
-                Relationships: [
-                    {
-                        foreignKeyName: "public_user_oauth2_user_id_fkey";
-                        columns: ["user_id"];
-                        isOneToOne: true;
-                        referencedRelation: "user";
-                        referencedColumns: ["id"];
-                    },
-                ];
             };
         };
         Views: {
