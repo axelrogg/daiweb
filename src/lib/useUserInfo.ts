@@ -1,7 +1,6 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import database from "./database";
 
-
 /**
  * Recupera información del usuario desde la base de datos y el contexto de
  * autenticación actual.
@@ -34,7 +33,7 @@ import database from "./database";
  */
 export async function useUserInfo(): Promise<UserInfo | null> {
     const { userId: userExternalId } = auth();
-    const userDetails = await currentUser()
+    const userDetails = await currentUser();
 
     if (!userExternalId || !userDetails) {
         return null;
@@ -50,15 +49,15 @@ export async function useUserInfo(): Promise<UserInfo | null> {
             externalId: userDetails.id,
             profilePicUrl: userDetails.imageUrl,
             fullName: userDetails.fullName,
-        }
+        };
     } catch (err) {
         return null;
     }
 }
 
 interface UserInfo {
-    id: number
-    externalId: string
-    profilePicUrl: string
-    fullName?: string | null
+    id: number;
+    externalId: string;
+    profilePicUrl: string;
+    fullName?: string | null;
 }
