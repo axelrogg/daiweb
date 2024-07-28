@@ -25,10 +25,11 @@ export const DashboardOverview = ({
                         <Button>Ver historial</Button>
                     </Link>
                     <Link href="/dashboard/pedir-material">
-                        <Button>Pedir material</Button>
+                        <Button>Pedir materiales</Button>
                     </Link>
                 </div>
             </DashboardOverviewCard>
+            {/*
             <DashboardOverviewCard title="Impresiones del mes">
                 <DashboardOverviewRingChart
                     label="Impresiones hechas este mes"
@@ -47,6 +48,8 @@ export const DashboardOverview = ({
                     </Link>
                 </div>
             </DashboardOverviewCard>
+
+            */}
         </div>
     );
 };
