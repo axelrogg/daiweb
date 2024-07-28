@@ -63,17 +63,15 @@ class Database {
             );
             return null;
         }
-        return data.map((element) => {
-            return {
-                id: element.id,
-                userId: element.user_id,
-                material: element.material,
-                status: element.status,
-                isActive: element.is_active,
-                createdAt: element.created_at,
-                validUntil: element.valid_until,
-            };
-        });
+        return data.map((element) => ({
+            id: element.id,
+            userId: element.user_id,
+            material: element.material,
+            status: element.status,
+            isActive: element.is_active,
+            createdAt: new Date(element.created_at),
+            validUntil: new Date(element.valid_until),
+        }));
     }
 
     async getUserIdFromExternalId(externalUserId: string) {
