@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { makeMaterialReservationAction } from "@/lib/actions/borrowMaterial";
+import { ToastAction } from "@/components/ui/toast";
 import {
     Form,
     FormControl,
@@ -21,22 +26,34 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 
 export const MaterialBorrowingForm = () => {
+    const { toast } = useToast();
     const [showOtros, setShowOtros] = useState(false);
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
             otros: "",
-            material: "",
+            material: undefined,
         },
     });
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        // more on this later
-        console.info(data);
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+        console.log(data);
+        const material =
+            data.material === "Otros" ? data.otros! : data.material;
+        await makeMaterialReservationAction(material);
+        toast({
+            title: "¡Todo listo!",
+            description:
+                "Solo queda que muestres tu código QR a un miembro de la DAI.",
+            action: (
+                <ToastAction altText="Mostrar mi QR" asChild>
+                    <Link href="/dashboard/mi-codigo-qr">Mostrar mi QR</Link>
+                </ToastAction>
+            ),
+        });
     }
 
     return (
@@ -63,12 +80,20 @@ export const MaterialBorrowingForm = () => {
                                             setShowOtros(!showOtros);
                                         }
                                         form.setValue("material", material);
+                                        if (
+                                            form.getValues("otros") &&
+                                            form.getValues("otros")!.length > 0
+                                        ) {
+                                            form.setValue("otros", "");
+                                        }
                                     }}
                                     defaultValue={field.value}
                                 >
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Selecciona el material que quieres" />
+                                            <SelectValue
+                                                placeholder="Selecciona el material que quieres"
+                                            />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
@@ -109,8 +134,9 @@ export const MaterialBorrowingForm = () => {
                             )}
                         />
                     )}
-
-                    <Button type="submit">Reservar</Button>
+                    <div className="flex justify-between">
+                        <Button type="submit">Pedir ahora</Button>
+                    </div>
                 </form>
             </Form>
         </div>
