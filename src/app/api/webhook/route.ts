@@ -82,7 +82,7 @@ export async function POST(req: Request) {
                     "but still triggered Clerk's webhook events."
             );
             return new Response(
-                `No user was found with external id '${parsedPayloadData.userExternalId}'`,
+                `No user was found with external id '${parsedPayloadData.userExternalId}'. Impossible to trigger user deletion`,
                 { status: HTTP_RESPONSE_STATUS.unprocessableEntity.code }
             );
         }
