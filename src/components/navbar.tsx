@@ -29,7 +29,7 @@ export const NavBar = () => (
                                 className={navigationMenuTriggerStyle}
                             >
                                 <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
-                                Documentación
+                                Guías
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>
@@ -40,7 +40,7 @@ export const NavBar = () => (
             <Button asChild variant="link" className="justify-start text-base">
                 <Link href="/guias">
                     <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
-                    Documentación
+                    Guías
                 </Link>
             </Button>
             <SideBarItem href="/guias/anadir-correo-uvigo">
@@ -51,6 +51,9 @@ export const NavBar = () => (
                 <WifiIcon className="mr-3 h-6 w-6 stroke-emerald-500" />
                 Activar el WiFi UVigo
             </SideBarItem>
+            <Button className="absolute bottom-6 left-6 w-60" asChild>
+                <Link href="/dashboard">Dashboard</Link>
+            </Button>
         </SideBar>
     </nav>
 );
