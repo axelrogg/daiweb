@@ -12,6 +12,15 @@ const nextConfigBase = {
         checkEnvironmentVariables();
         return config;
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "img.clerk.com",
+                port: "",
+            },
+        ],
+    },
 };
 
 // The following is needed to be able to render mdx content
