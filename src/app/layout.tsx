@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import fontConfig from "@/config/font";
 import clerkConfig from "@/config/clerk";
+import { Toaster } from "@/components/ui/toaster";
 
 export const viewport: Viewport = {
     width: "device-width",
@@ -35,7 +36,8 @@ export default function RootLayout({
         >
             <html lang="en">
                 <body className={`${fontConfig.className} text-base`}>
-                    {children}
+                    <main>{children}</main>
+                    <Toaster />
                 </body>
             </html>
         </ClerkProvider>
