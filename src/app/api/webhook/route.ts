@@ -1,14 +1,15 @@
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { UserJSON } from "@clerk/types";
-import database from "@/lib/database";
 import {
+    clerkWebhook,
     parseClerkCreatedUserObject,
     parseClerkDeletedUserObject,
-} from "@/lib/clerk-webhook-data";
+} from "@/lib/clerk";
 import { HTTP_RESPONSE_STATUS } from "@/lib/http-reponse-status";
 import { verifySvixHeaders } from "@/lib/svix";
 import { ClerkWebhookEvent } from "@/types";
+import user from "@/lib/user";
 
 export async function POST(req: Request) {
     // Clerk uses Svix to send us the webhook.
@@ -66,9 +67,9 @@ export async function POST(req: Request) {
             });
         }
 
-        let userId;
         try {
-            userId = await database.getUserIdFromExternalId(
+            await clerkWebhook.newEvent(
+                "user.deleted",
                 parsedPayloadData.userExternalId
             );
         } catch (err) {
@@ -76,26 +77,8 @@ export async function POST(req: Request) {
             throw err;
         }
 
-        if (!userId) {
-            console.error(
-                `No user was found with external id '${parsedPayloadData.userExternalId}' ` +
-                    "but still triggered Clerk's webhook events."
-            );
-            return new Response(
-                `No user was found with external id '${parsedPayloadData.userExternalId}'. Impossible to trigger user deletion`,
-                { status: HTTP_RESPONSE_STATUS.unprocessableEntity.code }
-            );
-        }
-
         try {
-            await database.insertWebhookDeleteEvent(userId);
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-
-        try {
-            await database.deleteUser(userId);
+            await user.deleteFromExternalId(parsedPayloadData.userExternalId);
         } catch (err) {
             console.error(err);
             throw err;
@@ -118,19 +101,22 @@ export async function POST(req: Request) {
             );
         }
 
-        let userId;
         try {
-            userId = await database.createUser(
+            await user.new(
                 parsedPayloadData.userId,
                 parsedPayloadData.emailAddress,
                 false
             );
         } catch (err) {
+            console.error(err);
             throw err;
         }
 
         try {
-            await database.insertWebhookCreateEvent(userId);
+            await clerkWebhook.newEvent(
+                "user.created",
+                parsedPayloadData.userId
+            );
         } catch (err) {
             throw err;
         }

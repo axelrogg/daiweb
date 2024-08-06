@@ -36,6 +36,7 @@ const NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL =
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const DATABASE_CONNECTION_STR = process.env.DATABASE_CONNECTION_STR;
 
 /**
  * An object mapping the names of the required environment variables to their
@@ -65,6 +66,7 @@ const envSecrets = {
         CLERK_SECRET_KEY: CLERK_SECRET_KEY,
         SUPABASE_URL: SUPABASE_URL,
         SUPABASE_ANON_KEY: SUPABASE_ANON_KEY,
+        DATABASE_CONNECTION_STR: DATABASE_CONNECTION_STR,
     },
 };
 

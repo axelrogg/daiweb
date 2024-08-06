@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { BarcodeFormat, BrowserMultiFormatReader } from "@zxing/library";
 
-export const VideoStreamCanvas = ({
-    showStream,
-    onStop,
-}: VideoStreamCanvasProps) => {
+
+export const MulticodeScanner = () => {
+    const [showStream, setShowStream] = useState(false);
     const [stream, setStream] = useState<MediaStream | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-
+    const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader | null>(null);
     const winWidth = window.screen.width;
     const winHeight = window.screen.height;
 
@@ -20,6 +20,42 @@ export const VideoStreamCanvas = ({
             videoRef.current.play();
         }
     }, [stream]);
+
+    useEffect(() => {
+        const reader = new BrowserMultiFormatReader();
+        setCodeReader(reader);
+
+        return () => {
+            reader.reset();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!stream || !showStream || !codeReader || !videoRef.current) {
+            return;
+        }
+
+        codeReader.decodeFromStream(stream, videoRef.current, (result, error) => {
+            if (result) {
+                if (result.getBarcodeFormat() !== BarcodeFormat.QR_CODE || result.getBarcodeFormat() !== BarcodeFormat.EAN_13) {
+                    console.error("Unsupported code format: " + result.getBarcodeFormat())
+                    codeReader.reset();
+                    stopStream();
+                    return;
+                }
+
+                alert(`Code detected: FORMAT: ${result.getBarcodeFormat()} -> ${result.getText()}`);
+                codeReader.reset();
+                stopStream();
+                return;
+            }
+            if (error) {
+                if (error.name !== "NotFoundException") {
+                    console.error(error);
+                }
+            }
+        });
+    }, [showStream, codeReader]);
 
     async function getVideoPermission() {
         if (!("MediaRecorder" in window)) {
@@ -37,6 +73,7 @@ export const VideoStreamCanvas = ({
                 },
             });
             setStream(streamData);
+            setShowStream(true);
         } catch (err: any) {
             if (err.name === "NotAllowedError") {
                 alert(
@@ -56,7 +93,7 @@ export const VideoStreamCanvas = ({
         }
         stream.getTracks().forEach((track) => track.stop());
         setStream(null);
-        onStop();
+        setShowStream(false);
     }
 
     return (
@@ -93,7 +130,8 @@ export const VideoStreamCanvas = ({
     );
 };
 
-interface VideoStreamCanvasProps {
+
+interface MulticodeScannerProps {
     showStream: boolean;
     onStop: Function;
 }

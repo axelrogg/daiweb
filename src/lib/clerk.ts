@@ -1,5 +1,12 @@
+import { createClerkClient } from "@clerk/backend";
 import { DeletedObjectJSON, UserJSON } from "@clerk/types";
 import { GoogleOAuthJSON } from "@/types";
+import envSecrets from "./environment";
+import sql from "./database";
+
+const clerkClient = createClerkClient({
+    secretKey: envSecrets.server.CLERK_SECRET_KEY,
+});
 
 const OAUTH_APPROVED_SCOPES = [
     "email",
@@ -8,6 +15,30 @@ const OAUTH_APPROVED_SCOPES = [
     "openid",
     "profile",
 ];
+
+type ClerkWebhookEventType = "user.created" | "user.deleted" | "user.updated";
+
+class ClerkWebhook {
+    async newEvent(event: ClerkWebhookEventType, externalUserId: string) {
+        try {
+            await sql`
+                insert into clerk_webhook_event
+                    (user_id, event_type)
+                values
+                    (
+                        (
+                            select id
+                            from "user"
+                            where clerk_user_id = ${externalUserId}
+                        ),
+                        ${event}
+                    )
+            `;
+        } catch (error: any) {
+            throw error;
+        }
+    }
+}
 
 function parseClerkDeletedUserObject(obj: object) {
     const userId = (obj as DeletedObjectJSON).id;
@@ -76,4 +107,11 @@ function parseOAuthObject(obj: object) {
     };
 }
 
-export { parseClerkDeletedUserObject, parseClerkCreatedUserObject };
+const clerkWebhook = new ClerkWebhook();
+
+export {
+    clerkWebhook,
+    clerkClient,
+    parseClerkDeletedUserObject,
+    parseClerkCreatedUserObject,
+};
