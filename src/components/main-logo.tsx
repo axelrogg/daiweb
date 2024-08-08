@@ -6,8 +6,8 @@ export const MainLogo = () => (
         <Image
             src="/logo-dai.svg"
             alt="DAI logo"
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             priority
         />
     </Link>
