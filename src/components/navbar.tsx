@@ -18,7 +18,7 @@ import { SideBarItem } from "./sidebar-item";
 import { MainLogo } from "./main-logo";
 
 export const NavBar = () => (
-    <nav className="mb-2 flex justify-between py-5">
+    <nav className="mb-2 flex items-center justify-center py-5 lg:mx-10 lg:justify-between">
         <MainLogo />
         <div className="hidden lg:flex">
             <NavigationMenu>
@@ -32,6 +32,11 @@ export const NavBar = () => (
                                 Guías
                             </NavigationMenuLink>
                         </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <Button asChild>
+                            <Link href="/dashboard">Dashboard</Link>
+                        </Button>
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
