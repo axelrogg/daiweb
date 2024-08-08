@@ -1,8 +1,8 @@
 "use strict";
 
 import nextMDX from "@next/mdx";
-import rehypeSlug from 'rehype-slug';
-import remarkToc from 'remark-toc';
+import rehypeSlug from "rehype-slug";
+import remarkToc from "remark-toc";
 import checkEnvironmentVariables from "./environment.config.mjs";
 
 /** @type {import('next').NextConfig} */
@@ -29,10 +29,8 @@ const nextConfigBase = {
 const withMdx = nextMDX({
     options: {
         rehypePlugins: [rehypeSlug],
-        remarkPlugins: [
-            [remarkToc, { heading: "Contenidos"}],
-        ]
-    }
+        remarkPlugins: [[remarkToc, { heading: "Contenidos" }]],
+    },
 });
 const nextConfig = withMdx(nextConfigBase);
 
