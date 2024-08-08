@@ -1,18 +1,26 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { Button } from "./ui/button";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { BarcodeFormat, BrowserMultiFormatReader } from "@zxing/library";
+import { Button } from "./ui/button";
+import { useMulticodeScanner } from "@/lib/hooks/useMulticodeScanner";
 
-
-export const MulticodeScanner = () => {
+export const MulticodeScanner = ({
+    children,
+    setScannedCode,
+}: MulticodeScannerProps) => {
     const [showStream, setShowStream] = useState(false);
     const [stream, setStream] = useState<MediaStream | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader | null>(null);
     const winWidth = window.screen.width;
     const winHeight = window.screen.height;
+
+    function stopStream() {
+        if (!stream) {
+            return;
+        }
+        stream.getTracks().forEach((track) => track.stop());
+        setStream(null);
+        setShowStream(false);
+    }
 
     useEffect(() => {
         if (videoRef.current && stream) {
@@ -21,41 +29,16 @@ export const MulticodeScanner = () => {
         }
     }, [stream]);
 
-    useEffect(() => {
-        const reader = new BrowserMultiFormatReader();
-        setCodeReader(reader);
-
-        return () => {
-            reader.reset();
-        };
-    }, []);
+    const scannedCode = useMulticodeScanner(
+        stream,
+        showStream,
+        videoRef,
+        stopStream
+    );
 
     useEffect(() => {
-        if (!stream || !showStream || !codeReader || !videoRef.current) {
-            return;
-        }
-
-        codeReader.decodeFromStream(stream, videoRef.current, (result, error) => {
-            if (result) {
-                if (result.getBarcodeFormat() !== BarcodeFormat.QR_CODE || result.getBarcodeFormat() !== BarcodeFormat.EAN_13) {
-                    console.error("Unsupported code format: " + result.getBarcodeFormat())
-                    codeReader.reset();
-                    stopStream();
-                    return;
-                }
-
-                alert(`Code detected: FORMAT: ${result.getBarcodeFormat()} -> ${result.getText()}`);
-                codeReader.reset();
-                stopStream();
-                return;
-            }
-            if (error) {
-                if (error.name !== "NotFoundException") {
-                    console.error(error);
-                }
-            }
-        });
-    }, [showStream, codeReader]);
+        setScannedCode(scannedCode);
+    }, [scannedCode]);
 
     async function getVideoPermission() {
         if (!("MediaRecorder" in window)) {
@@ -87,18 +70,9 @@ export const MulticodeScanner = () => {
         }
     }
 
-    function stopStream() {
-        if (!stream) {
-            return;
-        }
-        stream.getTracks().forEach((track) => track.stop());
-        setStream(null);
-        setShowStream(false);
-    }
-
     return (
         <>
-            <Button onClick={getVideoPermission}>Scan</Button>
+            <div onClick={getVideoPermission}>{children}</div>
             {showStream && (
                 <div className="fixed left-0 top-0 mt-0">
                     <Button
@@ -130,8 +104,7 @@ export const MulticodeScanner = () => {
     );
 };
 
-
 interface MulticodeScannerProps {
-    showStream: boolean;
-    onStop: Function;
+    children: ReactNode;
+    setScannedCode: (code: string | null) => void;
 }
