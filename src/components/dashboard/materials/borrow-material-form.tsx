@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { makeMaterialReservationAction } from "@/lib/actions/borrowMaterial";
+import { newMaterialReservation } from "@/lib/actions/newMaterialReservation";
 import { ToastAction } from "@/components/ui/toast";
 import {
     Form,
@@ -44,7 +44,7 @@ export const BorrowMaterialForm = () => {
         console.log(data);
         const material =
             data.material === "Otros" ? data.otros! : data.material;
-        await makeMaterialReservationAction(material);
+        await newMaterialReservation(material);
         toast({
             title: "¡Todo listo!",
             description:
@@ -55,6 +55,18 @@ export const BorrowMaterialForm = () => {
                 </ToastAction>
             ),
         });
+    }
+
+    function onMaterialValueChange(material: string) {
+        if (material === "Otros") {
+            setShowOtros(true);
+            setEnableSubmitButton(false);
+        } else {
+            form.setValue("material", "");
+            setShowOtros(false);
+            setEnableSubmitButton(true);
+        }
+        form.setValue("material", material);
     }
 
     return (
@@ -71,26 +83,9 @@ export const BorrowMaterialForm = () => {
                             <FormItem>
                                 <FormLabel>Material</FormLabel>
                                 <Select
-                                    onValueChange={(material) => {
-                                        if (material === "Otros") {
-                                            setShowOtros(true);
-                                        } else if (
-                                            material !== "Otros" &&
-                                            showOtros === true
-                                        ) {
-                                            setShowOtros(!showOtros);
-                                        }
-                                        form.setValue("material", material);
-                                        setEnableSubmitButton(true);
-                                        if (
-                                            form.getValues("otros") &&
-                                            form.getValues("otros")!.length > 0
-                                        ) {
-                                            form.setValue("otros", "");
-                                        }
-                                    }}
                                     defaultValue={field.value}
                                     disabled={field.disabled}
+                                    onValueChange={(material) => onMaterialValueChange(material)}
                                 >
                                     <FormControl>
                                         <SelectTrigger>
@@ -123,7 +118,17 @@ export const BorrowMaterialForm = () => {
                                     <FormControl>
                                         <Input
                                             placeholder="Escribe el nombre del material"
-                                            {...field}
+                                            defaultValue={field.value}
+                                            disabled={field.disabled}
+                                            onChange={(material) => {
+                                                if (material.target.value?.length) {
+                                                    setEnableSubmitButton(true);
+                                                    console.log(material.target.value)
+                                                } else {
+                                                    setEnableSubmitButton(false);
+                                                }
+                                                form.setValue("otros", material.target.value);
+                                            }}
                                         />
                                     </FormControl>
                                     <FormDescription>
