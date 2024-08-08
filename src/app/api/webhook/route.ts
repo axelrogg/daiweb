@@ -6,10 +6,10 @@ import {
     parseClerkCreatedUserObject,
     parseClerkDeletedUserObject,
 } from "@/lib/clerk";
-import { HTTP_RESPONSE_STATUS } from "@/lib/http-reponse-status";
-import { verifySvixHeaders } from "@/lib/svix";
+import { HTTP_RESPONSE_STATUS } from "@/lib/utils/http-reponse-status";
+import { verifySvixHeaders } from "@/lib/utils/svix";
 import { ClerkWebhookEvent } from "@/types";
-import user from "@/lib/user";
+import user from "@/lib/entities/user";
 
 export async function POST(req: Request) {
     // Clerk uses Svix to send us the webhook.
