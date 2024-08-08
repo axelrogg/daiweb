@@ -1,6 +1,8 @@
 "use strict";
 
 import nextMDX from "@next/mdx";
+import rehypeSlug from 'rehype-slug';
+import remarkToc from 'remark-toc';
 import checkEnvironmentVariables from "./environment.config.mjs";
 
 /** @type {import('next').NextConfig} */
@@ -24,7 +26,14 @@ const nextConfigBase = {
 };
 
 // The following is needed to be able to render mdx content
-const withMdx = nextMDX();
+const withMdx = nextMDX({
+    options: {
+        rehypePlugins: [rehypeSlug],
+        remarkPlugins: [
+            [remarkToc, { heading: "Contenidos"}],
+        ]
+    }
+});
 const nextConfig = withMdx(nextConfigBase);
 
 export default nextConfig;
