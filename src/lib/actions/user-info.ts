@@ -11,7 +11,7 @@ export async function useUserInfo() {
     }
 
     try {
-        const userInfo = await user.info(userDetails.id)
+        const userInfo = await user.info(userDetails.id);
         return {
             ...userInfo,
             profilePicUrl: userDetails.imageUrl,
@@ -21,4 +21,3 @@ export async function useUserInfo() {
         throw error;
     }
 }
-

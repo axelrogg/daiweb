@@ -1,18 +1,14 @@
 "use server";
 
 import { clerkClient } from "../clerk";
-import database from "../database";
+import user from "../entities/user";
 
-export async function getUserFullNameFromUserId(userId: number) {
+export async function userFullName(userId: number) {
     let userExternalId = null;
     try {
-        userExternalId = await database.getExternalIdFromUserId(userId);
+        userExternalId = await user.externalIdFromId(userId)
     } catch (error: any) {
         console.error(error);
-        return null;
-    }
-
-    if (userExternalId == null) {
         return null;
     }
 

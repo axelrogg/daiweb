@@ -9,7 +9,8 @@ export async function userActiveLoans() {
     if (!externalUserId) return null;
 
     try {
-        return await material.activeLoans(externalUserId);
+        const activeLoans = await material.activeLoans(externalUserId);
+        return activeLoans
     } catch (error: any) {
         throw error;
     }
