@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { newMaterialReservation } from "@/lib/actions/newMaterialReservation";
+import { newMaterialReservation } from "@/lib/actions/new-material-reservation";
 import { ToastAction } from "@/components/ui/toast";
 import {
     Form,
