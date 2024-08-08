@@ -7,7 +7,7 @@ export const DashboardOverviewRingChart = ({
     className,
 }: DashboardOverviewRingChartProps) => {
     return (
-        <div className="h-42 w-42 relative flex items-center justify-center">
+        <div className="h-42 w-42 relative z-0 flex items-center justify-center">
             <h3 className="absolute text-center text-4xl font-bold">
                 {currentValue}
             </h3>

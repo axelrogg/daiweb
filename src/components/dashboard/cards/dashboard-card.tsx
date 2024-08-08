@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 import { PropsWithChildren } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const DashboardOverviewCard = ({
+export const DashboardCard = ({
     title,
     className,
     children,
-}: PropsWithChildren<DashboardOverviewCardProps>) => {
+}: PropsWithChildren<DashboardCardProps>) => {
     return (
         <div className={cn("group w-full", className)}>
             <Card className="flex flex-col justify-between">
@@ -19,7 +19,7 @@ export const DashboardOverviewCard = ({
     );
 };
 
-interface DashboardOverviewCardProps {
+interface DashboardCardProps {
     title: string;
     className?: string | undefined;
 }

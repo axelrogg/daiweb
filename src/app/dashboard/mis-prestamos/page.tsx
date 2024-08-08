@@ -1,17 +1,17 @@
-import { MaterialBorrowingsList } from "@/components/material-borrowings-table";
-import { getMaterialBorrowings } from "@/lib/actions/getMaterialBorrowings";
+import { ActiveLoansTable } from "@/components/dashboard/materials/active-loans-table";
+import { userActiveLoans } from "@/lib/actions/userActiveLoans";
 
 export default async function Page() {
-    const list = await getMaterialBorrowings();
+    const activeLoans = await userActiveLoans();
 
-    if (!list) {
+    if (!activeLoans) {
         return <p>nothing</p>;
     }
 
     return (
         <div>
             <h1 className="mb-5 text-4xl font-bold">Mis préstamos</h1>
-            <MaterialBorrowingsList materialDetails={list} />
+            <ActiveLoansTable materialDetails={activeLoans} />
         </div>
     );
 }

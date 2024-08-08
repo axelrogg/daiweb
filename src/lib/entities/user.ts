@@ -1,11 +1,12 @@
-import sql from "./database";
+import sql from "@/lib/database";
+import { DbUserInfo, UserInfo } from "@/types/actions";
 
 export class User {
     async new(externalId: string, email: string, isStaff: boolean) {
         try {
             const newUser = await sql`
                 insert into "user"
-                    (clerk_user_id, email, is_verified, is_staff)
+                    (external_id, email, is_verified, is_staff)
                 values
                     (${externalId}, ${email}, false, false)
                 returning id
@@ -34,7 +35,7 @@ export class User {
         try {
             const deleted = await sql`
                 delete from "user"
-                where clerk_user_id = ${externalId}
+                where external_id = ${externalId}
             `;
             console.log(deleted);
         } catch (error: any) {
@@ -47,36 +48,36 @@ export class User {
             const userId = await sql<{ id: number }[]>`
             select id
             from "user"
-            where clerk_user_id = ${externalId}
+            where external_id = ${externalId}
         `;
 
-            if (userId.length != 1) {
-                console.error("wwoooooooooooooooooo");
-                return null;
-            }
-            return userId[0].id;
+            return userId[0].id as number;
         } catch (error: any) {
             throw error;
         }
     }
 
-    //async externalIdFromUserId(userId: number) {
-    //    const { data, statusText, error, status } = await this.db
-    //        .from("user")
-    //        .select("clerk_user_id")
-    //        .eq("id", userId);
+    async info(externalId: string) {
+        try {
+            const info = await sql<DbUserInfo[]>`
+                select *
+                from "user"
+                where external_id = ${externalId}
+            `;
 
-    //    if (status !== 200 || statusText !== "OK") {
-    //        console.error(error);
-    //        throw new Error(JSON.stringify(error, null, 4));
-    //    }
-
-    //    if (!data || data.length === 0) {
-    //        console.error(`No data associated to user with user id: ${userId}`);
-    //        return null;
-    //    }
-    //    return data[0].clerk_user_id;
-    //}
+            return {
+                id: info[0].id,
+                externalId: info[0].external_id,
+                email: info[0].email,
+                isStaff: info[0].is_staff,
+                createdAt: new Date(info[0].created_at),
+                lastUpdatedAt: new Date(info[0].last_updated_at),
+                isVerified: info[0].is_verified,
+            } as UserInfo;
+        } catch (error: any) {
+            throw error;
+        }
+    }
 }
 
 const user = new User();

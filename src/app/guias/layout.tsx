@@ -1,4 +1,4 @@
-import { GuidesLayout } from "@/layouts/guides-layout";
+import { DefaultLayout } from "@/layouts/default-layout";
 
 export default function DocsLayout({
     children,
@@ -6,6 +6,8 @@ export default function DocsLayout({
     children: React.ReactNode;
 }) {
     return (
-        <GuidesLayout>{children}</GuidesLayout>
-    )
+        <DefaultLayout>
+            <div className="mx-60">{children}</div>
+        </DefaultLayout>
+    );
 }
