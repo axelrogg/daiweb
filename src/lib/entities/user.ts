@@ -45,13 +45,25 @@ export class User {
 
     async idFromExternalId(externalId: string) {
         try {
-            const userId = await sql<{ id: number }[]>`
-            select id
-            from "user"
-            where external_id = ${externalId}
-        `;
+            const result = await sql<{ id: number }[]>`
+                select id
+                from "user"
+                where external_id = ${externalId}
+            `;
+            return result[0].id as number;
+        } catch (error: any) {
+            throw error;
+        }
+    }
 
-            return userId[0].id as number;
+    async externalIdFromId(id: number) {
+        try {
+            const result = await sql<{ external_id: string }[]>`
+                select external_id
+                from "user"
+                where id = ${id}
+            `;
+            return result[0].external_id;
         } catch (error: any) {
             throw error;
         }

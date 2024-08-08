@@ -1,6 +1,10 @@
 import sql from "@/lib/database";
 
 class Material {
+    private reservationTimeDelta(now: number) {
+        return new Date(now + 432000000);
+    }
+
     //async newLoan(userId: number, userResponsableId: number, material: string) {
     //    const now = Date.now();
     //    const valid_until = now + 432000000; // default value is 3 days from now.
@@ -23,14 +27,39 @@ class Material {
     //    return true;
     //}
 
-    async activeLoansCount(externalUserId: string): Promise<number> {
+    async newLoan(userId: string, responsableExternalId: string) {
+        const timeDelta = this.reservationTimeDelta(Date.now());
+    }
+
+    async newReservation(externalId: string, material: string) {
+        const timeDelta = this.reservationTimeDelta(Date.now());
+        try {
+            await sql`
+                insert into reservas_materiales
+                    (user_id, material, status, is_active, valid_until)
+                values
+                    (
+                        (select id from "user" where external_id = ${externalId}),
+                        ${material},
+                        'reserved',
+                        true,
+                        ${timeDelta}
+                    )
+            `;
+            return true;
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
+    async activeLoansCount(externalId: string): Promise<number> {
         try {
             const activeLoans = await sql`
                 select count(*) from prestamos_materiales
                 where user_id = (
                     select id
                     from "user"
-                    where external_id = ${externalUserId}
+                    where external_id = ${externalId}
                 )
             `;
             return activeLoans[0].count as number;
@@ -40,18 +69,18 @@ class Material {
         }
     }
 
-    async activeLoans(externalUserId: string) {
+    async activeLoans(externalId: string) {
         try {
             const loans = await sql`
                 select
                     id, user_id, material, is_active, renewed_count,
-                    status, created_at, valid_until
+                    created_at, valid_until
                 from prestamos_materiales
                 where user_id = (
                     select id
                     from "user"
-                    where external_id = ${externalUserId}
-                )
+                    where external_id = ${externalId}
+                ) and is_active = true
                 limit 5;
             `;
 
@@ -74,7 +103,7 @@ class Material {
         }
     }
 
-    async activeReservations(externalUserId: string) {
+    async activeReservations(externalId: string) {
         try {
             const reservations = await sql`
                 select
@@ -84,7 +113,7 @@ class Material {
                 where user_id = (
                     select id
                     from "user"
-                    where external_id = ${externalUserId}
+                    where external_id = ${externalId}
                 )
                 limit 5
                 `;
@@ -105,14 +134,14 @@ class Material {
         }
     }
 
-    async activeReservationsFromUserId(userId: number) {
+    async activeReservationsFromUserId(id: number) {
         try {
             const reservations = await sql`
                 select
                     id, user_id, material, is_active, status,
                     valid_until, created_at
                 from reservas_materiales
-                where user_id = ${userId}
+                where user_id = ${id}
                 limit 5
                 `;
             return reservations.map(
