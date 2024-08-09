@@ -22,9 +22,9 @@ export default async function Page() {
                 </div>
                 <PopoverPortal>
                     <PopoverContent
-                        className="z-50 w-64 rounded-lg bg-white p-6 drop-shadow-2xl"
+                        className="z-50 w-64 rounded-lg bg-white p-6 drop-shadow-2xl lg:w-3/5"
                         sideOffset={10}
-                        align="end"
+                        align="start"
                     >
                         <div className="flex flex-col space-y-2">
                             <p className="mb-3 text-xl font-bold">Tip</p>
