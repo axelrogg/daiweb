@@ -39,7 +39,7 @@ class Material {
                     (user_id, material, status, is_active, valid_until)
                 values
                     (
-                        (select id from "user" where external_id = ${externalId}),
+                        (select id from users where external_id = ${externalId}),
                         ${material},
                         'reserved',
                         true,
@@ -58,7 +58,7 @@ class Material {
                 select count(*) from prestamos_materiales
                 where user_id = (
                     select id
-                    from "user"
+                    from users
                     where external_id = ${externalId}
                 )
             `;
@@ -78,7 +78,7 @@ class Material {
                 from prestamos_materiales
                 where user_id = (
                     select id
-                    from "user"
+                    from users
                     where external_id = ${externalId}
                 ) and is_active = true
                 limit 5;
@@ -112,7 +112,7 @@ class Material {
                 from reservas_materiales
                 where user_id = (
                     select id
-                    from "user"
+                    from users
                     where external_id = ${externalId}
                 )
                 limit 5

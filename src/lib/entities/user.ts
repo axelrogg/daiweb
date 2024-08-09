@@ -5,7 +5,7 @@ export class User {
     async new(externalId: string, email: string, isStaff: boolean) {
         try {
             const newUser = await sql`
-                insert into "user"
+                insert into users
                     (external_id, email, is_verified, is_staff)
                 values
                     (${externalId}, ${email}, false, false)
@@ -22,7 +22,7 @@ export class User {
     async delete(userId: number) {
         try {
             const deleted = await sql`
-                delete from "user"
+                delete from users
                 where id = ${userId}
             `;
             console.log(deleted);
@@ -34,7 +34,7 @@ export class User {
     async deleteFromExternalId(externalId: string) {
         try {
             const deleted = await sql`
-                delete from "user"
+                delete from users
                 where external_id = ${externalId}
             `;
             console.log(deleted);
@@ -47,7 +47,7 @@ export class User {
         try {
             const result = await sql<{ id: number }[]>`
                 select id
-                from "user"
+                from users
                 where external_id = ${externalId}
             `;
             return result[0].id as number;
@@ -60,7 +60,7 @@ export class User {
         try {
             const result = await sql<{ external_id: string }[]>`
                 select external_id
-                from "user"
+                from users
                 where id = ${id}
             `;
             return result[0].external_id;
@@ -73,7 +73,7 @@ export class User {
         try {
             const info = await sql<DbUserInfo[]>`
                 select *
-                from "user"
+                from users
                 where external_id = ${externalId}
             `;
 
