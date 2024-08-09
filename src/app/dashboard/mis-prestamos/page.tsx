@@ -1,6 +1,6 @@
 import { ActiveLoansTable } from "@/components/dashboard/materials/active-loans-table";
 import { Popover } from "@/components/ui/popover";
-import { userActiveLoans } from "@/lib/actions/userActiveLoans";
+import { userActiveLoans } from "@/lib/actions/user-active-loans";
 import {
     PopoverContent,
     PopoverPortal,
