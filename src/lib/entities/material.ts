@@ -62,7 +62,7 @@ class Material {
                     where external_id = ${externalId}
                 )
             `;
-            return activeLoans[0].count as number;
+            return Number(activeLoans[0].count);
         } catch (error: any) {
             console.error(error);
             throw error;
@@ -152,8 +152,8 @@ class Material {
                         material: el.material,
                         isActive: el.is_active,
                         status: el.status,
-                        validUntil: el.valid_until,
-                        createdAt: el.createdAt,
+                        validUntil: new Date(el.valid_until),
+                        createdAt: new Date(el.created_at),
                     }) as ActiveReservation
             );
         } catch (error: any) {
