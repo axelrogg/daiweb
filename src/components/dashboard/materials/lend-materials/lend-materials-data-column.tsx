@@ -11,8 +11,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MaterialReservation } from "@/types/actions";
-import { dateToDMY } from "@/lib/utils/date";
-import { makeMaterialLoanAction } from "@/lib/actions/makeMaterialLoan";
+import { readableDate } from "@/lib/utils/date";
+import { newMaterialLoan } from "@/lib/actions/new-material-loan";
 
 export const columns: ColumnDef<MaterialReservation>[] = [
     {
@@ -21,13 +21,14 @@ export const columns: ColumnDef<MaterialReservation>[] = [
     },
     {
         accessorKey: "createdAt",
-        header: "Reservado en",
+        header: "Fecha",
         cell: ({ row }) => {
-            return <div>{dateToDMY(row.getValue("createdAt"))}</div>;
+            return <div>{readableDate(row.getValue("createdAt"))}</div>;
         },
     },
     {
         id: "actions",
+        maxSize: 3,
         cell: ({ row }) => {
             const material = row.original;
             return (
@@ -41,7 +42,7 @@ export const columns: ColumnDef<MaterialReservation>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuItem
                             onClick={() =>
-                                makeMaterialLoanAction(
+                                newMaterialLoan(
                                     material.id,
                                     material.userId,
                                     material.material
