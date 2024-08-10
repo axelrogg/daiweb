@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,11 +26,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { userActiveLoansCount } from "@/lib/actions/user-active-loans-count";
 
 export const BorrowMaterialForm = () => {
     const { toast } = useToast();
     const [showOtros, setShowOtros] = useState(false);
     const [enableSubmitButton, setEnableSubmitButton] = useState(false);
+    const [canBorrowMaterial, setCanBorrowMaterial] = useState(true);
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -39,6 +41,19 @@ export const BorrowMaterialForm = () => {
             material: undefined,
         },
     });
+
+    useEffect(() => {
+        async function activeLoansCount() {
+            const count = await userActiveLoansCount();
+            if (!count) {
+                return;
+            }
+            if (count >= 5) {
+                setCanBorrowMaterial(false);
+            }
+        }
+        activeLoansCount();
+    }, []);
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         console.log(data);
@@ -85,7 +100,9 @@ export const BorrowMaterialForm = () => {
                                 <Select
                                     defaultValue={field.value}
                                     disabled={field.disabled}
-                                    onValueChange={(material) => onMaterialValueChange(material)}
+                                    onValueChange={(material) =>
+                                        onMaterialValueChange(material)
+                                    }
                                 >
                                     <FormControl>
                                         <SelectTrigger>
@@ -102,7 +119,8 @@ export const BorrowMaterialForm = () => {
                                 </Select>
                                 <FormDescription>
                                     Elige lo que quieras. Recuerda que solo
-                                    puedes tener 5 artículos a la vez.
+                                    puedes tener 5 materiales en préstamo a la
+                                    vez.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
@@ -121,13 +139,23 @@ export const BorrowMaterialForm = () => {
                                             defaultValue={field.value}
                                             disabled={field.disabled}
                                             onChange={(material) => {
-                                                if (material.target.value?.length) {
+                                                if (
+                                                    material.target.value
+                                                        ?.length
+                                                ) {
                                                     setEnableSubmitButton(true);
-                                                    console.log(material.target.value)
+                                                    console.log(
+                                                        material.target.value
+                                                    );
                                                 } else {
-                                                    setEnableSubmitButton(false);
+                                                    setEnableSubmitButton(
+                                                        false
+                                                    );
                                                 }
-                                                form.setValue("otros", material.target.value);
+                                                form.setValue(
+                                                    "otros",
+                                                    material.target.value
+                                                );
                                             }}
                                         />
                                     </FormControl>
@@ -141,7 +169,10 @@ export const BorrowMaterialForm = () => {
                         />
                     )}
                     <div className="flex justify-between">
-                        <Button type="submit" disabled={!enableSubmitButton}>
+                        <Button
+                            type="submit"
+                            disabled={!enableSubmitButton || !canBorrowMaterial}
+                        >
                             Pedir ahora
                         </Button>
                     </div>
