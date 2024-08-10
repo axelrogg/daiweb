@@ -3,13 +3,12 @@
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { dateToDMY } from "@/lib/utils/date";
+import { readableDate } from "@/lib/utils/date";
 
 export const ActiveLoansTable = ({
     materialDetails,
@@ -17,25 +16,28 @@ export const ActiveLoansTable = ({
     <Table>
         <TableHeader>
             <TableRow>
-                <TableHead className="w-[70px]">Material</TableHead>
-                <TableHead>Inicio</TableHead>
-                <TableHead className="rounded-tr-md">Fin</TableHead>
+                <TableHead className="w-32 lg:w-2/5">Material</TableHead>
+                <TableHead className="min-w-32">Inicio</TableHead>
+                <TableHead className="min-w-32">Fin</TableHead>
+                <TableHead className="w-12 text-center">Renovaciones</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
             {materialDetails?.length ? (
                 materialDetails.map((details, idx) => {
-                    const bgColor = idx % 2 == 0 ? "bg-gray-100" : "";
                     return (
-                        <TableRow key={idx} className={bgColor}>
+                        <TableRow key={idx}>
                             <TableCell className="text-sm">
                                 {details.material}
                             </TableCell>
-                            <TableCell className="text-sm">
-                                {dateToDMY(details.createdAt)}
+                            <TableCell className="w-48 text-sm">
+                                {readableDate(details.createdAt)}
                             </TableCell>
-                            <TableCell className="text-sm">
-                                {dateToDMY(details.validUntil)}
+                            <TableCell className="w-48 text-sm">
+                                {readableDate(details.validUntil)}
+                            </TableCell>
+                            <TableCell className="text-center text-sm">
+                                {details.renewedCount}
                             </TableCell>
                         </TableRow>
                     );
@@ -61,6 +63,7 @@ interface ActiveLoansTableProps {
               createdAt: Date;
               validUntil: Date;
               status: string;
+              renewedCount: number;
           }[]
         | null;
 }
