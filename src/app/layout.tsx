@@ -1,9 +1,9 @@
 import "./globals.css";
 import { Viewport } from "next";
 import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
 import fontConfig from "@/config/font";
 import clerkConfig from "@/config/clerk";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 
 export const viewport: Viewport = {

@@ -1,7 +1,11 @@
 import { ImgHTMLAttributes } from "react";
 
-export const MdxImage = ({ src, alt, ...props}: ImgHTMLAttributes<HTMLImageElement>) => (
-    <div className="flex w-full my-5 justify-center items-center">
+export const MdxImage = ({
+    src,
+    alt,
+    ...props
+}: ImgHTMLAttributes<HTMLImageElement>) => (
+    <div className="my-5 flex w-full items-center justify-center">
         <img
             className="object-contain drop-shadow-2xl"
             width="auto"
@@ -10,4 +14,4 @@ export const MdxImage = ({ src, alt, ...props}: ImgHTMLAttributes<HTMLImageEleme
             {...props}
         />
     </div>
-)
+);
