@@ -5,7 +5,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DashboardCard } from "@/components/dashboard/cards/dashboard-card";
 import { LendMaterialsPanel } from "@/components/dashboard/materials/lend-materials/lend-materials-panel";
 import { MaterialLoansOverviewPanel } from "@/components/dashboard/materials/materials-loans-overview-panel";
-import { useUserInfo } from "@/lib/actions/useUserInfo";
+import { useUserInfo } from "@/lib/actions/user-info";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CircleHelpIcon } from "lucide-react";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default async function DashboardPage() {
     const userInfo = await useUserInfo();
@@ -42,14 +49,114 @@ export default async function DashboardPage() {
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="resumen" className="w-full">
-                        <DashboardCard title="Mis préstamos">
-                            <MaterialLoansOverviewPanel />
-                        </DashboardCard>
+                        <div className="group w-full">
+                            <Card className="flex flex-col justify-between">
+                                <CardHeader className="flex items-start pb-3">
+                                    <Popover>
+                                        <div className="mb-5 flex flex-row">
+                                            <CardTitle className="mr-3">
+                                                Mis préstamos
+                                            </CardTitle>
+                                            <PopoverTrigger>
+                                                <CircleHelpIcon className="h-6 w-6 text-primary" />
+                                            </PopoverTrigger>
+                                        </div>
+                                        <PopoverContent
+                                            className="z-50 w-64 rounded-lg bg-white p-6 drop-shadow-2xl lg:w-3/5"
+                                            sideOffset={10}
+                                            align="start"
+                                            collisionPadding={20}
+                                        >
+                                            <div className="flex flex-col space-y-2">
+                                                <p className="mb-3 text-xl font-bold text-primary">
+                                                    Tip
+                                                </p>
+                                                <p>
+                                                    En este panel los préstamos
+                                                    activos a tu nombre.
+                                                </p>
+                                                <p>
+                                                    Si quieres pedir algún
+                                                    material, haz click en el
+                                                    botón{" "}
+                                                    <span className="font-bold">
+                                                        Pedir materiales
+                                                    </span>
+                                                    .
+                                                </p>
+                                                <p>
+                                                    Recuerda que solo puedes
+                                                    tener 5 préstamos activos en
+                                                    un mismo momento.
+                                                </p>
+                                                <p>
+                                                    Si quieres ver los detalles
+                                                    de los materiales que
+                                                    tienes, haz click en el
+                                                    botón{" "}
+                                                    <span className="font-bold">
+                                                        Ver detalles
+                                                    </span>
+                                                    .
+                                                </p>
+                                            </div>
+                                        </PopoverContent>
+                                    </Popover>
+                                </CardHeader>
+                                <CardContent className="pt-3">
+                                    <MaterialLoansOverviewPanel />
+                                </CardContent>
+                            </Card>
+                        </div>
                     </TabsContent>
                     <TabsContent value="staff-panel">
-                        <DashboardCard title="Prestar materiales">
-                            <LendMaterialsPanel />
-                        </DashboardCard>
+                        <div className="group w-full">
+                            <Card className="flex flex-col justify-between">
+                                <CardHeader className="flex items-start pb-3">
+                                    <Popover>
+                                        <div className="mb-5 flex flex-row">
+                                            <CardTitle className="mr-3">
+                                                Prestar materiales
+                                            </CardTitle>
+                                            <PopoverTrigger>
+                                                <CircleHelpIcon className="h-6 w-6 text-primary" />
+                                            </PopoverTrigger>
+                                        </div>
+                                        <PopoverContent
+                                            className="z-50 w-64 rounded-lg bg-white p-6 drop-shadow-2xl lg:w-3/5"
+                                            sideOffset={10}
+                                            align="start"
+                                            collisionPadding={20}
+                                        >
+                                            <div className="flex flex-col space-y-2">
+                                                <p className="mb-3 text-xl font-bold text-primary">
+                                                    Tip
+                                                </p>
+                                                <p>
+                                                    En este panel podrás prestar
+                                                    materiales a cualquier
+                                                    estudiante.
+                                                </p>
+                                                <p>
+                                                    Si no tienes claro qué hacer
+                                                    revisa la{" "}
+                                                    <Link
+                                                        href="/guias/staff/como-realizar-prestamos"
+                                                        className="hover:underline"
+                                                    >
+                                                        guía sobre préstamos
+                                                    </Link>
+                                                    .
+                                                </p>
+                                            </div>
+                                        </PopoverContent>
+                                    </Popover>
+                                </CardHeader>
+                                <CardContent className="pt-3">
+                                    <LendMaterialsPanel />
+                                </CardContent>
+                            </Card>
+                        </div>
                     </TabsContent>
                 </Tabs>
             </div>
