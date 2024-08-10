@@ -38,7 +38,7 @@ export const MulticodeScanner = ({
 
     useEffect(() => {
         setScannedCode(scannedCode);
-    }, [scannedCode]);
+    }, [scannedCode, setScannedCode]);
 
     async function getVideoPermission() {
         if (!("MediaRecorder" in window)) {
