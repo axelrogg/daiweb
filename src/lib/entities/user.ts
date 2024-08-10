@@ -90,6 +90,28 @@ export class User {
             throw error;
         }
     }
+
+    async infoFromId(id: number) {
+        try {
+            const info = await sql<DbUserInfo[]>`
+                select *
+                from users
+                where id = ${id}
+            `;
+
+            return {
+                id: info[0].id,
+                externalId: info[0].external_id,
+                email: info[0].email,
+                isStaff: info[0].is_staff,
+                createdAt: new Date(info[0].created_at),
+                lastUpdatedAt: new Date(info[0].last_updated_at),
+                isVerified: info[0].is_verified,
+            } as UserInfo;
+        } catch (error: any) {
+            throw error;
+        }
+    }
 }
 
 const user = new User();
