@@ -59,6 +59,6 @@ export const useMulticodeScanner = (
                 }
             }
         );
-    }, [stream, showStream, codeReader]);
+    }, [stream, showStream, codeReader, onStopStreamCallback, videoRef]);
     return codeFound;
 };
