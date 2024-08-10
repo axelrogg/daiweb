@@ -4,7 +4,7 @@ import { clerkClient } from "../clerk";
 import { User } from "@clerk/backend";
 import user from "@/lib/entities/user";
 
-export async function useUserInfoFromId(id: number) {
+export async function userInfoFromId(id: number) {
     let userExternalId = null;
     try {
         userExternalId = await user.externalIdFromId(id);
