@@ -10,7 +10,7 @@ export async function userActiveLoans() {
 
     try {
         const activeLoans = await material.activeLoans(externalUserId);
-        return activeLoans
+        return activeLoans;
     } catch (error: any) {
         throw error;
     }
