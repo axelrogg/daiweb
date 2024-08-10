@@ -7,7 +7,7 @@ export default function DocsLayout({
 }) {
     return (
         <DefaultLayout>
-            <div className="mx-60">{children}</div>
+            <div>{children}</div>
         </DefaultLayout>
     );
 }
