@@ -4,9 +4,27 @@
  * @param {Date} date - The Date object to be converted.
  * @returns {string} A string representing the date in "DD-MM-YYYY" format.
  */
-export function dateToDMY(date: Date): string {
-    const day = String(date.getUTCDate()).padStart(2, "0");
-    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+export function readableDate(date: Date): string {
+    const days = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"];
+    const months = [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic",
+    ];
+
+    const day = days[date.getUTCDay() - 1];
+    const daynum = String(date.getUTCDate()).padStart(2, "0");
+    const month = months[date.getUTCMonth() - 1].toLowerCase();
     const year = date.getUTCFullYear();
-    return `${day}-${month}-${year}`;
+
+    return `${day} ${daynum}, ${month} ${year}`;
 }
