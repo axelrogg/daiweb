@@ -8,7 +8,7 @@ import { CircleHelpIcon } from "lucide-react";
 
 export default function Page() {
     return (
-        <div>
+        <>
             <Popover>
                 <div className="mb-5 flex flex-row">
                     <h1 className="mr-3 flex text-3xl font-bold">
@@ -41,8 +41,7 @@ export default function Page() {
                     </div>
                 </PopoverContent>
             </Popover>
-
             <BorrowMaterialForm />
-        </div>
+        </>
     );
 }
