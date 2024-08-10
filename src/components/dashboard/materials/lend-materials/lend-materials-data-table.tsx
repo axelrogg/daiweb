@@ -4,6 +4,7 @@ import {
     ColumnDef,
     flexRender,
     getCoreRowModel,
+    Header,
     useReactTable,
 } from "@tanstack/react-table";
 
@@ -15,21 +16,37 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    loading: boolean;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    loading,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
+
+    function handleWidth(header: Header<TData, unknown>) {
+        if (header.index === 0) {
+            return "lg:w-3/4";
+        }
+        if (header.index === 1) {
+            return "lg:w-2/5";
+        }
+        if (header.index === 2) {
+            return "lg:w-12";
+        }
+        return "";
+    }
 
     return (
         <div className="mb-5 rounded-md">
@@ -38,8 +55,12 @@ export function DataTable<TData, TValue>({
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
+                                const columnWidth = handleWidth(header);
                                 return (
-                                    <TableHead key={header.id}>
+                                    <TableHead
+                                        key={header.id}
+                                        className={`${columnWidth}`}
+                                    >
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -54,7 +75,18 @@ export function DataTable<TData, TValue>({
                     ))}
                 </TableHeader>
                 <TableBody>
-                    {table.getRowModel().rows?.length ? (
+                    {loading ? (
+                        <TableRow>
+                            <TableCell
+                                colSpan={columns.length}
+                                className="h-24 text-center"
+                            >
+                                <div className="flex w-full justify-center">
+                                    <LoadingSpinner />
+                                </div>
+                            </TableCell>
+                        </TableRow>
+                    ) : table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
                             <TableRow
                                 key={row.id}
