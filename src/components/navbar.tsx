@@ -1,10 +1,6 @@
 import Link from "next/link";
-import {
-    DocumentTextIcon,
-    EnvelopeIcon,
-    WifiIcon,
-} from "@heroicons/react/24/outline";
-
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { Menu } from "lucide-react";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -12,10 +8,72 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
-import { SideBar } from "./sidebar";
 import { Button } from "./ui/button";
-import { SideBarItem } from "./sidebar-item";
 import { MainLogo } from "./main-logo";
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetFooter,
+    SheetTrigger,
+} from "./ui/sheet";
+import { UserButton } from "@clerk/nextjs";
+import { ReactElement } from "react";
+
+const navBarSheetItems: NavBarSheetItem[] = [
+    {
+        title: "Guías",
+        href: "/guias",
+        isParent: true,
+        icon: <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />,
+        children: [
+            {
+                title: "Añadir el correo de la UVigo",
+                href: "/guias/anadir-correo-uvigo",
+                isParent: false,
+            },
+            {
+                title: "Activar el WiFi",
+                href: "http://localhost:3000/guias/activar-wifi",
+                isParent: false,
+            },
+        ],
+    },
+];
+
+interface NavBarSheetItem {
+    title: string;
+    href: string;
+    isParent: boolean;
+    children?: NavBarSheetItem[];
+    icon?: ReactElement;
+}
+
+function renderNavBarSheetItem(item?: NavBarSheetItem | null) {
+    if (!item) {
+        return;
+    }
+    const fontClasses = item.isParent ? "text-lg font-bold" : "";
+    return (
+        <div key={item.title}>
+            <SheetClose asChild className="m-0 p-0 text-start">
+                <Link
+                    className={`my-1 flex flex-row items-center ${fontClasses}`}
+                    href={item.href}
+                >
+                    {item.icon}
+                    {item.title}
+                </Link>
+            </SheetClose>
+            {item.children &&
+                item.children.map((child, indx) => (
+                    <SheetClose key={`${child.title}${indx}`} className="pl-4">
+                        {renderNavBarSheetItem(child)}
+                    </SheetClose>
+                ))}
+        </div>
+    );
+}
 
 export const NavBar = () => (
     <nav className="mb-2 flex items-center justify-center py-5 lg:justify-between">
@@ -26,39 +84,42 @@ export const NavBar = () => (
                     <NavigationMenuItem>
                         <Link href="/guias" legacyBehavior passHref>
                             <NavigationMenuLink
-                                className={navigationMenuTriggerStyle}
+                                className={navigationMenuTriggerStyle()}
                             >
                                 <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
                                 Guías
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <Button asChild>
-                            <Link href="/dashboard">Dashboard</Link>
-                        </Button>
-                    </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
         </div>
-        <SideBar>
-            <Button asChild variant="link" className="justify-start text-base">
-                <Link href="/guias">
-                    <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
-                    Guías
-                </Link>
-            </Button>
-            <SideBarItem href="/guias/anadir-correo-uvigo">
-                <EnvelopeIcon className="mr-3 h-6 w-6 stroke-zinc-500" />
-                Añadir el correo UVigo
-            </SideBarItem>
-            <SideBarItem href="/guias/activar-wifi">
-                <WifiIcon className="mr-3 h-6 w-6 stroke-emerald-500" />
-                Activar el WiFi UVigo
-            </SideBarItem>
-            <Button className="absolute bottom-6 left-6 w-60" asChild>
+        <div className="hidden lg:flex">
+            <Button asChild>
                 <Link href="/dashboard">Dashboard</Link>
             </Button>
-        </SideBar>
+        </div>
+        <Sheet>
+            <SheetTrigger className="absolute left-5 top-6 lg:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Open Menu</span>
+            </SheetTrigger>
+            <SheetContent side="left">
+                <MainLogo />
+                <div className="my-6">
+                    {navBarSheetItems.map((item) =>
+                        renderNavBarSheetItem(item)
+                    )}
+                </div>
+                <SheetFooter>
+                    <Button asChild>
+                        <Link href="/dashboard">Dashboard</Link>
+                    </Button>
+                </SheetFooter>
+            </SheetContent>
+        </Sheet>
+        <div className="absolute right-5 top-6 lg:hidden">
+            <UserButton />
+        </div>
     </nav>
 );
