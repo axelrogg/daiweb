@@ -47,7 +47,7 @@ export default async function Page() {
             <div
                 className="flex h-[25rem] flex-col items-center justify-center
                            rounded-lg bg-gradient-to-b from-blue-500
-                           to-cyan-500 pb-10 drop-shadow-2xl lg:w-2/5 lg:self-center"
+                           to-cyan-500 drop-shadow-2xl lg:w-2/5 lg:self-center"
             >
                 {userInfo.isVerified ? (
                     <div
