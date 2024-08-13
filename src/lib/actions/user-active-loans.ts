@@ -15,3 +15,13 @@ export async function userActiveLoans() {
         throw error;
     }
 }
+
+export async function extUserActiveLoans(userId: number) {
+    try {
+        const loans = await material.activeLoansFromUserId(userId);
+        return loans;
+    } catch (error: any) {
+        console.error(error);
+        throw error;
+    }
+}
