@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { Menu } from "lucide-react";
@@ -14,7 +16,9 @@ import {
     Sheet,
     SheetClose,
     SheetContent,
+    SheetDescription,
     SheetFooter,
+    SheetTitle,
     SheetTrigger,
 } from "./ui/sheet";
 import { UserButton } from "@clerk/nextjs";
@@ -78,28 +82,28 @@ function renderNavBarSheetItem(item?: NavBarSheetItem | null) {
 export const NavBar = () => (
     <nav className="mb-2 flex items-center justify-center py-5 lg:justify-between">
         <MainLogo />
-        <div className="hidden lg:flex">
-            <NavigationMenu>
-                <NavigationMenuList>
-                    <NavigationMenuItem>
-                        <Link href="/guias" legacyBehavior passHref>
-                            <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                            >
-                                <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
-                                Guías
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem>
-                </NavigationMenuList>
-            </NavigationMenu>
-        </div>
+        <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList>
+                <NavigationMenuItem>
+                    <Link href="/guias" legacyBehavior passHref>
+                        <NavigationMenuLink
+                            className={navigationMenuTriggerStyle()}
+                        >
+                            <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
+                            Guías
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+            </NavigationMenuList>
+        </NavigationMenu>
         <div className="hidden lg:flex">
             <Button asChild>
                 <Link href="/dashboard">Dashboard</Link>
             </Button>
         </div>
         <Sheet>
+            <SheetTitle className="hidden">Menu</SheetTitle>
+            <SheetDescription className="hidden">Menu</SheetDescription>
             <SheetTrigger className="absolute left-5 top-6 lg:hidden">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Open Menu</span>
@@ -111,11 +115,11 @@ export const NavBar = () => (
                         renderNavBarSheetItem(item)
                     )}
                 </div>
-                <SheetFooter>
-                    <Button asChild>
+                <SheetClose>
+                    <Button asChild className="w-full">
                         <Link href="/dashboard">Dashboard</Link>
                     </Button>
-                </SheetFooter>
+                </SheetClose>
             </SheetContent>
         </Sheet>
         <div className="absolute right-5 top-6 lg:hidden">
