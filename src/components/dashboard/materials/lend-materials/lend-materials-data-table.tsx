@@ -18,12 +18,6 @@ import {
 } from "@/components/ui/table";
 import { LoadingSpinner } from "@/components/loading-spinner";
 
-interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[];
-    data: TData[];
-    loading: boolean;
-}
-
 export function DataTable<TData, TValue>({
     columns,
     data,
@@ -87,28 +81,36 @@ export function DataTable<TData, TValue>({
                             </TableCell>
                         </TableRow>
                     ) : table.getRowModel().rows?.length ? (
-                        table.getRowModel().rows.map((row) => (
-                            <TableRow
-                                key={row.id}
-                                data-state={row.getIsSelected() && "selected"}
-                            >
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ))
+                        table.getRowModel().rows.map((row) => {
+                            if (!row.getIsSelected()) {
+                                return (
+                                    <TableRow
+                                        key={row.id}
+                                        data-state={
+                                            row.getIsSelected() && "selected"
+                                        }
+                                    >
+                                        {row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                );
+                            } else {
+                                return null;
+                            }
+                        })
                     ) : (
                         <TableRow>
                             <TableCell
                                 colSpan={columns.length}
                                 className="h-24 text-center"
                             >
-                                No hay reservas de materiales.
+                                Nada que mostrar.
                             </TableCell>
                         </TableRow>
                     )}
@@ -116,4 +118,10 @@ export function DataTable<TData, TValue>({
             </Table>
         </div>
     );
+}
+
+interface DataTableProps<TData, TValue> {
+    columns: ColumnDef<TData, TValue>[];
+    data: TData[];
+    loading: boolean;
 }
