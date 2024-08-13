@@ -31,7 +31,7 @@ export const GuideInfoCard = ({
         >
             <Card className="flex flex-row items-center justify-between">
                 <CardHeader>
-                    <CardTitle>{title}</CardTitle>
+                    <CardTitle className="text-xl">{title}</CardTitle>
                     <CardDescription>{description}</CardDescription>
                 </CardHeader>
                 <CardContent className="p-6 group-hover:animate-propel">
