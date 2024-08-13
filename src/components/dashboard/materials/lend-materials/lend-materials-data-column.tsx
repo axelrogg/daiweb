@@ -10,9 +10,9 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MaterialReservation } from "@/types/actions";
 import { readableDate } from "@/lib/utils/date";
 import { newMaterialLoan } from "@/lib/actions/new-material-loan";
+import { toast } from "@/components/ui/use-toast";
 
 export const columns: ColumnDef<MaterialReservation>[] = [
     {
@@ -30,7 +30,25 @@ export const columns: ColumnDef<MaterialReservation>[] = [
         id: "actions",
         maxSize: 3,
         cell: ({ row }) => {
-            const material = row.original;
+            function onClickDoLoan() {
+                try {
+                    newMaterialLoan(
+                        row.original.id,
+                        row.original.userId,
+                        row.original.material
+                    );
+                } catch (error: any) {
+                    console.error(error);
+                    return;
+                }
+                row.toggleSelected(true);
+                toast({
+                    title: "Pŕestamo hecho",
+                    description:
+                        "El préstamo fue realizado con éxito. Puedes entregar el material.",
+                });
+            }
+
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -40,15 +58,7 @@ export const columns: ColumnDef<MaterialReservation>[] = [
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem
-                            onClick={() =>
-                                newMaterialLoan(
-                                    material.id,
-                                    material.userId,
-                                    material.material
-                                )
-                            }
-                        >
+                        <DropdownMenuItem onClick={() => onClickDoLoan()}>
                             Realizar préstamo
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -57,3 +67,13 @@ export const columns: ColumnDef<MaterialReservation>[] = [
         },
     },
 ];
+
+type MaterialReservation = {
+    id: number;
+    userId: number;
+    material: string;
+    status: string;
+    isActive: boolean;
+    createdAt: Date;
+    validUntil: Date;
+};
