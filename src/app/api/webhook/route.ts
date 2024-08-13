@@ -105,7 +105,7 @@ export async function POST(req: Request) {
             await user.new(
                 parsedPayloadData.userId,
                 parsedPayloadData.emailAddress,
-                false
+                user.isStaff(parsedPayloadData.emailAddress)
             );
         } catch (err) {
             console.error(err);

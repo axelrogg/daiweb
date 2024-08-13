@@ -3,16 +3,15 @@ import { DbUserInfo, UserInfo } from "@/types/actions";
 
 export class User {
     async new(externalId: string, email: string, isStaff: boolean) {
+        const isVerified = isStaff ? true : false;
         try {
             const newUser = await sql`
                 insert into users
                     (external_id, email, is_verified, is_staff)
                 values
-                    (${externalId}, ${email}, false, false)
+                    (${externalId}, ${email}, ${isVerified}, ${isStaff})
                 returning id
             `;
-            console.log("here comes santa clause");
-            console.log(newUser);
             return newUser;
         } catch (error: any) {
             throw error;
@@ -21,11 +20,10 @@ export class User {
 
     async delete(userId: number) {
         try {
-            const deleted = await sql`
+            await sql`
                 delete from users
                 where id = ${userId}
             `;
-            console.log(deleted);
         } catch (error: any) {
             throw error;
         }
@@ -33,11 +31,10 @@ export class User {
 
     async deleteFromExternalId(externalId: string) {
         try {
-            const deleted = await sql`
+            await sql`
                 delete from users
                 where external_id = ${externalId}
             `;
-            console.log(deleted);
         } catch (error: any) {
             throw error;
         }
@@ -111,6 +108,23 @@ export class User {
         } catch (error: any) {
             throw error;
         }
+    }
+
+    isStaff(email: string) {
+        if (typeof email !== "string") {
+            return false;
+        }
+        const emailParts = email.split("@");
+        if (emailParts.length !== 2) {
+            return false;
+        }
+        if (
+            emailParts[1] === "dai.uvigo.gal" ||
+            emailParts[1] === "dai.uvigo.es"
+        ) {
+            return true;
+        }
+        return false;
     }
 }
 
