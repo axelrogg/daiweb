@@ -11,27 +11,27 @@ export default function Guides() {
                 los servicios que ofrecemos, las formas de acceder a ellos y
                 mucho más.
             </p>
-            <div className="my-4 grid grid-flow-row-dense grid-rows-3 grid-cols-2 gap-4">
+            <div className="my-4 grid grid-flow-row-dense grid-rows-3 gap-4 lg:grid-cols-2">
                 <GuideInfoCard
-                    title="Añadir el correo electrónico de la UVigo"
-                    description="Cómo añadir el correo alumnos.uvigo.es a tu ordenador y móvil."
+                    title="Añadir el correo de la UVigo"
+                    description="Cómo añadir el correo de la universidad a tu ordenador y móvil."
                     href="/guias/anadir-correo-uvigo"
                 >
-                    <ArrowRightIcon className="h-6 w-6 " />
+                    <ArrowRightIcon className="h-6 w-6" />
                 </GuideInfoCard>
                 <GuideInfoCard
                     title="Activar el WiFi de la UVigo"
                     description="Cómo estar siempre conectado en cualquier campus de la universidad."
                     href="/guias/activar-wifi"
                 >
-                    <ArrowRightIcon className="h-6 w-6 " />
+                    <ArrowRightIcon className="h-6 w-6" />
                 </GuideInfoCard>
                 <GuideInfoCard
                     title="Pedir materiales"
                     description="Pasos para acceder a materiales de la DAI."
                     href="/guias/pedir-materiales"
                 >
-                    <ArrowRightIcon className="h-6 w-6 " />
+                    <ArrowRightIcon className="h-6 w-6" />
                 </GuideInfoCard>
             </div>
         </>
