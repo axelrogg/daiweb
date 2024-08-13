@@ -5,7 +5,7 @@
  * @returns {string} A string representing the date in "DD-MM-YYYY" format.
  */
 export function readableDate(date: Date): string {
-    const days = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"];
+    const days = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"];
     const months = [
         "Ene",
         "Feb",
@@ -21,7 +21,7 @@ export function readableDate(date: Date): string {
         "Dic",
     ];
 
-    const day = days[date.getUTCDay() - 1];
+    const day = days[date.getUTCDay()];
     const daynum = String(date.getUTCDate()).padStart(2, "0");
     const month = months[date.getUTCMonth() - 1].toLowerCase();
     const year = date.getUTCFullYear();
