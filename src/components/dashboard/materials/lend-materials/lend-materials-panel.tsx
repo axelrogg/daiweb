@@ -35,7 +35,12 @@ export const LendMaterialsPanel = () => {
 
     function decodeUserId(code: string | null) {
         if (!code) return null;
-        const userId = Number(atob(code));
+        const decoded = atob(code);
+        const codeParts = decoded.split(".");
+        if (codeParts.length !== 2) {
+            return null;
+        }
+        const userId = Number(codeParts[0]);
         if (Number.isNaN(userId)) return null;
         return userId;
     }
