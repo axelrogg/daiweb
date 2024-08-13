@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Button } from "./ui/button";
@@ -10,8 +12,10 @@ export const MulticodeScanner = ({
     const [showStream, setShowStream] = useState(false);
     const [stream, setStream] = useState<MediaStream | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-    const winWidth = window.screen.width;
-    const winHeight = window.screen.height;
+    const [windowDimensions, setWindowDimensions] = useState<{
+        width: number;
+        height: number;
+    }>({ width: 0, height: 0 });
 
     function stopStream() {
         if (!stream) {
@@ -23,6 +27,10 @@ export const MulticodeScanner = ({
     }
 
     useEffect(() => {
+        setWindowDimensions({
+            width: window.screen.width,
+            height: window.screen.height,
+        });
         if (videoRef.current && stream) {
             videoRef.current.srcObject = stream;
             videoRef.current.play();
@@ -51,7 +59,8 @@ export const MulticodeScanner = ({
             const streamData = await navigator.mediaDevices.getUserMedia({
                 audio: false,
                 video: {
-                    aspectRatio: winWidth / winHeight,
+                    aspectRatio:
+                        windowDimensions.width / windowDimensions.height,
                     height: { ideal: 1080 },
                 },
             });
@@ -74,13 +83,13 @@ export const MulticodeScanner = ({
         <>
             <div onClick={getVideoPermission}>{children}</div>
             {showStream && (
-                <div className="fixed left-0 top-0 mt-0">
+                <div className="fixed left-0 top-0 z-40 mt-0">
                     <Button
                         onClick={stopStream}
-                        className="absolute left-3 top-3 z-40 flex h-12 w-12 items-center justify-center rounded-full"
+                        className="absolute left-3 top-3 z-50 flex h-12 w-12 items-center justify-center rounded-full"
                         variant="ghost"
                     >
-                        <XMarkIcon className="z-40 h-6 w-6 stroke-white" />
+                        <XMarkIcon className="z-50 h-6 w-6 stroke-white" />
                         <div className="absolute z-30 h-12 w-12 rounded-full bg-black opacity-40"></div>
                     </Button>
                     <div className="absolute z-20 grid h-full w-full grid-cols-4 gap-0">
@@ -95,8 +104,8 @@ export const MulticodeScanner = ({
                     <video
                         ref={videoRef}
                         className="object-cover"
-                        height={winHeight}
-                        width={winWidth}
+                        height={windowDimensions.height}
+                        width={windowDimensions.width}
                     />
                 </div>
             )}
