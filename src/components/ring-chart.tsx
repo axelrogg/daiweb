@@ -42,21 +42,10 @@ interface RingChartProps {
     className?: string | undefined;
 }
 
-function getStatus(currentValue: number, maxValue: number) {
-    if (currentValue < maxValue / 2 || currentValue == maxValue / 2) {
-        return "under";
-    }
-    if (currentValue > maxValue / 2 && currentValue < maxValue) {
-        return "over";
-    }
-    return "maxed";
-}
-
 function getColor(currentValue: number, maxValue: number) {
     const colors = new Map([
         ["under", "#00ace2"],
-        ["over", "#e2c500"],
         ["maxed", "#e20600"],
     ]);
-    return colors.get(getStatus(currentValue, maxValue));
+    return colors.get(currentValue === maxValue ? "maxed" : "under");
 }
