@@ -1,31 +1,22 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import database from "../database";
+import material from "../entities/material";
 
 export const newMaterialLoan = async (
     reservationId: number,
     userId: number,
-    material: string
+    materialName: string
 ) => {
     const { userId: userResponsableExternalUserId } = auth();
     if (!userResponsableExternalUserId) {
         return null;
     }
 
-    let userResponsableId = null;
-    try {
-        userResponsableId = await database.getUserIdFromExternalId(
-            userResponsableExternalUserId
-        );
-    } catch (err) {
-        throw err;
-    }
-
-    console.info(userResponsableId);
-    if (!userResponsableId) {
-        return;
-    }
-
-    await database.insertNewMaterialLoan(userId, userResponsableId, material);
+    await material.newLoan(
+        userId,
+        userResponsableExternalUserId,
+        reservationId,
+        materialName
+    );
 };
