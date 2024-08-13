@@ -27,7 +27,6 @@ const Callout = ({
 };
 
 interface CalloutProps {
-    title?: string | undefined;
     className?: string | undefined;
     variant: string;
 }
