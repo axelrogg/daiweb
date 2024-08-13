@@ -19,7 +19,6 @@ export const ActiveLoansTable = ({
                 <TableHead className="w-32 lg:w-2/5">Material</TableHead>
                 <TableHead className="min-w-32">Inicio</TableHead>
                 <TableHead className="min-w-32">Fin</TableHead>
-                <TableHead className="w-12 text-center">Renovaciones</TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
@@ -35,9 +34,6 @@ export const ActiveLoansTable = ({
                             </TableCell>
                             <TableCell className="w-48 text-sm">
                                 {readableDate(details.validUntil)}
-                            </TableCell>
-                            <TableCell className="text-center text-sm">
-                                {details.renewedCount}
                             </TableCell>
                         </TableRow>
                     );
@@ -63,7 +59,6 @@ interface ActiveLoansTableProps {
               createdAt: Date;
               validUntil: Date;
               status: string;
-              renewedCount: number;
           }[]
         | null;
 }
