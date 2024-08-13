@@ -1,6 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 import { Callout, CalloutDescription } from "@/components/ui/callout";
-import { AuthLayout } from "@/layouts/auth-layout";
+import { AuthLayout } from "@/components/layouts/auth-layout";
 
 export default function SignInPage() {
     return (

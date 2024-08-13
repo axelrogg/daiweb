@@ -1,4 +1,4 @@
-import { DefaultLayout } from "@/layouts/default-layout";
+import { DefaultLayout } from "@/components/layouts/default-layout";
 
 export default async function HomePage() {
     return (

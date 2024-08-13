@@ -1,5 +1,5 @@
 import { Callout, CalloutDescription } from "@/components/ui/callout";
-import { AuthLayout } from "@/layouts/auth-layout";
+import { AuthLayout } from "@/components/layouts/auth-layout";
 import { SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
