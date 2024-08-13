@@ -3,7 +3,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import user from "@/lib/entities/user";
 
-export async function useUserInfo() {
+export async function userInfo() {
     const userDetails = await currentUser();
 
     if (!userDetails) {

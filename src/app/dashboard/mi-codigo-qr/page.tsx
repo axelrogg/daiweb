@@ -1,11 +1,11 @@
 import Link from "next/link";
 import QRCode from "react-qr-code";
-import { useUserInfo } from "@/lib/actions/user-info";
+import { userInfo } from "@/lib/actions/user-info";
 
 export default async function Page() {
-    const userInfo = await useUserInfo();
+    const user = await userInfo();
 
-    if (!userInfo) {
+    if (!user) {
         return (
             <div className="flex flex-col justify-center">
                 <h1 className="mb-4 flex justify-center text-3xl font-bold lg:mb-24">
@@ -29,14 +29,14 @@ export default async function Page() {
         );
     }
 
-    const userIdsConcat = userInfo.id.toString() + "." + userInfo.externalId;
+    const userIdsConcat = user.id.toString() + "." + user.externalId;
 
     return (
         <div className="flex flex-col justify-center">
             <h1 className="mb-4 flex justify-center text-3xl font-bold lg:mb-24">
                 Mi código QR
             </h1>
-            {userInfo.isVerified && (
+            {user.isVerified && (
                 <div className="flex justify-center">
                     <p className="mb-5 text-center lg:w-2/5">
                         Muestra este código en cualquier sede de la DAI para
@@ -49,7 +49,7 @@ export default async function Page() {
                            rounded-lg bg-gradient-to-b from-blue-500
                            to-cyan-500 drop-shadow-2xl lg:w-2/5 lg:self-center"
             >
-                {userInfo.isVerified ? (
+                {user.isVerified ? (
                     <div
                         className="flex h-60 w-60 items-center justify-center
                                 rounded-lg bg-white drop-shadow-2xl"
