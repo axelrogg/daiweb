@@ -12,6 +12,12 @@ import {
 } from "@/components/ui/popover";
 import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
 import { Callout, CalloutDescription } from "@/components/ui/callout";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
 
 export default async function DashboardPage() {
     const user = await userInfo();
@@ -46,18 +52,49 @@ export default async function DashboardPage() {
             <h1 className="text-4xl font-bold">Dashboard</h1>
             <div className="group flex h-10 flex-row items-center space-x-3">
                 {user.isVerified && (
-                    <div>
-                        <BadgeCheckIcon className="text-primary" />
-                    </div>
+                        <Popover>
+                            <HoverCard>
+                                <HoverCardTrigger>
+                                    <PopoverTrigger className="flex items-center">
+                                        <BadgeCheckIcon className="text-primary" />
+                                    </PopoverTrigger>
+                                </HoverCardTrigger>
+                                <HoverCardContent>
+                                    Tu cuenta ha sido verificada.
+                                </HoverCardContent>
+                            </HoverCard>
+                            <PopoverContent className="lg:hidden" align="start" collisionPadding={10}>
+                                <p className="lg:hidden">
+                                    Tu cuenta ha sido verificada.
+                                </p>
+                            </PopoverContent>
+                        </Popover>
                 )}
                 {user.isStaff && (
-                    <div
-                        className="line-flex items-center justify-center
-                                    rounded-xl bg-gradient-to-r from-amber-400 to-amber-200 px-4
-                                    py-1 text-sm text-slate-50"
-                    >
-                        <p className="text-black">Staff</p>
-                    </div>
+                    <Popover>
+                        <HoverCard>
+                            <HoverCardTrigger>
+                                <PopoverTrigger className="flex items-center">
+                                    <div
+                                        className="line-flex items-center justify-center
+                                                    rounded-xl bg-gradient-to-r from-amber-400 to-amber-200 px-4
+                                                    py-1 text-sm text-slate-50"
+                                    >
+                                        <p className="text-black">Staff</p>
+                                    </div>
+                                </PopoverTrigger>
+                            </HoverCardTrigger>
+                        <HoverCardContent>
+                            Eres miembro de la DAI.
+                        </HoverCardContent>
+                    </HoverCard>
+                        <PopoverContent className="lg:hidden" align="start" collisionPadding={10}>
+                                <p className="lg:hidden">
+                            Eres miembro de la DAI.
+                                </p>
+                            </PopoverContent>
+</Popover>
+
                 )}
             </div>
             <div className="group my-5 w-full space-y-5 lg:space-x-5">
