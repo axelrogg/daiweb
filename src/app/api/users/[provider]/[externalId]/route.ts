@@ -5,14 +5,24 @@ export async function GET(
     request: NextRequest,
     { params }: { params: { provider: string; externalId: string } }
 ) {
-    if (params.provider !== "google" || !params.externalId) {
+    const {provider, externalId} = params;
+
+    if (!provider || !externalId) {
         return NextResponse.json(
-            { error: "Invalid provider or missing externalId" },
+            { error: "Missing provider or externalId params" },
             { status: 400 }
         );
     }
+
+    if (provider !== "google") {
+        return NextResponse.json(
+            {error: "Unsupported provider"},
+            {status: 400}
+        )
+    }
+
     try {
-        const userId = await user.accountId(params.externalId);
+        const userId = await user.accountId(externalId);
         if (!userId) {
             return NextResponse.json(
                 { error: "User not found" },

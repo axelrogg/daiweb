@@ -1,7 +1,7 @@
+import Image from "next/image";
+import { signIn } from "@/auth";
 import { Callout, CalloutDescription } from "@/components/ui/callout";
 import { AuthLayout } from "@/components/layouts/auth-layout";
-import { signIn } from "@/auth";
-import Image from "next/image";
 
 export default function SignInPage() {
     return (
