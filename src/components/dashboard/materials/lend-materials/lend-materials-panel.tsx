@@ -23,9 +23,9 @@ export const LendMaterialsPanel = () => {
                 return;
             }
 
-            const userId = userIdDecode(code)
+            const userId = userIdDecode(code);
             if (!userId) {
-                return
+                return;
             }
 
             setDataIsLoading(true);
