@@ -2,9 +2,7 @@
 
 import material from "@/lib/database/entities/material";
 
-
 export async function activeLoans() {
-
     if (!externalUserId) return null;
 
     try {

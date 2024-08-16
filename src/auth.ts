@@ -7,7 +7,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         signIn: "/auth/sign-in",
     },
     callbacks: {
-        async signIn({ profile}) {
+        async signIn({ profile }) {
             if (!profile) {
                 return false;
             }
@@ -30,12 +30,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 );
 
                 if (response.status === 500 || response.status === 400) {
-                    return false
+                    return false;
                 }
 
                 if (response.status === 200) {
                     exists = true;
-                    return true
+                    return true;
                 }
             } catch (error: any) {
                 console.error(error);
@@ -62,18 +62,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return false;
                 }
                 if (response.status === 201) {
-                    return true
+                    return true;
                 }
             } catch (error: any) {
                 console.error(error);
                 return false;
             }
-            return false
-
+            return false;
         },
-        async jwt({token, profile}) {
+        async jwt({ token, profile }) {
             if (!profile) {
-                return token
+                return token;
             }
 
             try {
@@ -81,27 +80,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     "http://localhost:3000/api/users/google/" + profile!.sub
                 );
 
-                if (response.status === 500 || response.status === 400 || response.status === 404) {
-                    return token
+                if (
+                    response.status === 500 ||
+                    response.status === 400 ||
+                    response.status === 404
+                ) {
+                    return token;
                 }
 
                 if (response.status === 200) {
-                    const body = await response.json()
-                    console.log("HERE IS THE BODY USERID IN JWT CALLBACK")
-                    console.log(body.userId)
-                    token.id = body.userId
-                    return token
+                    const body = await response.json();
+                    console.log("HERE IS THE BODY USERID IN JWT CALLBACK");
+                    console.log(body.userId);
+                    token.id = body.userId;
+                    return token;
                 }
             } catch (error: any) {
-                console.error("there is an error in jwt response")
+                console.error("there is an error in jwt response");
                 console.error(error);
-                return token
+                return token;
             }
-            return token
+            return token;
         },
-        session({session, token}) {
-            session.user.id = token.id as string
-            return session
-        }
+        session({ session, token }) {
+            session.user.id = token.id as string;
+            return session;
+        },
     },
 });

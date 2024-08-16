@@ -4,4 +4,3 @@ export type EnvironmentSecrets = {
     AUTH_SECRET: string;
     DATABASE_CONNECTION_STR: string;
 };
-

@@ -118,16 +118,18 @@ export class User {
 
     async info(id: string) {
         try {
-            const profile = await sql<{
-                id: number;
-                email: string;
-                name: string;
-                is_verified: boolean;
-                is_staff: boolean;
-                picture_uri: string;
-                created_at: Date;
-                last_updated_at: Date;
-            }[]>`
+            const profile = await sql<
+                {
+                    id: number;
+                    email: string;
+                    name: string;
+                    is_verified: boolean;
+                    is_staff: boolean;
+                    picture_uri: string;
+                    created_at: Date;
+                    last_updated_at: Date;
+                }[]
+            >`
                 select
                     id,
                     email,
@@ -143,7 +145,7 @@ export class User {
                     id = ${id}
             `;
             if (profile.length === 0) {
-                return null
+                return null;
             }
             return {
                 id: profile[0].id,
@@ -155,7 +157,6 @@ export class User {
                 lastUpdatedAt: new Date(profile[0].last_updated_at),
                 isVerified: profile[0].is_verified,
             } as UserInfo;
-
         } catch (error: any) {
             throw error;
         }

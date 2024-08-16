@@ -2,7 +2,6 @@
 
 import user from "@/lib/database/entities/user";
 
-
 export async function userInfoFromId(id: number) {
     let userExternalId = null;
     try {
