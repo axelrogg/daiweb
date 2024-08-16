@@ -8,7 +8,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { userInfo } from "@/lib/actions/user-info";
+import { userInfo } from "@/lib/actions/user/user-info";
 import { CircleHelpIcon } from "lucide-react";
 import Link from "next/link";
 

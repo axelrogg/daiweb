@@ -1,4 +1,4 @@
-import sql from "@/lib/database";
+import sql from "@/lib/database/psql";
 
 class Material {
     private reservationTimeDelta(now: number) {
@@ -89,16 +89,12 @@ class Material {
         }
     }
 
-    async activeLoansCount(externalId: string): Promise<number> {
+    async activeLoansCount(id: string): Promise<number> {
         try {
             const activeLoans = await sql`
                 select count(*) from prestamos_materiales
                 where
-                    user_id = (
-                        select id
-                        from users
-                        where external_id = ${externalId}
-                    ) and
+                    user_id = ${id} and
                     is_active = true
             `;
             return Number(activeLoans[0].count);

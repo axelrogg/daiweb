@@ -1,6 +1,6 @@
-import { SignIn } from "@clerk/nextjs";
 import { Callout, CalloutDescription } from "@/components/ui/callout";
 import { AuthLayout } from "@/components/layouts/auth-layout";
+import { signIn } from "@/auth";
 
 export default function SignInPage() {
     return (
@@ -15,8 +15,15 @@ export default function SignInPage() {
                         DAI o acércate a una de sus sedes.
                     </CalloutDescription>
                 </Callout>
-                <SignIn />
             </div>
+            <form
+                action={async () => {
+                    "use server";
+                    await signIn("google", { redirectTo: "/dashboard" });
+                }}
+            >
+                <button type="submit">Signin with Google</button>
+            </form>
         </AuthLayout>
     );
 }

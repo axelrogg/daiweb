@@ -11,9 +11,6 @@
         "prettify": "prettier . --write"
     },
     "dependencies": {
-        "@clerk/backend": "^1.5.2",
-        "@clerk/localizations": "^1.28.7",
-        "@clerk/nextjs": "beta",
         "@heroicons/react": "^2.1.4",
         "@hookform/resolvers": "^3.7.0",
         "@mdx-js/loader": "^3.0.1",
@@ -37,6 +34,7 @@
         "clsx": "^2.1.1",
         "lucide-react": "^0.363.0",
         "next": "^14.2.4",
+        "next-auth": "^5.0.0-beta.20",
         "postgres": "^3.4.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
@@ -44,7 +42,6 @@
         "react-qr-code": "^2.0.15",
         "rehype-slug": "^6.0.0",
         "remark-toc": "^9.0.0",
-        "svix": "^1.24.0",
         "tailwind-merge": "^2.3.0",
         "tailwindcss-animate": "^1.0.7",
         "zod": "^3.23.8"

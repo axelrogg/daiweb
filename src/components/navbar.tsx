@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactElement } from "react";
 import Link from "next/link";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { Menu } from "lucide-react";
@@ -9,20 +10,17 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
     navigationMenuTriggerStyle,
-} from "./ui/navigation-menu";
-import { Button } from "./ui/button";
-import { MainLogo } from "./main-logo";
+} from "@/components/ui/navigation-menu";
 import {
     Sheet,
     SheetClose,
     SheetContent,
     SheetDescription,
-    SheetFooter,
     SheetTitle,
     SheetTrigger,
 } from "./ui/sheet";
-import { UserButton } from "@clerk/nextjs";
-import { ReactElement } from "react";
+import { MainLogo } from "@/components/main-logo";
+import { Button } from "@/components/ui/button";
 
 const navBarSheetItems: NavBarSheetItem[] = [
     {
@@ -122,8 +120,6 @@ export const NavBar = () => (
                 </SheetClose>
             </SheetContent>
         </Sheet>
-        <div className="absolute right-5 top-6 lg:hidden">
-            <UserButton />
-        </div>
+        <div className="absolute right-5 top-6 lg:hidden"></div>
     </nav>
 );

@@ -1,10 +1,9 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
-import material from "@/lib/entities/material";
+import material from "@/lib/database/entities/material";
 
-export async function userActiveLoans() {
-    const { userId: externalUserId } = auth();
+
+export async function activeLoans() {
 
     if (!externalUserId) return null;
 

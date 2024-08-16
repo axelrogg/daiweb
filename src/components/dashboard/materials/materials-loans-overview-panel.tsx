@@ -1,12 +1,11 @@
+import Link from "next/link";
+import { activeLoansCount } from "@/lib/actions/materials/active-loans-count";
 import { DashboardOverviewRingChart } from "@/components/dashboard-overview/dashboard-overview-ring-chart";
 import { Button } from "@/components/ui/button";
-import { userActiveLoansCount } from "@/lib/actions/user-active-loans-count";
-import Link from "next/link";
 
 export const MaterialLoansOverviewPanel = async () => {
-    const activeLoansCount = await userActiveLoansCount();
-    console.log(activeLoansCount);
-    if (!activeLoansCount) {
+    const loansNumber = await activeLoansCount();
+    if (!loansNumber) {
         return null;
     }
 
@@ -14,18 +13,18 @@ export const MaterialLoansOverviewPanel = async () => {
         <>
             <DashboardOverviewRingChart
                 label="Préstamos activos"
-                currentValue={activeLoansCount}
+                currentValue={loansNumber}
                 maxValue={5}
             />
             <p className="mb-5 text-center">
-                Préstamos activos: {activeLoansCount} de {5}
+                Préstamos activos: {loansNumber} de {5}
             </p>
             <div className="flex flex-row items-center justify-between">
                 <Button asChild>
                     <Link href="/dashboard/mis-prestamos">Ver detalles</Link>
                 </Button>
 
-                {activeLoansCount === 5 ? (
+                {loansNumber === 5 ? (
                     <Button disabled>Pedir materiales</Button>
                 ) : (
                     <Button asChild>

@@ -1,31 +1,15 @@
-import { EnvironmentSecrets, EnvironmentVariables } from "@/types";
+import { EnvironmentSecrets } from "@/types";
 
 const {
-    CLERK_WEBHOOK_SECRET,
-    CLERK_SECRET_KEY,
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    AUTH_GOOGLE_ID,
+    AUTH_GOOGLE_SECRET,
+    AUTH_SECRET,
     DATABASE_CONNECTION_STR,
-} = process.env as any as EnvironmentVariables;
+} = process.env as any as EnvironmentSecrets;
 
-const envSecrets: EnvironmentSecrets = {
-    pub: {
-        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-        NEXT_PUBLIC_CLERK_SIGN_IN_URL: NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-        NEXT_PUBLIC_CLERK_SIGN_UP_URL: NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-        NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:
-            NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-        NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
-            NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
-    },
-    server: {
-        CLERK_WEBHOOK_SECRET: CLERK_WEBHOOK_SECRET,
-        CLERK_SECRET_KEY: CLERK_SECRET_KEY,
-        DATABASE_CONNECTION_STR: DATABASE_CONNECTION_STR,
-    },
-};
-
-export default envSecrets;
+export default {
+    AUTH_GOOGLE_ID: AUTH_GOOGLE_ID,
+    AUTH_GOOGLE_SECRET: AUTH_GOOGLE_SECRET,
+    AUTH_SECRET: AUTH_SECRET,
+    DATABASE_CONNECTION_STR: DATABASE_CONNECTION_STR,
+} as EnvironmentSecrets;

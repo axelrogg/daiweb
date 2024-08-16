@@ -1,14 +1,19 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { auth } from "@/auth";
+import { NextResponse } from "next/server";
 
-const isDashboardRoute = createRouteMatcher(["/dashboard(.*)"]);
-
-export default clerkMiddleware((auth, req) => {
-    // Restrict dashboard routes to logged in users
-    if (isDashboardRoute(req)) {
-        auth().protect();
+export default auth((request) => {
+    const pathname = request.nextUrl.pathname;
+    if (
+        !request.auth &&
+        (pathname.startsWith("/dashboard") ||
+            pathname.startsWith("/guias/staff"))
+    ) {
+        return NextResponse.redirect(
+            new URL("/auth/sign-in", request.nextUrl.origin)
+        );
     }
 });
 
 export const config = {
-    matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

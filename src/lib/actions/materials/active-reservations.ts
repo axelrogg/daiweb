@@ -1,11 +1,9 @@
 "use server";
 
+import material from "@/lib/database/entities/material";
 import { MaterialReservations } from "@/types/actions";
-import material from "../entities/material";
-import { auth } from "@clerk/nextjs/server";
 
-export async function userActiveReservations(): Promise<MaterialReservations | null> {
-    const { userId: externalUserId } = auth();
+export async function activeReservations(): Promise<MaterialReservations | null> {
     if (!externalUserId) {
         console.error("No user id found: userId is");
         console.error(externalUserId);

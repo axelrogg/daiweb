@@ -1,8 +1,7 @@
 "use server";
 
-import { clerkClient } from "../clerk";
-import { User } from "@clerk/backend";
-import user from "@/lib/entities/user";
+import user from "@/lib/database/entities/user";
+
 
 export async function userInfoFromId(id: number) {
     let userExternalId = null;
@@ -11,18 +10,6 @@ export async function userInfoFromId(id: number) {
     } catch (error: any) {
         console.error(error);
         return null;
-    }
-
-    let userDetails: User;
-    try {
-        userDetails = await clerkClient.users.getUser(userExternalId);
-        if (!userDetails) {
-            console.log("USE USER INFO FROM ID: USER DETAILS IS NONE");
-            return null;
-        }
-    } catch (error: any) {
-        console.error(error);
-        throw error;
     }
 
     try {
