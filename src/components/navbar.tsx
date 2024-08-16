@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { Menu } from "lucide-react";
@@ -21,6 +21,9 @@ import {
 } from "./ui/sheet";
 import { MainLogo } from "@/components/main-logo";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { UserInfo } from "@/types/actions";
+import { userInfo } from "@/lib/actions/user/user-info";
 
 const navBarSheetItems: NavBarSheetItem[] = [
     {
@@ -77,7 +80,18 @@ function renderNavBarSheetItem(item?: NavBarSheetItem | null) {
     );
 }
 
-export const NavBar = () => (
+export const NavBar = () => {
+    const [user, setUser] = useState<UserInfo | null>(null)
+
+    useEffect(() => {
+        async function getUserInfo() {
+            const info = await userInfo()
+            setUser(info)
+        }
+        getUserInfo()
+
+    }, [])
+    return (
     <nav className="mb-2 flex items-center justify-center py-5 lg:justify-between">
         <MainLogo />
         <NavigationMenu className="hidden lg:flex">
@@ -120,6 +134,18 @@ export const NavBar = () => (
                 </SheetClose>
             </SheetContent>
         </Sheet>
-        <div className="absolute right-5 top-6 lg:hidden"></div>
+        {user && (
+            <div className="absolute right-5 top-5 lg:hidden">
+                <Image
+                    src={user.pictureUri}
+                    className="rounded-full"
+                    alt="Foto de perfil. Haz click para acceder a tu perfil"
+                    width={35}
+                    height={35}
+                    priority
+                />
+            </div>
+        )}
     </nav>
 );
+}
