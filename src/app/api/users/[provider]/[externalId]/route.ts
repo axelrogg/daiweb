@@ -5,7 +5,7 @@ export async function GET(
     request: NextRequest,
     { params }: { params: { provider: string; externalId: string } }
 ) {
-    const {provider, externalId} = params;
+    const { provider, externalId } = params;
 
     if (!provider || !externalId) {
         return NextResponse.json(
@@ -16,9 +16,9 @@ export async function GET(
 
     if (provider !== "google") {
         return NextResponse.json(
-            {error: "Unsupported provider"},
-            {status: 400}
-        )
+            { error: "Unsupported provider" },
+            { status: 400 }
+        );
     }
 
     try {
