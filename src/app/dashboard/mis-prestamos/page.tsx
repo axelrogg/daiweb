@@ -1,5 +1,5 @@
 import { ActiveLoansTable } from "@/components/dashboard/materials/active-loans-table";
-import { userActiveLoans } from "@/lib/actions/user-active-loans";
+import { activeLoans } from "@/lib/actions/materials/active-loans";
 import {
     Popover,
     PopoverContent,
@@ -8,7 +8,7 @@ import {
 import { CircleHelpIcon } from "lucide-react";
 
 export default async function Page() {
-    const activeLoans = await userActiveLoans();
+    const loans = await activeLoans();
 
     return (
         <>
@@ -39,7 +39,7 @@ export default async function Page() {
                     </div>
                 </PopoverContent>
             </Popover>
-            <ActiveLoansTable materialDetails={activeLoans} />
+            <ActiveLoansTable materialDetails={loans} />
         </>
     );
 }
