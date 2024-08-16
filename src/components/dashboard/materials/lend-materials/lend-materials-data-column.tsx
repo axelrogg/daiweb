@@ -11,7 +11,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { readableDate } from "@/lib/utils/date";
-import { newMaterialLoan } from "@/lib/actions/new-material-loan";
+import { newMaterialLoan } from "@/lib/actions/materials/new-material-loan";
 import { toast } from "@/components/ui/use-toast";
 
 export const columns: ColumnDef<MaterialReservation>[] = [

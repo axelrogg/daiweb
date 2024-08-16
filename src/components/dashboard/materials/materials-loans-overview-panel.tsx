@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 export const MaterialLoansOverviewPanel = async () => {
     const loansNumber = await activeLoansCount();
-    if (!loansNumber) {
-        return null;
+    if (typeof loansNumber === "object" && !loansNumber) {
+        return null
     }
 
     return (

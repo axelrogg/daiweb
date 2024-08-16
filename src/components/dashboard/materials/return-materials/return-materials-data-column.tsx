@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { readableDate } from "@/lib/utils/date";
 import { toast } from "@/components/ui/use-toast";
-import { newMaterialReturn } from "@/lib/actions/new-material-return";
+import { newMaterialReturn } from "@/lib/actions/materials/new-material-return";
 import { MaterialLoan } from "@/types/actions";
 
 export const columns: ColumnDef<MaterialLoan>[] = [

@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { MulticodeScanner } from "@/components/multicode-scanner";
 import { Button } from "@/components/ui/button";
-import { userInfoFromId } from "@/lib/actions/user-info-from-id";
+import { userInfoFromId } from "@/lib/actions/user/user-info-from-id";
 import { MaterialLoans } from "@/types/actions";
-import { extUserActiveLoans } from "@/lib/actions/user-active-loans";
+import { extUserActiveLoans } from "@/lib/actions/materials/active-loans";
 import { DataTable } from "../lend-materials/lend-materials-data-table";
 import { columns } from "./return-materials-data-column";
 
@@ -35,11 +35,7 @@ export const ReturnMaterialsPanel = () => {
     function decodeUserId(code: string | null) {
         if (!code) return null;
         const decoded = atob(code);
-        const codeParts = decoded.split(".");
-        if (codeParts.length !== 2) {
-            return null;
-        }
-        const userId = Number(codeParts[0]);
+        const userId = Number(decoded[0]);
         if (Number.isNaN(userId)) return null;
         return userId;
     }

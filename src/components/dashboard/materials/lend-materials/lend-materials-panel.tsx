@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { MulticodeScanner } from "@/components/multicode-scanner";
 import { Button } from "@/components/ui/button";
-import { extUserActiveReservations } from "@/lib/actions/user-active-reservations";
-import { userInfoFromId } from "@/lib/actions/user-info-from-id";
+import { extUserActiveReservations } from "@/lib/actions/materials/active-reservations";
+import { userInfoFromId } from "@/lib/actions/user/user-info-from-id";
 import { MaterialReservations } from "@/types/actions";
 import { DataTable } from "./lend-materials-data-table";
 import { columns } from "./lend-materials-data-column";
+import { userIdDecode } from "@/lib/utils/userId-endec";
 
 export const LendMaterialsPanel = () => {
     const [dataIsLoading, setDataIsLoading] = useState(false);
@@ -18,10 +19,15 @@ export const LendMaterialsPanel = () => {
 
     useEffect(() => {
         const activeReservations = async () => {
-            const userId = decodeUserId(code);
-            if (!userId) {
+            if (!code) {
                 return;
             }
+
+            const userId = userIdDecode(code)
+            if (!userId) {
+                return
+            }
+
             setDataIsLoading(true);
             const reservations = await extUserActiveReservations(userId);
             const userInfo = await userInfoFromId(userId);
@@ -32,18 +38,6 @@ export const LendMaterialsPanel = () => {
 
         activeReservations();
     }, [code]);
-
-    function decodeUserId(code: string | null) {
-        if (!code) return null;
-        const decoded = atob(code);
-        const codeParts = decoded.split(".");
-        if (codeParts.length !== 2) {
-            return null;
-        }
-        const userId = Number(codeParts[0]);
-        if (Number.isNaN(userId)) return null;
-        return userId;
-    }
 
     return (
         <>
