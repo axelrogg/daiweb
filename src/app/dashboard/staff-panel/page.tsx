@@ -55,7 +55,7 @@ export default async function StaffPanelPage() {
                                         Prestar materiales
                                     </CardTitle>
                                     <PopoverTrigger>
-                                        <CircleHelpIcon className="h-6 w-6 text-primary" />
+                                        <CircleHelpIcon className="text-primary h-6 w-6" />
                                     </PopoverTrigger>
                                 </div>
                                 <PopoverContent
@@ -65,7 +65,7 @@ export default async function StaffPanelPage() {
                                     collisionPadding={20}
                                 >
                                     <div className="flex flex-col space-y-2">
-                                        <p className="mb-3 text-xl font-bold text-primary">
+                                        <p className="text-primary mb-3 text-xl font-bold">
                                             Tip
                                         </p>
                                         <p>
@@ -101,7 +101,7 @@ export default async function StaffPanelPage() {
                                         Devolver materiales
                                     </CardTitle>
                                     <PopoverTrigger>
-                                        <CircleHelpIcon className="h-6 w-6 text-primary" />
+                                        <CircleHelpIcon className="text-primary h-6 w-6" />
                                     </PopoverTrigger>
                                 </div>
                                 <PopoverContent
@@ -111,7 +111,7 @@ export default async function StaffPanelPage() {
                                     collisionPadding={20}
                                 >
                                     <div className="flex flex-col space-y-2">
-                                        <p className="mb-3 text-xl font-bold text-primary">
+                                        <p className="text-primary mb-3 text-xl font-bold">
                                             Tip
                                         </p>
                                         <p>

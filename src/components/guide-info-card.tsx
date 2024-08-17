@@ -34,7 +34,7 @@ export const GuideInfoCard = ({
                     <CardTitle className="text-xl">{title}</CardTitle>
                     <CardDescription>{description}</CardDescription>
                 </CardHeader>
-                <CardContent className="p-6 group-hover:animate-propel">
+                <CardContent className="group-hover:animate-propel p-6">
                     {children}
                 </CardContent>
             </Card>

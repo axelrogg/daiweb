@@ -15,15 +15,15 @@ export const UserButton = async () => {
     const user = await userInfo();
 
     if (!user) {
-        return null
+        return null;
     }
 
     return (
         <Popover>
             <PopoverTrigger>
                 <div
-                    className="flex h-10 w-10 items-center justify-center
-                                rounded-full bg-primary bg-gradient-to-b
+                    className="bg-primary flex h-10 w-10 items-center
+                                justify-center rounded-full bg-gradient-to-b
                                 from-blue-500 to-cyan-500 drop-shadow-lg"
                 >
                     <div
