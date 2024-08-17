@@ -35,7 +35,7 @@ export default async function DashboardPage() {
                         necesitas{" "}
                         <Link
                             className="font-bold underline"
-                            href="/verificar-cuenta"
+                            href="/dashboard/verificar-mi-cuenta"
                         >
                             verificar tu cuenta
                         </Link>

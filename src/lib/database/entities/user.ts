@@ -1,5 +1,5 @@
 import sql from "@/lib/database/psql";
-import { DbUserInfo, UserInfo } from "@/types/actions";
+import { UserInfo } from "@/types/actions";
 
 export class User {
     async accountId(externalId: string) {
@@ -28,20 +28,6 @@ export class User {
         name: string,
         pictureUri: string
     ) {
-        //const isVerified = isStaff ? true : false;
-        //try {
-        //    const newUser = await sql`
-        //        insert into users
-        //            (external_id, email, is_verified, is_staff)
-        //        values
-        //            (${externalId}, ${email}, ${isVerified}, ${isStaff})
-        //        returning id
-        //    `;
-        //    return newUser;
-        //} catch (error: any) {
-        //    throw error;
-        //}
-
         try {
             const result = await sql.begin(async (sql) => {
                 const userId = await sql`
@@ -62,6 +48,19 @@ export class User {
             });
             console.log(result);
             return result;
+        } catch (error: any) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async verify(id: number) {
+        try {
+            await sql`
+                update user_profiles
+                set is_verified = true
+                where id = ${id}
+            `;
         } catch (error: any) {
             console.error(error);
             throw error;
