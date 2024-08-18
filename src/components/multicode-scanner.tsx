@@ -62,8 +62,12 @@ export const MulticodeScanner = ({
             const streamData = await navigator.mediaDevices.getUserMedia({
                 audio: false,
                 video: {
-                    //facingMode: { exact: "environment" },
-                    aspectRatio: windowDimensions.width / windowDimensions.height,
+                    facingMode: {
+                        exact: "environment"
+                    },
+                    aspectRatio: {
+                        min: 1.777777778
+                    },
                     height: {
                         ideal: windowDimensions.height,
                         min: windowDimensions.height / 2,
