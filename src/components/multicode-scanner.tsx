@@ -33,7 +33,7 @@ export const MulticodeScanner = ({
         });
     }, []);
 
-    console.log(windowDimensions)
+    console.log(windowDimensions);
     useEffect(() => {
         if (videoRef.current && stream) {
             videoRef.current.srcObject = stream;
@@ -63,6 +63,7 @@ export const MulticodeScanner = ({
             const streamData = await navigator.mediaDevices.getUserMedia({
                 audio: false,
                 video: {
+                    facingMode: { exact: "environment" },
                     aspectRatio:
                         windowDimensions.width / windowDimensions.height,
                     height: { ideal: 1080 },
