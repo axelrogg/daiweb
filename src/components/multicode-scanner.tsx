@@ -33,12 +33,13 @@ export const MulticodeScanner = ({
         });
     }, []);
 
+    console.log(windowDimensions)
     useEffect(() => {
         if (videoRef.current && stream) {
             videoRef.current.srcObject = stream;
             videoRef.current.play();
         }
-    }, [stream]);
+    }, []);
 
     const scannedCode = useMulticodeScanner(
         stream,
