@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { MulticodeScanner } from "@/components/multicode-scanner";
 import { Button } from "@/components/ui/button";
-import { userInfoFromId } from "@/lib/actions/user-info-from-id";
 import { MaterialLoans } from "@/types/actions";
-import { extUserActiveLoans } from "@/lib/actions/user-active-loans";
+import { activeLoans } from "@/lib/actions/materials/active-loans";
 import { DataTable } from "../lend-materials/lend-materials-data-table";
 import { columns } from "./return-materials-data-column";
+import { userInfo } from "@/lib/actions/user/user-info";
 
 export const ReturnMaterialsPanel = () => {
     const [loading, setLoading] = useState(false);
@@ -16,30 +16,30 @@ export const ReturnMaterialsPanel = () => {
     const [materialLoans, setMaterialLoans] = useState<MaterialLoans>([]);
 
     useEffect(() => {
-        const activeLoans = async () => {
+        const userActiveLoans = async () => {
             const userId = decodeUserId(code);
             if (!userId) {
                 return;
             }
             setLoading(true);
-            const activeLoans = await extUserActiveLoans(userId);
-            const userInfo = await userInfoFromId(userId);
-            setMaterialLoans((old) => [...old, ...activeLoans]);
-            setFullName(userInfo!.fullName);
+            const loans = await activeLoans(userId);
+            const user = await userInfo(userId);
+            if (loans) {
+                setMaterialLoans((old) => [...old, ...loans]);
+            }
+            if (user) {
+                setFullName(user.name);
+            }
             setLoading(false);
         };
 
-        activeLoans();
+        userActiveLoans();
     }, [code]);
 
     function decodeUserId(code: string | null) {
         if (!code) return null;
         const decoded = atob(code);
-        const codeParts = decoded.split(".");
-        if (codeParts.length !== 2) {
-            return null;
-        }
-        const userId = Number(codeParts[0]);
+        const userId = Number(decoded[0]);
         if (Number.isNaN(userId)) return null;
         return userId;
     }

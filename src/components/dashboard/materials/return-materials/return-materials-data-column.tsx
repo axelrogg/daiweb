@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { readableDate } from "@/lib/utils/date";
 import { toast } from "@/components/ui/use-toast";
-import { newMaterialReturn } from "@/lib/actions/new-material-return";
+import { newMaterialReturn } from "@/lib/actions/materials/new-material-return";
 import { MaterialLoan } from "@/types/actions";
 
 export const columns: ColumnDef<MaterialLoan>[] = [
@@ -34,15 +34,21 @@ export const columns: ColumnDef<MaterialLoan>[] = [
             function onClickDoLoan() {
                 try {
                     newMaterialReturn(row.original.id);
+                    row.toggleSelected(true);
+                    toast({
+                        title: "Material devuelto",
+                        description: "El material fue devuelto con éxito.",
+                    });
                 } catch (error: any) {
                     console.error(error);
+                    toast({
+                        variant: "destructive",
+                        title: "Error",
+                        description:
+                            "No se pudo procesar la devolución. Por favor, inténtalo de nuevo más tarde",
+                    });
                     return;
                 }
-                row.toggleSelected(true);
-                toast({
-                    title: "Material devuelto",
-                    description: "El material fue devuelto con éxito.",
-                });
             }
 
             return (

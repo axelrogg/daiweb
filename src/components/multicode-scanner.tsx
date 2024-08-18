@@ -31,6 +31,9 @@ export const MulticodeScanner = ({
             width: window.screen.width,
             height: window.screen.height,
         });
+    }, []);
+
+    useEffect(() => {
         if (videoRef.current && stream) {
             videoRef.current.srcObject = stream;
             videoRef.current.play();

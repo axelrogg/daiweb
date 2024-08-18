@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { MulticodeScanner } from "@/components/multicode-scanner";
 import { Button } from "@/components/ui/button";
-import { extUserActiveReservations } from "@/lib/actions/user-active-reservations";
-import { userInfoFromId } from "@/lib/actions/user-info-from-id";
 import { MaterialReservations } from "@/types/actions";
 import { DataTable } from "./lend-materials-data-table";
 import { columns } from "./lend-materials-data-column";
+import { userIdDecode } from "@/lib/utils/user-id-endec";
+import { activeReservations } from "@/lib/actions/materials/active-reservations";
+import { userInfo } from "@/lib/actions/user/user-info";
 
 export const LendMaterialsPanel = () => {
     const [dataIsLoading, setDataIsLoading] = useState(false);
@@ -17,33 +18,30 @@ export const LendMaterialsPanel = () => {
         useState<MaterialReservations>([]);
 
     useEffect(() => {
-        const activeReservations = async () => {
-            const userId = decodeUserId(code);
+        const userActiveReservations = async () => {
+            if (!code) {
+                return;
+            }
+
+            const userId = userIdDecode(code);
             if (!userId) {
                 return;
             }
+
             setDataIsLoading(true);
-            const reservations = await extUserActiveReservations(userId);
-            const userInfo = await userInfoFromId(userId);
-            setMaterialReservations((old) => [...old, ...reservations]);
-            setFullName(userInfo!.fullName);
+            const reservations = await activeReservations(userId);
+            const user = await userInfo(userId);
+            if (reservations) {
+                setMaterialReservations((old) => [...old, ...reservations]);
+            }
+            if (user) {
+                setFullName(user.name);
+            }
             setDataIsLoading(false);
         };
 
-        activeReservations();
+        userActiveReservations();
     }, [code]);
-
-    function decodeUserId(code: string | null) {
-        if (!code) return null;
-        const decoded = atob(code);
-        const codeParts = decoded.split(".");
-        if (codeParts.length !== 2) {
-            return null;
-        }
-        const userId = Number(codeParts[0]);
-        if (Number.isNaN(userId)) return null;
-        return userId;
-    }
 
     return (
         <>

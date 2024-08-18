@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { newMaterialReservation } from "@/lib/actions/new-material-reservation";
+import { newMaterialReservation } from "@/lib/actions/materials/new-material-reservation";
 import { ToastAction } from "@/components/ui/toast";
 import {
     Form,
@@ -26,7 +26,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { userActiveLoansCount } from "@/lib/actions/user-active-loans-count";
+import { activeLoansCount } from "@/lib/actions/materials/active-loans-count";
 
 export const BorrowMaterialForm = () => {
     const { toast } = useToast();
@@ -43,8 +43,8 @@ export const BorrowMaterialForm = () => {
     });
 
     useEffect(() => {
-        async function activeLoansCount() {
-            const count = await userActiveLoansCount();
+        async function userActiveLoansCount() {
+            const count = await activeLoansCount();
             if (!count) {
                 return;
             }
@@ -52,11 +52,10 @@ export const BorrowMaterialForm = () => {
                 setCanBorrowMaterial(false);
             }
         }
-        activeLoansCount();
+        userActiveLoansCount();
     }, []);
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(data);
         const material =
             data.material === "Otros" ? data.otros! : data.material;
         await newMaterialReservation(material);

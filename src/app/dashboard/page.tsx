@@ -1,23 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import { BadgeCheckIcon, CircleHelpIcon } from "lucide-react";
+import { userInfo } from "@/lib/actions/user/user-info";
 import { Button } from "@/components/ui/button";
 import { MaterialLoansOverviewPanel } from "@/components/dashboard/materials/materials-loans-overview-panel";
-import { userInfo } from "@/lib/actions/user-info";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BadgeCheckIcon, CircleHelpIcon } from "lucide-react";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
 import { Callout, CalloutDescription } from "@/components/ui/callout";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
-
 
 export default async function DashboardPage() {
     const user = await userInfo();
@@ -36,7 +35,7 @@ export default async function DashboardPage() {
                         necesitas{" "}
                         <Link
                             className="font-bold underline"
-                            href="/verificar-cuenta"
+                            href="/dashboard/verificar-mi-cuenta"
                         >
                             verificar tu cuenta
                         </Link>
@@ -52,23 +51,27 @@ export default async function DashboardPage() {
             <h1 className="text-4xl font-bold">Dashboard</h1>
             <div className="group flex h-10 flex-row items-center space-x-3">
                 {user.isVerified && (
-                        <Popover>
-                            <HoverCard>
-                                <HoverCardTrigger>
-                                    <PopoverTrigger className="flex items-center">
-                                        <BadgeCheckIcon className="text-primary" />
-                                    </PopoverTrigger>
-                                </HoverCardTrigger>
-                                <HoverCardContent>
-                                    Tu cuenta ha sido verificada.
-                                </HoverCardContent>
-                            </HoverCard>
-                            <PopoverContent className="lg:hidden" align="start" collisionPadding={10}>
-                                <p className="lg:hidden">
-                                    Tu cuenta ha sido verificada.
-                                </p>
-                            </PopoverContent>
-                        </Popover>
+                    <Popover>
+                        <HoverCard>
+                            <HoverCardTrigger>
+                                <PopoverTrigger className="flex items-center">
+                                    <BadgeCheckIcon className="text-primary" />
+                                </PopoverTrigger>
+                            </HoverCardTrigger>
+                            <HoverCardContent>
+                                Tu cuenta ha sido verificada.
+                            </HoverCardContent>
+                        </HoverCard>
+                        <PopoverContent
+                            className="lg:hidden"
+                            align="start"
+                            collisionPadding={10}
+                        >
+                            <p className="lg:hidden">
+                                Tu cuenta ha sido verificada.
+                            </p>
+                        </PopoverContent>
+                    </Popover>
                 )}
                 {user.isStaff && (
                     <Popover>
@@ -84,17 +87,18 @@ export default async function DashboardPage() {
                                     </div>
                                 </PopoverTrigger>
                             </HoverCardTrigger>
-                        <HoverCardContent>
-                            Eres miembro de la DAI.
-                        </HoverCardContent>
-                    </HoverCard>
-                        <PopoverContent className="lg:hidden" align="start" collisionPadding={10}>
-                                <p className="lg:hidden">
-                            Eres miembro de la DAI.
-                                </p>
-                            </PopoverContent>
-</Popover>
-
+                            <HoverCardContent>
+                                Eres miembro de la DAI.
+                            </HoverCardContent>
+                        </HoverCard>
+                        <PopoverContent
+                            className="lg:hidden"
+                            align="start"
+                            collisionPadding={10}
+                        >
+                            <p className="lg:hidden">Eres miembro de la DAI.</p>
+                        </PopoverContent>
+                    </Popover>
                 )}
             </div>
             <div className="group my-5 w-full space-y-5 lg:space-x-5">
@@ -138,27 +142,18 @@ export default async function DashboardPage() {
                                         <p className="mb-3 text-xl font-bold text-primary">
                                             Tip
                                         </p>
-                                        <p>
-                                            En este panel los préstamos activos
-                                            a tu nombre.
-                                        </p>
+                                        <p>Estos son tus préstamos activos</p>
                                         <p>
                                             Si quieres pedir algún material, haz
-                                            click en el botón{" "}
+                                            click en{" "}
                                             <span className="font-bold">
                                                 Pedir materiales
                                             </span>
                                             .
                                         </p>
                                         <p>
-                                            Recuerda que solo puedes tener 5
-                                            préstamos activos en un mismo
-                                            momento.
-                                        </p>
-                                        <p>
-                                            Si quieres ver los detalles de los
-                                            materiales que tienes, haz click en
-                                            el botón{" "}
+                                            Si quieres ver detalles de tus
+                                            materiales, haz click en{" "}
                                             <span className="font-bold">
                                                 Ver detalles
                                             </span>

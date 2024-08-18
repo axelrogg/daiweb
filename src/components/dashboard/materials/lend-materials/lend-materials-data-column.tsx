@@ -11,7 +11,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { readableDate } from "@/lib/utils/date";
-import { newMaterialLoan } from "@/lib/actions/new-material-loan";
+import { newMaterialLoan } from "@/lib/actions/materials/new-material-loan";
 import { toast } from "@/components/ui/use-toast";
 
 export const columns: ColumnDef<MaterialReservation>[] = [
@@ -37,16 +37,22 @@ export const columns: ColumnDef<MaterialReservation>[] = [
                         row.original.userId,
                         row.original.material
                     );
+                    row.toggleSelected(true);
+                    toast({
+                        title: "Pŕestamo hecho",
+                        description:
+                            "El préstamo fue realizado con éxito. Puedes entregar el material.",
+                    });
                 } catch (error: any) {
                     console.error(error);
+                    toast({
+                        variant: "destructive",
+                        title: "Hubo un error",
+                        description:
+                            "No se pudo realizar el préstamo. Por favor, inténtalo más tarde",
+                    });
                     return;
                 }
-                row.toggleSelected(true);
-                toast({
-                    title: "Pŕestamo hecho",
-                    description:
-                        "El préstamo fue realizado con éxito. Puedes entregar el material.",
-                });
             }
 
             return (

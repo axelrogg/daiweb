@@ -1,5 +1,3 @@
-import { LoadingSpinner } from "@/components/loading-spinner";
-import { MainLogo } from "@/components/main-logo";
 import Image from "next/image";
 
 export default function LoadingPage() {

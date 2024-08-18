@@ -26,22 +26,13 @@ export type MaterialLoan = {
 
 export type MaterialLoans = MaterialLoan[];
 
-export type DbUserInfo = {
-    id: number;
-    external_id: string;
-    email: string;
-    is_verified: boolean;
-    is_staff: boolean;
-    created_at: Date;
-    last_updated_at: Date;
-};
-
 export type UserInfo = {
     id: number;
-    externalId: string;
     email: string;
+    name: string;
     isVerified: boolean;
     isStaff: boolean;
+    pictureUri: string;
     createdAt: Date;
     lastUpdatedAt: Date;
 };

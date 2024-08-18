@@ -1,10 +1,8 @@
 import "./globals.css";
 import { Viewport } from "next";
 import type { Metadata } from "next";
-import fontConfig from "@/config/font";
-import clerkConfig from "@/config/clerk";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
+import font from "@/lib/config/font";
 
 export const viewport: Viewport = {
     width: "device-width",
@@ -18,9 +16,6 @@ export const metadata: Metadata = {
         {
             name: "Axel Rodríguez Chang",
         },
-        {
-            name: "Manuel Medina Rodríguez",
-        },
     ],
 };
 
@@ -30,16 +25,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ClerkProvider
-            localization={clerkConfig.localization}
-            appearance={clerkConfig.appeareance}
-        >
-            <html lang="en">
-                <body className={`${fontConfig.className} text-base`}>
-                    <main>{children}</main>
-                    <Toaster />
-                </body>
-            </html>
-        </ClerkProvider>
+        <html lang="en">
+            <body className={`${font.className} text-base`}>
+                <main>{children}</main>
+                <Toaster />
+            </body>
+        </html>
     );
 }

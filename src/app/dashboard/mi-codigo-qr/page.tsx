@@ -1,6 +1,7 @@
 import Link from "next/link";
 import QRCode from "react-qr-code";
-import { userInfo } from "@/lib/actions/user-info";
+import { userInfo } from "@/lib/actions/user/user-info";
+import { userIdEncode } from "@/lib/utils/user-id-endec";
 
 export default async function Page() {
     const user = await userInfo();
@@ -8,7 +9,7 @@ export default async function Page() {
     if (!user) {
         return (
             <div className="flex flex-col justify-center">
-                <h1 className="mb-4 flex justify-center text-3xl font-bold lg:mb-24">
+                <h1 className="mb-4 flex text-3xl font-bold lg:mb-24">
                     Mi código QR
                 </h1>
                 <p className="text-center">
@@ -29,11 +30,9 @@ export default async function Page() {
         );
     }
 
-    const userIdsConcat = user.id.toString() + "." + user.externalId;
-
     return (
         <div className="flex flex-col justify-center">
-            <h1 className="mb-4 flex justify-center text-3xl font-bold lg:mb-24">
+            <h1 className="mb-4 flex text-3xl font-bold lg:mb-24">
                 Mi código QR
             </h1>
             {user.isVerified && (
@@ -59,9 +58,7 @@ export default async function Page() {
                             style={{ height: "auto" }}
                             viewBox={`0 0 1000 1000`}
                             level="H"
-                            value={Buffer.from(userIdsConcat).toString(
-                                "base64"
-                            )}
+                            value={userIdEncode(user.id)}
                         />
                     </div>
                 ) : (
