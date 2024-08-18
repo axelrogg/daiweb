@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import BASE_URL from "./lib/utils/base-url";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [Google],
@@ -26,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             let exists = false;
             try {
                 const response = await fetch(
-                    "/api/users/google/" + googleUserId
+                    BASE_URL +  "/api/users/google/" + googleUserId
                 );
 
                 if (response.status === 500 || response.status === 400) {
@@ -47,7 +48,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             try {
                 const response = await fetch(
-                    "/api/users",
+                    BASE_URL + "/api/users",
                     {
                         method: "POST",
                         body: JSON.stringify({
@@ -77,7 +78,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             try {
                 const response = await fetch(
-                    "/api/users/google/" + profile!.sub
+                    BASE_URL + "/api/users/google/" + profile!.sub
                 );
 
                 if (

@@ -20,6 +20,7 @@
  *
  * `DATABASE_CONNECTION_STR` es el url de la base de datos.
  */
+const NODE_ENV = process.env.NODE_ENV;
 const AUTH_GOOGLE_ID = process.env.AUTH_GOOGLE_ID;
 const AUTH_GOOGLE_SECRET = process.env.AUTH_GOOGLE_SECRET;
 const AUTH_SECRET = process.env.AUTH_SECRET;
@@ -39,6 +40,7 @@ const envSecrets = {
     AUTH_GOOGLE_ID: AUTH_GOOGLE_ID,
     AUTH_GOOGLE_SECRET: AUTH_GOOGLE_SECRET,
     AUTH_SECRET: AUTH_SECRET,
+    NODE_ENV: NODE_ENV,
 };
 
 /**
