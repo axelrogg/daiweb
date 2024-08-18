@@ -31,9 +31,14 @@ export const MulticodeScanner = ({
             width: window.screen.width,
             height: window.screen.height,
         });
+
+        console.log(windowDimensions);
+        console.log("this is the inner width: ")
+        console.log(window.innerWidth)
+        console.log("this is the inner height: ")
+        console.log(window.innerHeight)
     }, []);
 
-    console.log(windowDimensions);
     useEffect(() => {
         if (videoRef.current && stream) {
             videoRef.current.srcObject = stream;
@@ -66,7 +71,7 @@ export const MulticodeScanner = ({
                     facingMode: { exact: "environment" },
                     aspectRatio:
                         windowDimensions.width / windowDimensions.height,
-                    height: { ideal: 1080 },
+                    height: { min: 1080 },
                 },
             });
             setStream(streamData);
