@@ -26,7 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             let exists = false;
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/users/google/" + googleUserId
+                    "/api/users/google/" + googleUserId
                 );
 
                 if (response.status === 500 || response.status === 400) {
@@ -47,7 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/users",
+                    "/api/users",
                     {
                         method: "POST",
                         body: JSON.stringify({
