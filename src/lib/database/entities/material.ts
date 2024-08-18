@@ -7,7 +7,7 @@ class Material {
 
     async newLoan(
         userId: number,
-        responsableExternalId: string,
+        userResponsableId: number,
         reservationId: number,
         material: string
     ) {
@@ -35,7 +35,7 @@ class Material {
                     values
                         (
                             ${userId},
-                            (select id from users where external_id = ${responsableExternalId}),
+                            ${userResponsableId},
                             ${material},
                             true,
                             'on_loan',
@@ -50,7 +50,7 @@ class Material {
         }
     }
 
-    async newReservation(externalId: string, material: string) {
+    async newReservation(id: number, material: string) {
         const timeDelta = this.reservationTimeDelta(Date.now());
         try {
             await sql`
@@ -58,7 +58,7 @@ class Material {
                     (user_id, material, status, is_active, valid_until)
                 values
                     (
-                        (select id from users where external_id = ${externalId}),
+                        ${id},
                         ${material},
                         'reserved',
                         true,
@@ -71,13 +71,13 @@ class Material {
         }
     }
 
-    async newReturn(returnedByExternalId: string, materialId: number) {
+    async newReturn(userId: number, materialId: number) {
         try {
             await sql`
                 update prestamos_materiales
                 set
                     status = 'returned',
-                    returned_by = (select id from users where external_id = ${returnedByExternalId}),
+                    returned_by = ${userId},
                     is_active = false,
                     last_updated_at = ${sql`now()`}
                 where
@@ -104,18 +104,16 @@ class Material {
         }
     }
 
-    async activeLoans(externalId: string) {
+    async activeLoans(id: number) {
         try {
             const loans = await sql`
                 select
                     id, user_id, material, is_active,
                     created_at, valid_until
                 from prestamos_materiales
-                where user_id = (
-                    select id
-                    from users
-                    where external_id = ${externalId}
-                ) and is_active = true
+                where
+                    user_id = ${id} and
+                    is_active = true
                 limit 5;
             `;
 
@@ -137,68 +135,7 @@ class Material {
         }
     }
 
-    async activeLoansFromUserId(userId: number) {
-        try {
-            const loans = await sql`
-                select
-                    id, user_id, material, is_active,
-                    created_at, valid_until
-                from prestamos_materiales
-                where
-                    user_id = ${userId} and
-                    is_active = true
-            `;
-            return loans.map(
-                (el) =>
-                    ({
-                        id: el.id,
-                        userId: el.user_id,
-                        material: el.material,
-                        isActive: el.is_active,
-                        createdAt: new Date(el.created_at),
-                        validUntil: new Date(el.valid_until),
-                    }) as ActiveLoan
-            );
-        } catch (error: any) {
-            console.error(error);
-            throw error;
-        }
-    }
-
-    async activeReservations(externalId: string) {
-        try {
-            const reservations = await sql`
-                select
-                    id, user_id, material, is_active, status,
-                    valid_until, created_at
-                from reservas_materiales
-                where
-                    user_id = (
-                        select id
-                        from users
-                        where external_id = ${externalId}
-                    ) and
-                    is_active = true
-                limit 5
-                `;
-            return reservations.map(
-                (el) =>
-                    ({
-                        id: el.id,
-                        userId: el.user_id,
-                        material: el.material,
-                        isActive: el.is_active,
-                        status: el.status,
-                        validUntil: el.valid_until,
-                        createdAt: el.createdAt,
-                    }) as ActiveReservation
-            );
-        } catch (error: any) {
-            throw error;
-        }
-    }
-
-    async activeReservationsFromUserId(id: number) {
+    async activeReservations(id: number) {
         try {
             const reservations = await sql`
                 select
@@ -218,8 +155,8 @@ class Material {
                         material: el.material,
                         isActive: el.is_active,
                         status: el.status,
-                        validUntil: new Date(el.valid_until),
-                        createdAt: new Date(el.created_at),
+                        validUntil: el.valid_until,
+                        createdAt: el.created_at,
                     }) as ActiveReservation
             );
         } catch (error: any) {

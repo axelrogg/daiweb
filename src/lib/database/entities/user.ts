@@ -115,7 +115,7 @@ export class User {
         }
     }
 
-    async info(id: string) {
+    async info(id: number) {
         try {
             const profile = await sql<
                 {

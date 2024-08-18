@@ -8,7 +8,6 @@ export async function activeLoansCount() {
     if (!session || !session.user || !session.user.id) {
         return null;
     }
-    console.log(session.user.id);
 
     try {
         return await material.activeLoansCount(session.user.id);

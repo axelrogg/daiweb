@@ -22,7 +22,7 @@ import { z } from "zod";
 
 export const VerifyAccountForm = () => {
     const { toast } = useToast();
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -39,38 +39,37 @@ export const VerifyAccountForm = () => {
         formData.append("full_name", data.fullName);
         formData.append("sign_up_sheet", data.file);
         try {
-            setLoading(true)
+            setLoading(true);
             const response = await fetch("/api/users/verify", {
                 method: "POST",
                 body: formData,
             });
-            setLoading(false)
+            setLoading(false);
             if (!response.ok) {
                 toast({
-                variant: "destructive",
-                title: "No pudimos verificar tu cuenta.",
-                description:
-                    "Asegúrate de que tus datos coinciden con el PDF de tu " +
-                    "matrícula. Si crees que son correctos, contáctanos para " +
-                    "una verificación manual."
-            });
-                return
-            }
-            
-                toast({
                     variant: "destructive",
-                    title: "¡Yuhu! Tu cuenta ha sido verificada",
+                    title: "No pudimos verificar tu cuenta.",
                     description:
-                        "Puedes disfrutar de todos los beneficios de nuestra web. " +
-                        "Vuelve a tu dashboard para ver los cambios.",
-                    action: (
-                        <ToastAction altText="Volver al dashboard" asChild>
-                            <Link href="/dashboard">Dashboard</Link>
-                        </ToastAction>
-                    ),
+                        "Asegúrate de que tus datos coinciden con el PDF de tu " +
+                        "matrícula. Si crees que son correctos, contáctanos para " +
+                        "una verificación manual.",
                 });
-            return
-            
+                return;
+            }
+
+            toast({
+                variant: "destructive",
+                title: "¡Yuhu! Tu cuenta ha sido verificada",
+                description:
+                    "Puedes disfrutar de todos los beneficios de nuestra web. " +
+                    "Vuelve a tu dashboard para ver los cambios.",
+                action: (
+                    <ToastAction altText="Volver al dashboard" asChild>
+                        <Link href="/dashboard">Dashboard</Link>
+                    </ToastAction>
+                ),
+            });
+            return;
         } catch (error: any) {
             toast({
                 variant: "destructive",
@@ -175,10 +174,12 @@ export const VerifyAccountForm = () => {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit" className="mt-4" disabled={loading ? true : false}>
-                        {loading ? (
-                            <LoadingSpinner/>
-                        ) : (<p>Submit</p>)}
+                    <Button
+                        type="submit"
+                        className="mt-4"
+                        disabled={loading ? true : false}
+                    >
+                        {loading ? <LoadingSpinner /> : <p>Submit</p>}
                     </Button>
                 </form>
             </Form>

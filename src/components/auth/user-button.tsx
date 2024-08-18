@@ -22,8 +22,8 @@ export const UserButton = async () => {
         <Popover>
             <PopoverTrigger>
                 <div
-                    className="bg-primary flex h-10 w-10 items-center
-                                justify-center rounded-full bg-gradient-to-b
+                    className="flex h-10 w-10 items-center justify-center
+                                rounded-full bg-primary bg-gradient-to-b
                                 from-blue-500 to-cyan-500 drop-shadow-lg"
                 >
                     <div

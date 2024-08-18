@@ -9,7 +9,7 @@ export default async function Page() {
     if (!user) {
         return (
             <div className="flex flex-col justify-center">
-                <h1 className="mb-4 flex justify-center text-3xl font-bold lg:mb-24">
+                <h1 className="mb-4 flex text-3xl font-bold lg:mb-24">
                     Mi código QR
                 </h1>
                 <p className="text-center">
@@ -32,7 +32,7 @@ export default async function Page() {
 
     return (
         <div className="flex flex-col justify-center">
-            <h1 className="mb-4 flex justify-center text-3xl font-bold lg:mb-24">
+            <h1 className="mb-4 flex text-3xl font-bold lg:mb-24">
                 Mi código QR
             </h1>
             {user.isVerified && (

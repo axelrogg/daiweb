@@ -16,7 +16,7 @@ export default async function Page() {
                 <div className="mb-5 flex flex-row">
                     <h1 className="mr-3 text-3xl font-bold">Mis préstamos</h1>
                     <PopoverTrigger>
-                        <CircleHelpIcon className="text-primary h-6 w-6" />
+                        <CircleHelpIcon className="h-6 w-6 text-primary" />
                     </PopoverTrigger>
                 </div>
                 <PopoverContent

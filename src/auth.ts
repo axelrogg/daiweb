@@ -77,7 +77,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/users/google/" + profile!.sub
+                    "/api/users/google/" + profile!.sub
                 );
 
                 if (
@@ -90,13 +90,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 if (response.status === 200) {
                     const body = await response.json();
-                    console.log("HERE IS THE BODY USERID IN JWT CALLBACK");
-                    console.log(body.userId);
                     token.id = body.userId;
                     return token;
                 }
             } catch (error: any) {
-                console.error("there is an error in jwt response");
                 console.error(error);
                 return token;
             }

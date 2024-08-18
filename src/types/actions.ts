@@ -29,6 +29,7 @@ export type MaterialLoans = MaterialLoan[];
 export type UserInfo = {
     id: number;
     email: string;
+    name: string;
     isVerified: boolean;
     isStaff: boolean;
     pictureUri: string;

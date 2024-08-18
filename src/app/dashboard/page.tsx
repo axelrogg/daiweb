@@ -129,7 +129,7 @@ export default async function DashboardPage() {
                                         Mis préstamos
                                     </CardTitle>
                                     <PopoverTrigger>
-                                        <CircleHelpIcon className="text-primary h-6 w-6" />
+                                        <CircleHelpIcon className="h-6 w-6 text-primary" />
                                     </PopoverTrigger>
                                 </div>
                                 <PopoverContent
@@ -139,30 +139,21 @@ export default async function DashboardPage() {
                                     collisionPadding={20}
                                 >
                                     <div className="flex flex-col space-y-2">
-                                        <p className="text-primary mb-3 text-xl font-bold">
+                                        <p className="mb-3 text-xl font-bold text-primary">
                                             Tip
                                         </p>
-                                        <p>
-                                            En este panel los préstamos activos
-                                            a tu nombre.
-                                        </p>
+                                        <p>Estos son tus préstamos activos</p>
                                         <p>
                                             Si quieres pedir algún material, haz
-                                            click en el botón{" "}
+                                            click en{" "}
                                             <span className="font-bold">
                                                 Pedir materiales
                                             </span>
                                             .
                                         </p>
                                         <p>
-                                            Recuerda que solo puedes tener 5
-                                            préstamos activos en un mismo
-                                            momento.
-                                        </p>
-                                        <p>
-                                            Si quieres ver los detalles de los
-                                            materiales que tienes, haz click en
-                                            el botón{" "}
+                                            Si quieres ver detalles de tus
+                                            materiales, haz click en{" "}
                                             <span className="font-bold">
                                                 Ver detalles
                                             </span>

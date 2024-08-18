@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { MulticodeScanner } from "@/components/multicode-scanner";
 import { Button } from "@/components/ui/button";
-import { extUserActiveReservations } from "@/lib/actions/materials/active-reservations";
-import { userInfoFromId } from "@/lib/actions/user/user-info-from-id";
 import { MaterialReservations } from "@/types/actions";
 import { DataTable } from "./lend-materials-data-table";
 import { columns } from "./lend-materials-data-column";
-import { userIdDecode } from "@/lib/utils/userId-endec";
+import { userIdDecode } from "@/lib/utils/user-id-endec";
+import { activeReservations } from "@/lib/actions/materials/active-reservations";
+import { userInfo } from "@/lib/actions/user/user-info";
 
 export const LendMaterialsPanel = () => {
     const [dataIsLoading, setDataIsLoading] = useState(false);
@@ -18,7 +18,7 @@ export const LendMaterialsPanel = () => {
         useState<MaterialReservations>([]);
 
     useEffect(() => {
-        const activeReservations = async () => {
+        const userActiveReservations = async () => {
             if (!code) {
                 return;
             }
@@ -29,14 +29,18 @@ export const LendMaterialsPanel = () => {
             }
 
             setDataIsLoading(true);
-            const reservations = await extUserActiveReservations(userId);
-            const userInfo = await userInfoFromId(userId);
-            setMaterialReservations((old) => [...old, ...reservations]);
-            setFullName(userInfo!.fullName);
+            const reservations = await activeReservations(userId);
+            const user = await userInfo(userId);
+            if (reservations) {
+                setMaterialReservations((old) => [...old, ...reservations]);
+            }
+            if (user) {
+                setFullName(user.name);
+            }
             setDataIsLoading(false);
         };
 
-        activeReservations();
+        userActiveReservations();
     }, [code]);
 
     return (

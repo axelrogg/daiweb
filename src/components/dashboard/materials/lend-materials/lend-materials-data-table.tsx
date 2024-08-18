@@ -42,6 +42,7 @@ export function DataTable<TData, TValue>({
         return "";
     }
 
+    console.log(data);
     return (
         <div className="mb-5 rounded-md">
             <Table>

@@ -15,7 +15,7 @@ export default function Page() {
                         Préstamo de materiales
                     </h1>
                     <PopoverTrigger>
-                        <CircleHelpIcon className="text-primary h-6 w-6" />
+                        <CircleHelpIcon className="h-6 w-6 text-primary" />
                     </PopoverTrigger>
                 </div>
                 <PopoverContent
@@ -25,7 +25,7 @@ export default function Page() {
                     collisionPadding={20}
                 >
                     <div className="flex flex-col space-y-2">
-                        <p className="text-primary mb-3 text-xl font-bold">
+                        <p className="mb-3 text-xl font-bold text-primary">
                             Tip
                         </p>
                         <p>
