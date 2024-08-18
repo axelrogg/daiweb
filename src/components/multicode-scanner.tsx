@@ -16,7 +16,6 @@ export const MulticodeScanner = ({
         width: number;
         height: number;
     }>({ width: 0, height: 0 });
-    const [windowInnerDims, setWindowInnerDims] = useState<{width: number, height: number}>({width: 0, height: 0})
 
     function stopStream() {
         if (!stream) {
@@ -32,12 +31,6 @@ export const MulticodeScanner = ({
             width: window.screen.width,
             height: window.screen.height,
         });
-
-        setWindowInnerDims({
-            width: window.innerWidth,
-            height: window.innerHeight
-        })
-
     }, []);
 
     useEffect(() => {
@@ -89,11 +82,6 @@ export const MulticodeScanner = ({
             }
         }
     }
-
-    console.log("normal dims")
-    console.log(windowDimensions);
-    console.log("inner dims")
-    console.log(windowInnerDims)
 
     return (
         <>

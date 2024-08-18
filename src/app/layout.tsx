@@ -6,6 +6,7 @@ import font from "@/lib/config/font";
 
 export const viewport: Viewport = {
     width: "device-width",
+    height: "device-height",
     initialScale: 1.0,
 };
 
