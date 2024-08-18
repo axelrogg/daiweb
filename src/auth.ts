@@ -9,7 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     callbacks: {
         async signIn({ profile }) {
-            console.log(BASE_URL)
+            console.log(BASE_URL);
             if (!profile) {
                 return false;
             }
@@ -28,7 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             let exists = false;
             try {
                 const response = await fetch(
-                    BASE_URL +  "/api/users/google/" + googleUserId
+                    BASE_URL + "/api/users/google/" + googleUserId
                 );
 
                 if (response.status === 500 || response.status === 400) {
@@ -48,18 +48,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // de datos. Vamos a crearlo.
 
             try {
-                const response = await fetch(
-                    BASE_URL + "/api/users",
-                    {
-                        method: "POST",
-                        body: JSON.stringify({
-                            externalId: googleUserId,
-                            email: email,
-                            name: name,
-                            pictureUri: picture,
-                        }),
-                    }
-                );
+                const response = await fetch(BASE_URL + "/api/users", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        externalId: googleUserId,
+                        email: email,
+                        name: name,
+                        pictureUri: picture,
+                    }),
+                });
                 if (response.status === 400 || response.status === 500) {
                     return false;
                 }
