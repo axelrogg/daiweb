@@ -9,6 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     callbacks: {
         async signIn({ profile }) {
+            console.log(BASE_URL)
             if (!profile) {
                 return false;
             }
