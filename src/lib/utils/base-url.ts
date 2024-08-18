@@ -2,7 +2,7 @@ import envSecrets from "@/lib/environment";
 
 
 function baseUrl() {
-    if (envSecrets.NODE_ENV === "prod") {
+    if (envSecrets.NODE_ENV === "production") {
         return "https://daiweb.vercel.app"
     }
     if (envSecrets.NODE_ENV === "stage") {
