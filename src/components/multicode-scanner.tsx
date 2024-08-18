@@ -29,7 +29,7 @@ export const MulticodeScanner = ({
     useEffect(() => {
         setWindowDimensions({
             width: window.screen.width,
-            height: window.screen.height,
+            height: window.screen.height
         });
     }, []);
 
@@ -62,22 +62,25 @@ export const MulticodeScanner = ({
             const streamData = await navigator.mediaDevices.getUserMedia({
                 audio: false,
                 video: {
-                    facingMode: { exact: "environment" },
-                    aspectRatio:
-                        windowDimensions.width / windowDimensions.height,
-                    height: { min: 1080 },
+                    //facingMode: { exact: "environment" },
+                    aspectRatio: windowDimensions.width / windowDimensions.height,
+                    height: {
+                        ideal: windowDimensions.height,
+                        min: windowDimensions.height / 2,
+                    },
                 },
             });
             setStream(streamData);
             setShowStream(true);
-        } catch (err: any) {
-            if (err.name === "NotAllowedError") {
+        } catch (error: any) {
+            if (error.name === "NotAllowedError") {
                 alert(
                     "El permiso para acceder a la cámara fue denegado. Por favor, permite el acceso a la cámara en la configuración de tu navegador."
                 );
                 return;
             } else {
-                alert("Un error desconocido ocurrió: " + err.message);
+                console.error(error)
+                alert("Un error desconocido ocurrió: " + error.message);
                 return;
             }
         }
@@ -108,8 +111,6 @@ export const MulticodeScanner = ({
                     <video
                         ref={videoRef}
                         className="object-cover"
-                        height={windowDimensions.height}
-                        width={windowDimensions.width}
                     />
                 </div>
             )}
