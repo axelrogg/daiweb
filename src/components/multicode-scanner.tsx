@@ -89,6 +89,11 @@ export const MulticodeScanner = ({
         }
     }
 
+    console.log(windowDimensions);
+    console.log("this is the inner width: ")
+    console.log(window.innerWidth)
+    console.log("this is the inner height: ")
+    console.log(window.innerHeight)
     return (
         <>
             <div onClick={getVideoPermission}>{children}</div>

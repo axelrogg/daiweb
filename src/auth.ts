@@ -9,7 +9,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     callbacks: {
         async signIn({ profile }) {
-            console.log(BASE_URL);
             if (!profile) {
                 return false;
             }
@@ -32,6 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 );
 
                 if (response.status === 500 || response.status === 400) {
+                    console.error(await response.json())
                     return false;
                 }
 
