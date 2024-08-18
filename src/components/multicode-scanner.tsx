@@ -16,6 +16,7 @@ export const MulticodeScanner = ({
         width: number;
         height: number;
     }>({ width: 0, height: 0 });
+    const [windowInnerDims, setWindowInnerDims] = useState<{width: number, height: number}>({width: 0, height: 0})
 
     function stopStream() {
         if (!stream) {
@@ -32,11 +33,11 @@ export const MulticodeScanner = ({
             height: window.screen.height,
         });
 
-        console.log(windowDimensions);
-        console.log("this is the inner width: ")
-        console.log(window.innerWidth)
-        console.log("this is the inner height: ")
-        console.log(window.innerHeight)
+        setWindowInnerDims({
+            width: window.innerWidth,
+            height: window.innerHeight
+        })
+
     }, []);
 
     useEffect(() => {
@@ -89,11 +90,11 @@ export const MulticodeScanner = ({
         }
     }
 
+    console.log("normal dims")
     console.log(windowDimensions);
-    console.log("this is the inner width: ")
-    console.log(window.innerWidth)
-    console.log("this is the inner height: ")
-    console.log(window.innerHeight)
+    console.log("inner dims")
+    console.log(windowInnerDims)
+
     return (
         <>
             <div onClick={getVideoPermission}>{children}</div>
