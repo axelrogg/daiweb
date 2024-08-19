@@ -25,8 +25,8 @@ export class User {
         externalId: string,
         email: string,
         isStaff: boolean,
-        name: string,
-        pictureUri: string
+        name?: string | null | undefined,
+        pictureUri?: string | null | undefined
     ) {
         try {
             const result = await sql.begin(async (sql) => {
@@ -37,12 +37,17 @@ export class User {
                         ('google', ${externalId})
                     returning id
                     `;
-                console.log(userId);
                 await sql`
                     insert into user_profiles
                         (id, email, is_verified, is_staff, name, picture_uri)
-                    values
-                        (${userId[0].id}, ${email}, false, ${isStaff}, ${name}, ${pictureUri})
+                    values (
+                        ${userId[0].id},
+                        ${email},
+                        false,
+                        ${isStaff},
+                        ${name ? name : ""},
+                        ${pictureUri ? pictureUri : ""}
+                    )
                     `;
                 return userId[0].id;
             });
