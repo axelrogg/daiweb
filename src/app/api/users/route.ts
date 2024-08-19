@@ -9,30 +9,42 @@ export async function POST(request: NextRequest) {
         pictureUri?: string;
     };
 
-    if (!name || !email || !externalId || !pictureUri) {
+    const userParamsMissingFields = [];
+    if (!name) {
+        userParamsMissingFields.push(name);
+    }
+
+    if (!email) {
+        userParamsMissingFields.push(email);
+    }
+
+    if (userParamsMissingFields.length > 0) {
         return NextResponse.json(
-            { error: "Missing required fields" },
-            { status: 400 }
+            {
+                message: "Missing required fields",
+                missingFields: userParamsMissingFields,
+            },
+            { status: 400 } // 400 Bad Request
         );
     }
 
     try {
         const userId = await user.new(
-            externalId,
-            email,
+            externalId!,
+            email!,
             false,
             name,
             pictureUri
         );
         return NextResponse.json(
             { message: "User created successfully", userId: userId },
-            { status: 201 }
+            { status: 201 } // 200 Created
         );
     } catch (error: any) {
         console.error("Error creating a user", error);
         return NextResponse.json(
-            { error: "Internal server error" },
-            { status: 500 }
+            { error: "Internal Server Error" },
+            { status: 500 } // 500 Internal Server Error
         );
     }
 }
