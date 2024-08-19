@@ -29,7 +29,7 @@ export const MulticodeScanner = ({
     useEffect(() => {
         setWindowDimensions({
             width: window.screen.width,
-            height: window.screen.height
+            height: window.screen.height,
         });
     }, []);
 
@@ -63,10 +63,10 @@ export const MulticodeScanner = ({
                 audio: false,
                 video: {
                     facingMode: {
-                        exact: "environment"
+                        exact: "environment",
                     },
                     aspectRatio: {
-                        min: 1.777777778
+                        min: 1.777777778,
                     },
                     height: {
                         ideal: windowDimensions.height,
@@ -83,7 +83,7 @@ export const MulticodeScanner = ({
                 );
                 return;
             } else {
-                console.error(error)
+                console.error(error);
                 alert("Un error desconocido ocurrió: " + error.message);
                 return;
             }
@@ -112,10 +112,7 @@ export const MulticodeScanner = ({
                         <div className="col-span-4 bg-black opacity-40" />
                         <div className="col-span-4 bg-black opacity-40" />
                     </div>
-                    <video
-                        ref={videoRef}
-                        className="object-cover"
-                    />
+                    <video ref={videoRef} className="object-cover" />
                 </div>
             )}
         </>
