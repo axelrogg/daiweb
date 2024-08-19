@@ -10,14 +10,14 @@ export async function GET(
     if (!provider || !externalId) {
         return NextResponse.json(
             { error: "Missing provider or externalId params" },
-            { status: 400 }
+            { status: 400 } // 400 Bad Request
         );
     }
 
     if (provider !== "google") {
         return NextResponse.json(
             { error: "Unsupported provider" },
-            { status: 400 }
+            { status: 400 } // 400 Bad Request
         );
     }
 
@@ -26,20 +26,20 @@ export async function GET(
         if (!userId) {
             return NextResponse.json(
                 { error: "User not found" },
-                { status: 404 }
+                { status: 404 } // 404 Not Found
             );
         }
         return NextResponse.json(
             {
                 userId: userId,
             },
-            { status: 200 }
+            { status: 200 } // 200 OK
         );
     } catch (error: any) {
         console.error(error);
         return NextResponse.json(
             { error: "Internal server error" },
-            { status: 500 }
+            { status: 500 } // 500 Internal Server Error
         );
     }
 }

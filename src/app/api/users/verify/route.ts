@@ -53,8 +53,7 @@ export const POST = auth(async function POST(request) {
     if (contentLengthInt > MAX_PAYLOAD_SIZE) {
         return NextResponse.json(
             {
-                message:
-                    "Payload exceeds the 55 kB limit. Received ${contentLengthInt} bytes",
+                message: `Payload exceeds the 55 kB limit. Received ${contentLengthInt} bytes`,
             },
             { status: 413 } // 413 Payload Too Large
         );
@@ -119,7 +118,7 @@ export const POST = auth(async function POST(request) {
 
     try {
         await user.verify(Number(request.auth.user!.id!));
-        return NextResponse.json(null, { status: 200 });
+        return NextResponse.json(null, { status: 200 }); // 200 OK
     } catch (error: any) {
         return NextResponse.json(
             {
