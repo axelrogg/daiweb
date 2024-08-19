@@ -5,7 +5,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { UserIcon } from "lucide-react";
+import { GhostIcon, UserIcon } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { signOut } from "@/auth";
 import { Button } from "../ui/button";
@@ -23,7 +23,7 @@ export const UserButton = async () => {
             <PopoverTrigger>
                 <div
                     className="flex h-10 w-10 items-center justify-center
-                                rounded-full bg-primary bg-gradient-to-b
+                                rounded-full bg-gradient-to-b
                                 from-blue-500 to-cyan-500 drop-shadow-lg"
                 >
                     <div
@@ -34,13 +34,22 @@ export const UserButton = async () => {
                             className="relative h-8 w-8 items-center justify-center
                                         rounded-full"
                         >
-                            <Image
-                                src={user.pictureUri}
-                                className="h-8 w-8 rounded-full"
-                                alt="Foto de perfil. Haz click para acceder a tu perfil"
-                                fill
-                                priority
-                            />
+                            {user.pictureUri ? (
+                                <Image
+                                    src={user.pictureUri}
+                                    className="h-8 w-8 rounded-full"
+                                    alt="Foto de perfil. Haz click para acceder a tu perfil"
+                                    fill
+                                    priority
+                                />
+                            ) : (
+                                <div
+                                    className="flex h-8 w-8 items-center
+                                justify-center rounded-full bg-gradient-to-b from-blue-500 to-cyan-500"
+                                >
+                                    <GhostIcon className="h-5 w-5 text-white" />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
