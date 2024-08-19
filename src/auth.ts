@@ -31,7 +31,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 );
 
                 if (response.status === 500 || response.status === 400) {
-                    console.error(await response.json())
                     return false;
                 }
 
