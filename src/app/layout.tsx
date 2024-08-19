@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${font.className} text-base`}>
+            <body className={`${font.className} h-[100svh] text-base`}>
                 <main>{children}</main>
                 <Toaster />
             </body>

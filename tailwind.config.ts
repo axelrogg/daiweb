@@ -17,6 +17,9 @@ const config = {
             },
         },
         extend: {
+            backgroundImage: {
+                "line-in-motion": "url('/assets/patterns/line-in-motion.svg')",
+            },
             colors: {
                 accent: "#a636bf",
                 primary: "#00ace0",
