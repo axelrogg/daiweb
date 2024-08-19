@@ -8,6 +8,9 @@ import checkEnvironmentVariables from "./environment.config.mjs";
 /** @type {import('next').NextConfig} */
 const nextConfigBase = {
     // `reactStrictMode` is enabled by default but let's make sure it's `true`
+    experimental: {
+        serverComponentsExternalPackages: ["pino"],
+    },
     reactStrictMode: true,
     pageExtensions: ["md", "mdx", "tsx", "ts"],
     webpack: (config) => {
