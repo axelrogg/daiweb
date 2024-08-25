@@ -30,9 +30,7 @@ const navBarSheetItems: NavBarSheetItem[] = [
         title: "Reserva de espacios",
         href: "/guias/servicios/como-reservar-espacios",
         icon: <CalendarCheckIcon className="mr-2 h-6 w-6 stroke-green-800" />,
-
-    }
-
+    },
 ];
 
 interface NavBarSheetItem {
