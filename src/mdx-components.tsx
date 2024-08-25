@@ -32,6 +32,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         a: ({ href, children }) => (
             <a
                 href={href}
+                target="_blank"
                 className="text-blue-500 underline lg:hover:underline"
             >
                 {children}
