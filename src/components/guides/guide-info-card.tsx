@@ -8,7 +8,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { PropsWithChildren } from "@/types";
+import { ArrowRightIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const GuideInfoCard = ({
@@ -16,8 +16,7 @@ export const GuideInfoCard = ({
     description,
     href,
     className,
-    children,
-}: PropsWithChildren<GuideInfoCardProps>) => {
+}: GuideInfoCardProps) => {
     const { push } = useRouter();
 
     function onClickCard() {
@@ -29,13 +28,13 @@ export const GuideInfoCard = ({
             className={cn("group text-start", className)}
             onClick={onClickCard}
         >
-            <Card className="flex flex-row items-center justify-between">
+            <Card className="flex flex-row items-center justify-between hover:bg-slate-100">
                 <CardHeader>
                     <CardTitle className="text-xl">{title}</CardTitle>
                     <CardDescription>{description}</CardDescription>
                 </CardHeader>
                 <CardContent className="p-6 group-hover:animate-propel">
-                    {children}
+                    <ArrowRightIcon className="h-6 w-6" />
                 </CardContent>
             </Card>
         </button>

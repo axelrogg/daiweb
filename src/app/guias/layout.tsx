@@ -1,4 +1,5 @@
 import { DefaultLayout } from "@/components/layouts/default-layout";
+import { GuidesContentBar } from "@/components/guides/guides-content-bar";
 
 export default function DocsLayout({
     children,
@@ -7,7 +8,12 @@ export default function DocsLayout({
 }) {
     return (
         <DefaultLayout>
-            <div>{children}</div>
+            <div className="flex min-h-[80svh] lg:flex-row">
+                <div className="hidden flex-col overflow-y-auto lg:flex lg:w-1/4">
+                    <GuidesContentBar />
+                </div>
+                <div className="min-h-[80svh] flex-1 lg:ml-10">{children}</div>
+            </div>
         </DefaultLayout>
     );
 }
