@@ -8,6 +8,7 @@ export const viewport: Viewport = {
     width: "device-width",
     height: "device-height",
     initialScale: 1.0,
+    viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${font.className} h-[100svh] text-base`}>
+            <body className={`${font.className} min-h-[100svh] text-base`}>
                 <main>{children}</main>
                 <Toaster />
             </body>
