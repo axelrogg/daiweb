@@ -32,8 +32,8 @@ export const WithFooter = () => (
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col w-1/3">
-                <Link className="font-bold text-white mb-5" href="/guias">
+            <div className="flex w-1/3 flex-col">
+                <Link className="mb-5 font-bold text-white" href="/guias">
                     Guías
                 </Link>
                 <div className="flex flex-col space-y-3">
@@ -45,16 +45,18 @@ export const WithFooter = () => (
                     </Link>
                 </div>
             </div>
-            <div className="flex flex-col w-1/3">
-                <p className="font-bold text-white mb-5">Normativas</p>
+            <div className="flex w-1/3 flex-col">
+                <p className="mb-5 font-bold text-white">Normativas</p>
                 <div className="flex flex-col space-y-3">
-
-                <Link className="text-white" href="/política-de-privacidad">
-                    Política de privacidad
-                </Link>
-                <Link className="text-white" href="/reglamento-de-pista-deportiva-peritos">
-                    Reglamento de la pista deportiva de peritos
-                </Link>
+                    <Link className="text-white" href="/política-de-privacidad">
+                        Política de privacidad
+                    </Link>
+                    <Link
+                        className="text-white"
+                        href="/reglamento-de-pista-deportiva-peritos"
+                    >
+                        Reglamento de la pista deportiva de peritos
+                    </Link>
                 </div>
             </div>
         </div>
@@ -64,4 +66,3 @@ export const WithFooter = () => (
         </p>
     </footer>
 );
-

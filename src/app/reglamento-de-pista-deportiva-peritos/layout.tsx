@@ -5,9 +5,5 @@ export default function DocsLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return (
-        <DefaultLayout>
-            {children}
-        </DefaultLayout>
-    );
+    return <DefaultLayout>{children}</DefaultLayout>;
 }
