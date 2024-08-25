@@ -5,7 +5,7 @@ export default function LoadingPage() {
         <div className="group flex h-[80vh] flex-col items-center justify-center space-y-4">
             <div className="animate-pulse ">
                 <Image
-                    src="/logo-dai.svg"
+                    src="/dai-logo-color.svg"
                     alt="DAI logo"
                     width={80}
                     height={62}
