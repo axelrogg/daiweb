@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const MainLogo = ({ variant, scale }: MainLogoProps) => (
-    <Link href="/">
+    <Link href="/" className="w-[80px]">
         <Image
             src={
                 variant === "white"
