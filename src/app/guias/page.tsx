@@ -26,7 +26,7 @@ export default function Guides() {
                         <GuideInfoCard
                             title="Activar el WiFi de la UVigo en tus dispositivos"
                             description="Cómo estar siempre conectado en cualquier campus de la universidad."
-                            href="/guias/primeros-pasos/activar-wifi"
+                            href="/guias/primeros-pasos/activar-el-wifi-de-uvigo-en-tus-dispositivos"
                         />
                     </div>
                 </div>
