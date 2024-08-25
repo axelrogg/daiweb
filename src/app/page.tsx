@@ -5,7 +5,7 @@ import { LayoutDashboardIcon } from "lucide-react";
 
 export default async function HomePage() {
     return (
-        <div className="mx-5 flex min-h-dvh flex-col">
+        <div className="flex min-h-dvh flex-col">
             <div className="lg:mx-20 2xl:mx-80">
                 <NavBar />
             </div>
@@ -14,7 +14,7 @@ export default async function HomePage() {
                     <h1 className="text-center text-5xl font-bold">
                         Esta es la DAI
                     </h1>
-                    <h2 className="text-xl">
+                    <h2 className="text-center text-xl">
                         Explora la nueva web de la Delegación de Alumnos de
                         Industriales: tu guía en la Universidad de Vigo
                     </h2>
