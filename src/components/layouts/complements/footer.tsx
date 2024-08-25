@@ -5,8 +5,8 @@ import { MailIcon, PhoneIcon } from "lucide-react";
 
 export const Footer = () => (
     <footer className="flex w-full flex-col items-center bg-primary px-5 py-5">
-        <div className="mb-4 flex w-full flex-row px-5 lg:px-20 2xl:px-80">
-            <div className="w-1/3">
+        <div className="mb-4 flex w-full flex-col space-y-6 px-5 py-5 md:flex-row lg:px-20 lg:py-5 2xl:px-80">
+            <div className="flex flex-col md:w-2/5">
                 <MainLogo variant="white" scale={2} />
                 <SocialMediaLinks />
                 <div className="space-y-2">
@@ -32,7 +32,7 @@ export const Footer = () => (
                     </div>
                 </div>
             </div>
-            <div className="flex w-1/3 flex-col">
+            <div className="flex flex-col md:w-1/3">
                 <Link className="mb-5 font-bold text-white" href="/guias">
                     Guías
                 </Link>
@@ -45,7 +45,7 @@ export const Footer = () => (
                     </Link>
                 </div>
             </div>
-            <div className="flex w-1/3 flex-col">
+            <div className="flex flex-col md:w-1/3">
                 <p className="mb-5 font-bold text-white">Normativas</p>
                 <div className="flex flex-col space-y-3">
                     <Link className="text-white" href="/política-de-privacidad">
@@ -60,7 +60,7 @@ export const Footer = () => (
                 </div>
             </div>
         </div>
-        <p className="text-center text-sm text-white">
+        <p className="my-5 text-center text-sm text-white">
             &copy; 2024 Delegación de Alumnos de Industriales - Universidade de
             Vigo.
         </p>
