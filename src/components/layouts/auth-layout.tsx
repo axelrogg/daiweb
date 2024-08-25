@@ -7,6 +7,6 @@ export const AuthLayout = ({ children }: { children: React.ReactNode }) => (
             <MainLogo />
         </nav>
         {children}
-        <WithFooter className="fixed bottom-0 left-0" />
+        <WithFooter />
     </div>
 );
