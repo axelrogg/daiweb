@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Link from "next/link";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { Menu } from "lucide-react";
+import { CalendarCheckIcon, Menu } from "lucide-react";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -35,7 +35,7 @@ const navBarSheetItems: NavBarSheetItem[] = [
             },
             {
                 title: "Activar el WiFi",
-                href: "http://localhost:3000/guias/activar-wifi",
+                href: "/guias/activar-wifi",
                 isParent: false,
             },
         ],
@@ -89,6 +89,20 @@ export const NavBar = () => {
                             >
                                 <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
                                 Guías
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <Link
+                            href="/guias/servicios/como-reservar-espacios"
+                            legacyBehavior
+                            passHref
+                        >
+                            <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                            >
+                                <CalendarCheckIcon className="mr-2 h-6 w-6 stroke-green-800" />
+                                Reserva de espacios
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>
