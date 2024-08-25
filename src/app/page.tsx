@@ -1,5 +1,5 @@
-import { NavBar } from "@/components/navbar";
-import { WithFooter } from "@/components/with-footer";
+import { NavBar } from "@/components/layouts/complements/navbar";
+import { Footer } from "@/components/layouts/complements/footer";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { LayoutDashboardIcon } from "lucide-react";
 
@@ -45,7 +45,7 @@ export default async function HomePage() {
                     ,
                 </div>
             </div>
-            <WithFooter />
+            <Footer />
         </div>
     );
 }

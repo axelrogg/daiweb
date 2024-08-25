@@ -6,7 +6,6 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { CircleHelpIcon, KeyRoundIcon } from "lucide-react";
-import Link from "next/link";
 
 export const MyLocker = () => (
     <Card className="flex flex-col justify-between">
@@ -37,7 +36,7 @@ export const MyLocker = () => (
             </Popover>
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-center pt-3">
-            <p className="mb-8">No tienes una taquilla.</p>
+            <p className="mb-8">No tienes una taquilla asignada.</p>
             <form>
                 <Button type="submit">Reserva tu taquilla</Button>
             </form>

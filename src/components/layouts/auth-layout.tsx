@@ -1,5 +1,5 @@
-import { MainLogo } from "@/components/main-logo";
-import { WithFooter } from "@/components/with-footer";
+import { MainLogo } from "@/components/layouts/complements/main-logo";
+import { Footer } from "@/components/layouts/complements/footer";
 
 export const AuthLayout = ({ children }: { children: React.ReactNode }) => (
     <div className="flex min-h-dvh flex-col px-5">
@@ -7,6 +7,6 @@ export const AuthLayout = ({ children }: { children: React.ReactNode }) => (
             <MainLogo />
         </nav>
         {children}
-        <WithFooter />
+        <Footer />
     </div>
 );

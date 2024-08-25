@@ -3,7 +3,7 @@ import { MainLogo } from "./main-logo";
 import Link from "next/link";
 import { MailIcon, PhoneIcon } from "lucide-react";
 
-export const WithFooter = () => (
+export const Footer = () => (
     <footer className="flex w-full flex-col items-center bg-primary px-5 py-5">
         <div className="mb-4 flex w-full flex-row px-5 lg:px-20 2xl:px-80">
             <div className="w-1/3">

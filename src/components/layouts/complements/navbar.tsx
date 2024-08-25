@@ -16,37 +16,28 @@ import {
     SheetDescription,
     SheetTitle,
     SheetTrigger,
-} from "./ui/sheet";
-import { MainLogo } from "@/components/main-logo";
+} from "@/components/ui/sheet";
+import { MainLogo } from "@/components/layouts/complements/main-logo";
 import { Button } from "@/components/ui/button";
-import { UserButton } from "./auth/user-button";
 
 const navBarSheetItems: NavBarSheetItem[] = [
     {
         title: "Guías",
         href: "/guias",
-        isParent: true,
         icon: <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />,
-        children: [
-            {
-                title: "Añadir el correo de la UVigo",
-                href: "/guias/anadir-correo-uvigo",
-                isParent: false,
-            },
-            {
-                title: "Activar el WiFi",
-                href: "/guias/activar-wifi",
-                isParent: false,
-            },
-        ],
     },
+    {
+        title: "Reserva de espacios",
+        href: "/guias/servicios/como-reservar-espacios",
+        icon: <CalendarCheckIcon className="mr-2 h-6 w-6 stroke-green-800" />,
+
+    }
+
 ];
 
 interface NavBarSheetItem {
     title: string;
     href: string;
-    isParent: boolean;
-    children?: NavBarSheetItem[];
     icon?: ReactElement;
 }
 
@@ -54,24 +45,17 @@ function renderNavBarSheetItem(item?: NavBarSheetItem | null) {
     if (!item) {
         return;
     }
-    const fontClasses = item.isParent ? "text-lg font-bold" : "";
     return (
         <div key={item.title}>
             <SheetClose asChild className="m-0 p-0 text-start">
                 <Link
-                    className={`my-1 flex flex-row items-center ${fontClasses}`}
+                    className="my-1 flex flex-row items-center"
                     href={item.href}
                 >
                     {item.icon}
                     {item.title}
                 </Link>
             </SheetClose>
-            {item.children &&
-                item.children.map((child, indx) => (
-                    <SheetClose key={`${child.title}${indx}`} className="pl-4">
-                        {renderNavBarSheetItem(child)}
-                    </SheetClose>
-                ))}
         </div>
     );
 }
@@ -122,7 +106,7 @@ export const NavBar = () => {
                 </SheetTrigger>
                 <SheetContent side="left">
                     <MainLogo />
-                    <div className="my-6">
+                    <div className="my-6 space-y-3">
                         {navBarSheetItems.map((item) =>
                             renderNavBarSheetItem(item)
                         )}
@@ -134,9 +118,6 @@ export const NavBar = () => {
                     </SheetClose>
                 </SheetContent>
             </Sheet>
-            <div className="absolute right-5 top-5 lg:hidden">
-                <UserButton />
-            </div>
         </nav>
     );
 };

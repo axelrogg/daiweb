@@ -41,6 +41,8 @@ export const UserButton = async () => {
                                     alt="Foto de perfil. Haz click para acceder a tu perfil"
                                     fill
                                     priority
+                                    quality={60}
+                                    sizes="12vw"
                                 />
                             ) : (
                                 <div
