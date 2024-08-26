@@ -16,20 +16,25 @@ import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const VerifyAccountForm = () => {
     const { toast } = useToast();
     const [loading, setLoading] = useState(false);
+    const [formFile, setFormFile] = useState<File | undefined>()
+
+    useEffect(() => {
+        setFormFile(new File([], ""))
+    }, [])
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
             id: "",
             fullName: "",
-            file: new File([], ""),
+            file: formFile,
         },
     });
 
@@ -58,7 +63,6 @@ export const VerifyAccountForm = () => {
             }
 
             toast({
-                variant: "destructive",
                 title: "¡Yuhu! Tu cuenta ha sido verificada",
                 description:
                     "Puedes disfrutar de todos los beneficios de nuestra web. " +
