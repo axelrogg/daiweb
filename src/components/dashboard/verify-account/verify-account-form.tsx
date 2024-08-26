@@ -23,11 +23,11 @@ import { z } from "zod";
 export const VerifyAccountForm = () => {
     const { toast } = useToast();
     const [loading, setLoading] = useState(false);
-    const [formFile, setFormFile] = useState<File | undefined>()
+    const [formFile, setFormFile] = useState<File | undefined>();
 
     useEffect(() => {
-        setFormFile(new File([], ""))
-    }, [])
+        setFormFile(new File([], ""));
+    }, []);
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
