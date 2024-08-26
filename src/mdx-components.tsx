@@ -34,7 +34,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 underline lg:hover:underline"
+                className="text-blue-500 underline hover:text-accent"
             >
                 {children}
             </a>
