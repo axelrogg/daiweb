@@ -1,9 +1,9 @@
 "use client";
 
-import { CompassIcon, FileTextIcon, PocketKnifeIcon } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { CompassIcon, FileTextIcon, PocketKnifeIcon } from "lucide-react";
 
 const guideContentBarItems: GuideContentBarItem[] = [
     {

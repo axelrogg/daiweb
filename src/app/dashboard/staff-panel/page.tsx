@@ -1,7 +1,7 @@
+import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
 import { LendMaterialsPanel } from "@/components/dashboard/materials/lend-materials/lend-materials-panel";
 import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
 import { ReturnMaterialsPanel } from "@/components/dashboard/materials/return-materials/return-materials-panel";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Popover,
@@ -18,9 +18,20 @@ export default async function StaffPanelPage() {
         return <NoUserInfo />;
     }
 
+    if (!user.isVerified) {
+        return (
+            <div className="flex h-[80svh] w-full flex-col items-start items-center">
+                <h1 className="self-start text-3xl font-bold">
+                    Panel de staff
+                </h1>
+                <UnverifiedCard />
+            </div>
+        );
+    }
+
     if (!user.isStaff) {
         return (
-            <div className="flex h-[80svh] w-full flex-col items-center justify-center">
+            <div className="flex min-h-[80svh] w-full flex-col items-center justify-center">
                 <div className="max-w-screen-sm">
                     <h1 className="text-center text-xl font-bold">
                         No tienes autorización para ver esta página
@@ -39,15 +50,9 @@ export default async function StaffPanelPage() {
     return (
         <div className="flex flex-col items-start justify-center">
             <h1 className="text-4xl font-bold">Panel de staff</h1>
-            <Button
-                asChild
-                className="mb-5 mt-5 w-full rounded-xl lg:max-w-24 lg:rounded-lg"
-            >
-                <Link href="/dashboard/mi-codigo-qr">Ver mi QR</Link>
-            </Button>
             <div className="flex w-full flex-col items-center justify-center">
-                <div className="group w-full space-y-4">
-                    <Card className="flex flex-col justify-between">
+                <div className="mt-4 w-full space-y-4 lg:flex lg:flex-row lg:space-x-4 lg:space-y-0">
+                    <Card className="flex flex-col justify-between lg:w-1/2">
                         <CardHeader className="flex items-start pb-3">
                             <Popover>
                                 <div className="mb-5 flex flex-row">
@@ -93,7 +98,7 @@ export default async function StaffPanelPage() {
                             <LendMaterialsPanel />
                         </CardContent>
                     </Card>
-                    <Card className="flex flex-col justify-between">
+                    <Card className="flex flex-col justify-between lg:w-1/2">
                         <CardHeader className="flex items-start pb-3">
                             <Popover>
                                 <div className="mb-5 flex flex-row">

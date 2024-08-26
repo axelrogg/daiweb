@@ -1,12 +1,27 @@
+import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
 import { BorrowMaterialForm } from "@/components/dashboard/materials/borrow-material-form";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { userInfo } from "@/lib/actions/user/user-info";
 import { CircleHelpIcon } from "lucide-react";
 
-export default function Page() {
+export default async function Page() {
+    const user = await userInfo();
+
+    if (!user?.isVerified) {
+        return (
+            <div className="flex min-h-[80svh] w-full flex-col items-start items-center">
+                <h1 className="self-start text-3xl font-bold">
+                    Pŕestamo de materiales
+                </h1>
+                <UnverifiedCard />
+            </div>
+        );
+    }
+
     return (
         <>
             <Popover>
@@ -21,7 +36,7 @@ export default function Page() {
                 <PopoverContent
                     className="z-50 w-64 rounded-lg bg-white p-6 drop-shadow-2xl lg:w-3/5"
                     sideOffset={10}
-                    align="start"
+                    align="center"
                     collisionPadding={20}
                 >
                     <div className="flex flex-col space-y-2">

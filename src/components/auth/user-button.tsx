@@ -56,7 +56,7 @@ export const UserButton = async () => {
                     </div>
                 </div>
             </PopoverTrigger>
-            <PopoverContent align="end">
+            <PopoverContent align="end" collisionPadding={10} sideOffset={10}>
                 <div className="">
                     <Button asChild variant="outline" className="w-full">
                         <Link href="/dashboard/mi-perfil">

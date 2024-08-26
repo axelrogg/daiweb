@@ -73,8 +73,8 @@ export default async function Page() {
                             Para obtener tu propio QR y poder acceder a todos
                             los servicios de la DAI,{" "}
                             <Link
-                                href="/guias/como-verificar-mi-cuenta"
-                                className="underline"
+                                href="/dashboard/verificar-mi-cuenta"
+                                className="font-bold underline hover:text-black"
                             >
                                 verifica tu cuenta
                             </Link>

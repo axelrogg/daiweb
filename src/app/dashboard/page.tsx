@@ -1,8 +1,6 @@
 import React from "react";
-import Link from "next/link";
 import { BadgeCheckIcon } from "lucide-react";
 import { userInfo } from "@/lib/actions/user/user-info";
-import { Button } from "@/components/ui/button";
 import {
     Popover,
     PopoverContent,
@@ -14,9 +12,9 @@ import {
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
-import { Callout, CalloutDescription } from "@/components/ui/callout";
 import { MyLoans } from "@/components/dashboard/cards/my-loans";
 import { MyLocker } from "@/components/dashboard/cards/my-locker";
+import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
 
 export default async function DashboardPage() {
     const user = await userInfo();
@@ -27,28 +25,15 @@ export default async function DashboardPage() {
     if (!user.isVerified) {
         return (
             <div className="flex h-[80svh] w-full flex-col items-start items-center">
-                <h1 className="self-start text-4xl font-bold">Dashboard</h1>
-                <Callout variant="warning" className="max-w-lg">
-                    <CalloutDescription>
-                        Parece que no has verificado tu cuenta todavía. Para
-                        poder acceder a todos los beneficios de la DAI,
-                        necesitas{" "}
-                        <Link
-                            className="font-bold underline"
-                            href="/dashboard/verificar-mi-cuenta"
-                        >
-                            verificar tu cuenta
-                        </Link>
-                        .
-                    </CalloutDescription>
-                </Callout>
+                <h1 className="self-start text-3xl font-bold">Dashboard</h1>
+                <UnverifiedCard />
             </div>
         );
     }
 
     return (
         <div className="flex flex-col items-start justify-center">
-            <h1 className="text-4xl font-bold">Dashboard</h1>
+            <h1 className="text-3xl font-bold">Dashboard</h1>
             <div className="group flex h-10 flex-row items-center space-x-3">
                 {user.isVerified && (
                     <Popover>
@@ -101,28 +86,14 @@ export default async function DashboardPage() {
                     </Popover>
                 )}
             </div>
-            <div className="group my-5 w-full space-y-5 lg:space-x-5">
-                {user.isStaff && (
-                    <Button
-                        asChild
-                        className="w-full rounded-xl bg-gradient-to-r from-amber-400 to-amber-200 text-black lg:max-w-40 lg:rounded-lg"
-                    >
-                        <Link href="/dashboard/staff-panel">
-                            Ir al panel de staff
-                        </Link>
-                    </Button>
-                )}
-                <Button
-                    asChild
-                    className="w-full rounded-xl lg:max-w-24 lg:rounded-lg"
-                >
-                    <Link href="/dashboard/mi-codigo-qr">Ver mi QR</Link>
-                </Button>
-            </div>
-            <div className="flex w-full flex-col items-center justify-center">
-                <div className="group w-full space-y-4">
-                    <MyLocker />
-                    <MyLoans />
+            <div className="mt-5 flex w-full flex-col items-center justify-center">
+                <div className="w-full space-y-4 lg:flex lg:flex-row lg:space-x-4 lg:space-y-0">
+                    <div className="lg:w-1/2">
+                        <MyLocker />
+                    </div>
+                    <div className="lg:w-1/2">
+                        <MyLoans />
+                    </div>
                 </div>
             </div>
         </div>

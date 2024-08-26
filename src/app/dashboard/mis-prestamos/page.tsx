@@ -6,9 +6,21 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { CircleHelpIcon } from "lucide-react";
+import { userInfo } from "@/lib/actions/user/user-info";
+import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
 
 export default async function Page() {
+    const user = await userInfo();
     const loans = await activeLoans();
+
+    if (!user?.isVerified) {
+        return (
+            <div className="flex h-[80svh] w-full flex-col items-start items-center">
+                <h1 className="self-start text-3xl font-bold">Mis préstamos</h1>
+                <UnverifiedCard />
+            </div>
+        );
+    }
 
     return (
         <>

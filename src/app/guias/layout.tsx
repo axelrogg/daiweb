@@ -1,5 +1,5 @@
+import { GuidesContentBar } from "@/components/layouts/complements/guides-content-bar";
 import { DefaultLayout } from "@/components/layouts/default-layout";
-import { GuidesContentBar } from "@/components/guides/guides-content-bar";
 
 export default function DocsLayout({
     children,

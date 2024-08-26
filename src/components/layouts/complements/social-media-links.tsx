@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PhoneIcon } from "lucide-react";
 
 export const SocialMediaLinks = () => (
     <div className="my-5 flex flex-row items-center space-x-7">
