@@ -10,7 +10,7 @@ export default async function HomePage() {
                 <NavBar />
             </div>
             <div className="flex w-full w-full flex-col items-center justify-center space-y-1 divide-solid bg-line-in-motion bg-cover">
-                <div className="flex h-[90svh] flex-col items-center justify-center space-y-3">
+                <div className="flex h-[90svh] flex-col items-center justify-center space-y-3 px-4">
                     <h1 className="text-center text-5xl font-bold">
                         Esta es la DAI
                     </h1>
@@ -19,7 +19,7 @@ export default async function HomePage() {
                         Industriales: tu guía en la Universidad de Vigo
                     </h2>
                 </div>
-                <div className="flex h-[90svh] items-center justify-center space-y-3">
+                <div className="flex flex-col lg:flex-row h-[90svh] items-center justify-center space-y-3 px-4">
                     <LayoutDashboardIcon className="h-2/5 w-2/5 text-primary" />
                     <div className="flex flex-col items-center justify-center space-y-4">
                         <h1 className="text-center text-5xl font-bold">
@@ -31,7 +31,8 @@ export default async function HomePage() {
                         </h2>
                     </div>
                 </div>
-                <div className="flex h-[90svh] flex-row items-center justify-center space-y-3">
+                <div className="flex flex-col lg:flex-row h-[90svh] flex-row items-center justify-center space-y-3 px-4">
+                    <DocumentTextIcon className="h-2/5 w-2/5 stroke-purple-800 lg:hidden" />
                     <div className="flex flex-col items-center justify-center space-y-4">
                         <h1 className="text-center text-5xl font-bold">
                             Revisa nuestras guías
@@ -41,8 +42,7 @@ export default async function HomePage() {
                             navegar tu vida universitaria
                         </h2>
                     </div>
-                    <DocumentTextIcon className="h-2/5 w-2/5 stroke-purple-800" />
-                    ,
+                    <DocumentTextIcon className="h-2/5 w-2/5 stroke-purple-800 hidden lg:flex" />
                 </div>
             </div>
             <Footer />
