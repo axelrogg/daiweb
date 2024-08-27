@@ -3,6 +3,7 @@
 import nextMDX from "@next/mdx";
 import rehypeSlug from "rehype-slug";
 import remarkToc from "remark-toc";
+import rehypeHighlight from "rehype-highlight";
 import checkEnvironmentVariables from "./environment.config.mjs";
 
 /** @type {import('next').NextConfig} */
@@ -30,7 +31,7 @@ const nextConfigBase = {
 // The following is needed to be able to render mdx content
 const withMdx = nextMDX({
     options: {
-        rehypePlugins: [rehypeSlug],
+        rehypePlugins: [rehypeSlug, rehypeHighlight],
         remarkPlugins: [[remarkToc, { heading: "Contenidos" }]],
     },
 });

@@ -1,4 +1,6 @@
 import type { MDXComponents } from "mdx/types";
+import React from "react";
+import { MDXPre } from "./components/guides/mdx-pre";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
     return {
@@ -39,6 +41,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                 {children}
             </a>
         ),
+        pre: ({ children, className, ...props }) => <MDXPre>{children}</MDXPre>,
         p: ({ children }) => <p className="my-1 text-base">{children}</p>,
         ...components,
     };
