@@ -13,7 +13,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
     title: "Delegación de Alumnos de Industriales",
-    description: "La web de la Delegación de Alumnos de la Escuela de Ingeniería Industrial de la Universidad de Vigo",
+    description:
+        "La web de la Delegación de Alumnos de la Escuela de Ingeniería Industrial de la Universidad de Vigo",
     authors: [
         {
             name: "Axel Rodríguez Chang",
