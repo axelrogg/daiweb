@@ -9,24 +9,18 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const GuideInfoCard = ({
     title,
     description,
     href,
     className,
-}: GuideInfoCardProps) => {
-    const { push } = useRouter();
+}: GuideInfoCardProps) => (
 
-    function onClickCard() {
-        push(href);
-    }
-
-    return (
-        <button
+        <Link
             className={cn("group text-start", className)}
-            onClick={onClickCard}
+            href={href}
         >
             <Card className="flex h-full flex-row content-between justify-between hover:bg-slate-100">
                 <div className="flex flex-col justify-between">
@@ -41,9 +35,8 @@ export const GuideInfoCard = ({
                     <ArrowRightIcon className="h-6 w-6" />
                 </CardContent>
             </Card>
-        </button>
+        </Link>
     );
-};
 
 interface GuideInfoCardProps {
     title: string;

@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Link from "next/link";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { CalendarCheckIcon, Menu } from "lucide-react";
+import { CalendarCheckIcon, KeyRoundIcon, Menu } from "lucide-react";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -76,6 +76,20 @@ export const NavBar = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
+                            href="/guias/servicios/como-solicitar-una-taquilla"
+                            legacyBehavior
+                            passHref
+                        >
+                            <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                            >
+                                <KeyRoundIcon className="mr-2 h-6 w-6 stroke-blue-800" />
+                                Solicita una taquilla
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <Link
                             href="/guias/servicios/como-reservar-espacios"
                             legacyBehavior
                             passHref
@@ -90,11 +104,13 @@ export const NavBar = () => {
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
+            {/*
             <div className="hidden lg:flex">
                 <Button asChild>
                     <Link href="/dashboard">Dashboard</Link>
                 </Button>
             </div>
+            */}
             <Sheet>
                 <SheetTitle className="hidden">Menu</SheetTitle>
                 <SheetDescription className="hidden">Menu</SheetDescription>

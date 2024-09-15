@@ -48,7 +48,7 @@ export const Footer = () => (
             <div className="flex flex-col md:w-1/3">
                 <p className="mb-5 font-bold text-white">Normativas</p>
                 <div className="flex flex-col space-y-3">
-                    <Link className="text-white" href="/política-de-privacidad">
+                    <Link className="text-white" href="/politica-de-privacidad">
                         Política de privacidad
                     </Link>
                     <Link
