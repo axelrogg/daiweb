@@ -19,7 +19,6 @@ export default async function HomePage() {
                         Industriales: tu guía en la Universidad de Vigo
                     </h2>
                 </div>
-                {/*
                 <div className="flex h-[90svh] flex-col items-center justify-center space-y-3 px-4 lg:flex-row">
                     <LayoutDashboardIcon className="h-2/5 w-2/5 text-primary" />
                     <div className="flex flex-col items-center justify-center space-y-4">
@@ -32,7 +31,6 @@ export default async function HomePage() {
                         </h2>
                     </div>
                 </div>
-                */}
                 <div className="flex h-[90svh] flex-row flex-col items-center justify-center space-y-3 px-4 lg:flex-row">
                     <DocumentTextIcon className="h-2/5 w-2/5 stroke-purple-800 lg:hidden" />
                     <div className="flex flex-col items-center justify-center space-y-4">
