@@ -104,13 +104,11 @@ export const NavBar = () => {
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
-            {/*
             <div className="hidden lg:flex">
                 <Button asChild>
                     <Link href="/dashboard">Dashboard</Link>
                 </Button>
             </div>
-            */}
             <Sheet>
                 <SheetTitle className="hidden">Menu</SheetTitle>
                 <SheetDescription className="hidden">Menu</SheetDescription>
