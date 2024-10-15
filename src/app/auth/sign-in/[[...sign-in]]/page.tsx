@@ -8,18 +8,6 @@ export default function SignInPage() {
         <DefaultLayout>
             <div className="flex w-full flex-col items-center justify-center">
                 <h1 className="my-10 text-3xl font-bold">Iniciar sesión</h1>
-                <Callout
-                    variant="warning"
-                    className="mb-5 sm:max-w-96 lg:max-w-96"
-                >
-                    <CalloutDescription>
-                        Por ahora solo miembros de la DAI con un correo
-                        electrónico @dai.uvigo.gal pueden acceder al Dashboard.
-                        <br />
-                        Para más información comunícate con algún miembro de la
-                        DAI o acércate a una de sus sedes.
-                    </CalloutDescription>
-                </Callout>
                 <form
                     action={async () => {
                         "use server";
