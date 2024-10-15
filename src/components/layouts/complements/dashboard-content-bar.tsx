@@ -4,15 +4,16 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboardIcon } from "lucide-react";
 import { dashboardContentBarItems } from "./dashboard-content-bar-item";
+import { URLPath } from "@/lib/utils/url-path";
 
 export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
-    const pathName = usePathname();
+    const pathname = usePathname();
     return (
         <>
             <Link href="/dashboard">
                 <div className="my-1 flex flex-row items-center rounded-lg px-2 py-2 hover:bg-slate-100">
                     <LayoutDashboardIcon className="mr-3 h-4 w-4 text-accent" />
-                    <p className={pathName === "/dashboard" ? "font-bold" : ""}>
+                    <p className={pathname === "/dashboard" ? "font-bold" : ""}>
                         Dashboard
                     </p>
                 </div>
@@ -21,7 +22,11 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                 if (item.title === "Panel de staff" && !isStaff) {
                     return;
                 }
-                const boldifyParent = pathName.includes(item.href);
+
+                const currentURLPath = new URLPath(pathname)
+                const itemURLPath = new URLPath(item.href)
+                const boldifyParent = itemURLPath.parent.toString() === currentURLPath.parent.toString()
+
                 return (
                     <div key={idx}>
                         {item.icon && (
@@ -42,7 +47,7 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                             <div className="space-y-2">
                                 {item.children.map((child, index) => {
                                     const boldifyChild =
-                                        pathName === child.href;
+                                        pathname === child.href;
                                     return (
                                         <div
                                             key={`${index}-${child.href}`}
