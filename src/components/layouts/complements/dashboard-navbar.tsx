@@ -1,7 +1,6 @@
-import { ReactElement } from "react";
 import Link from "next/link";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { CalendarCheckIcon, Menu } from "lucide-react";
+import { CalendarCheckIcon, KeyRoundIcon, Menu } from "lucide-react";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -11,7 +10,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
     Sheet,
-    SheetClose,
     SheetContent,
     SheetDescription,
     SheetTitle,
@@ -19,7 +17,6 @@ import {
 } from "@/components/ui/sheet";
 import { MainLogo } from "@/components/layouts/complements/main-logo";
 import { UserButton } from "@/components/auth/user-button";
-import { dashboardContentBarItems } from "./dashboard-content-bar-item";
 import { DashboardContentBar } from "./dashboard-content-bar";
 
 export const DashboardNavBar = () => {
@@ -35,6 +32,20 @@ export const DashboardNavBar = () => {
                             >
                                 <DocumentTextIcon className="mr-2 h-6 w-6 stroke-purple-800" />
                                 Guías
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <Link
+                            href="/guias/servicios/como-solicitar-una-taquilla"
+                            legacyBehavior
+                            passHref
+                        >
+                            <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                            >
+                                <KeyRoundIcon className="mr-2 h-6 w-6 stroke-blue-800" />
+                                Solicita una taquilla
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>
