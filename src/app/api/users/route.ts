@@ -51,14 +51,16 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    const emailDomain = email!.split("@")
-
+    const emailDomain = email!.split("@");
 
     try {
         const userId = await user.new(
             externalId!,
             email!,
-            true ? (emailDomain[1] === "dai.uvigo.gal" || emailDomain[1] === "dai.uvigo.es") : false,
+            true
+                ? emailDomain[1] === "dai.uvigo.gal" ||
+                      emailDomain[1] === "dai.uvigo.es"
+                : false,
             name,
             pictureUri
         );

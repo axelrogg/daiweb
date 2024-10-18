@@ -32,9 +32,7 @@ export default async function Page() {
 
     return (
         <div className="flex flex-col justify-center">
-            <h1 className="mb-4 flex text-3xl font-bold">
-                Mi código QR
-            </h1>
+            <h1 className="mb-4 flex text-3xl font-bold">Mi código QR</h1>
             {user.isVerified && (
                 <div className="flex justify-center">
                     <p className="mb-5 text-center lg:w-2/5">

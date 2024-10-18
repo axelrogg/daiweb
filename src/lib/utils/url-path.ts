@@ -1,19 +1,18 @@
 export class URLPath {
-    path: string
+    path: string;
 
     constructor(path: string) {
-        this.path = path
-        if (path === "") this.path = "/"
+        this.path = path;
+        if (path === "") this.path = "/";
     }
 
     get parent() {
-        const parts = this.path.split("/")
-        if (parts.length <= 1) return new URLPath("/")
-        return new URLPath(parts.slice(0, -1).join("/"))
+        const parts = this.path.split("/");
+        if (parts.length <= 1) return new URLPath("/");
+        return new URLPath(parts.slice(0, -1).join("/"));
     }
 
     toString() {
-        return this.path
+        return this.path;
     }
 }
-

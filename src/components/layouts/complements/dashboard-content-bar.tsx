@@ -23,9 +23,11 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                     return;
                 }
 
-                const currentURLPath = new URLPath(pathname)
-                const itemURLPath = new URLPath(item.href)
-                const boldifyParent = itemURLPath.parent.toString() === currentURLPath.parent.toString()
+                const currentURLPath = new URLPath(pathname);
+                const itemURLPath = new URLPath(item.href);
+                const boldifyParent =
+                    itemURLPath.parent.toString() ===
+                    currentURLPath.parent.toString();
 
                 return (
                     <div key={idx}>
