@@ -16,7 +16,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -161,7 +161,16 @@ export const VerifyAccountForm = () => {
                                 <FormDescription>
                                     Sube el PDF del impreso tu matrícula. Si
                                     necesitas ayuda para encontrarlo, revisa la
-                                    guía sobre la verificación de cuentas.
+                                    guía sobre la{" "}
+                                    <Link
+                                        href="/guias/servicios/como-crear-una-cuenta-en-la-dai#paso-2-verifica-tu-cuenta"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-500 underline hover:text-accent"
+                                    >
+                                        verificación de cuentas
+                                    </Link>
+                                    .
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
