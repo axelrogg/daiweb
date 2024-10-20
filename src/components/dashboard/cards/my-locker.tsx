@@ -55,8 +55,8 @@ export const MyLocker = async () => {
                     <>
                         <p className="mb-8">No tienes una taquilla asignada</p>
                         <Button asChild>
-                            <Link href="/dashboard/reserva-de-taquilla">
-                                Reserva tu taquilla
+                            <Link href="/dashboard/reserva-de-taquillas">
+                                Reserva tu taquillas
                             </Link>
                         </Button>
                     </>
