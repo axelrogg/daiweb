@@ -33,7 +33,7 @@ export default async function DashboardPage() {
 
     return (
         <div className="flex flex-col items-start justify-center">
-            <h1 className="text-3xl font-bold">Dashboard</h1>
+            <h1 className="text-3xl font-bold">{user.name}</h1>
             <div className="group flex h-10 flex-row items-center space-x-3">
                 {user.isVerified && (
                     <Popover>
@@ -87,7 +87,7 @@ export default async function DashboardPage() {
                 )}
             </div>
             <div className="mt-5 flex w-full flex-col items-center justify-center">
-                <div className="w-full space-y-4 lg:flex lg:flex-row lg:space-x-4 lg:space-y-0">
+                <div className="w-full space-y-4">
                     <div className="lg:w-1/2">
                         <MyLocker />
                     </div>
