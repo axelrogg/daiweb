@@ -51,10 +51,8 @@ export class User {
                     `;
                 return userId[0].id;
             });
-            console.log(result);
             return result;
         } catch (error: any) {
-            console.error(error);
             throw error;
         }
     }

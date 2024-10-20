@@ -143,9 +143,6 @@ export const BorrowMaterialForm = () => {
                                                         ?.length
                                                 ) {
                                                     setEnableSubmitButton(true);
-                                                    console.log(
-                                                        material.target.value
-                                                    );
                                                 } else {
                                                     setEnableSubmitButton(
                                                         false
