@@ -48,8 +48,7 @@ export const MyLocker = async () => {
                             {locker.campus.toUpperCase()}
                         </p>
                         <p className="text-center">
-                            Puedes encontrar tu taquilla en la sección '
-                            {locker.zone}'
+                            Puedes encontrar tu taquilla en la sección &apos;{locker.zone}&apos;
                         </p>
                     </div>
                 ) : (
