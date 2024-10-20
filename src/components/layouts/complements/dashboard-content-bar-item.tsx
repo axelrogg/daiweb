@@ -20,17 +20,17 @@ export const dashboardContentBarItems: DashboardContentBarItem[] = [
         icon: <QrCodeIcon className="mr-3 h-4 w-4 stroke-primary" />,
     },
     {
-        title: "Préstamo de materiales",
-        href: "/dashboard/mis-prestamos",
+        title: "Materiales",
+        href: "/dashboard/materiales/mis-prestamos",
         icon: <PencilRulerIcon className="mr-3 h-4 w-4 stroke-green-800" />,
         children: [
             {
                 title: "Mis préstamos",
-                href: "/dashboard/mis-prestamos",
+                href: "/dashboard/materiales/mis-prestamos",
             },
             {
                 title: "Pedir materiales",
-                href: "/dashboard/pedir-material",
+                href: "/dashboard/materiales/pedir-material",
             },
         ],
     },

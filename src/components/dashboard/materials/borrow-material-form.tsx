@@ -84,7 +84,7 @@ export const BorrowMaterialForm = () => {
     }
 
     return (
-        <div className="flex justify-center">
+        <div className="flex">
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -143,9 +143,6 @@ export const BorrowMaterialForm = () => {
                                                         ?.length
                                                 ) {
                                                     setEnableSubmitButton(true);
-                                                    console.log(
-                                                        material.target.value
-                                                    );
                                                 } else {
                                                     setEnableSubmitButton(
                                                         false

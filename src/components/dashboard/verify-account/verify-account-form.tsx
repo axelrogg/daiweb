@@ -72,16 +72,10 @@ export const VerifyAccountForm = () => {
         } catch (error: any) {
             toast({
                 variant: "destructive",
-                title: "¡Yuhu! Tu cuenta ha sido verificada",
+                title: "Ocurrió un error",
                 description:
-                    "Puedes disfrutar de todos los beneficios de nuestra web. Vuelve a tu dashboard para ver los cambios.",
-                action: (
-                    <ToastAction altText="Volver al dashboard" asChild>
-                        <Link href="/dashboard">Dashboard</Link>
-                    </ToastAction>
-                ),
+                    "Tuvimos un error y no pudimos verificar tu cuenta. Prueba más tarde. Si el problema persiste contacta con algún miembro de la DAI",
             });
-            console.log(error);
         }
     }
     return (
