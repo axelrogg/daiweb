@@ -3,11 +3,11 @@
 import { auth } from "@/auth";
 import material from "@/lib/database/entities/material";
 
-export const newMaterialLoan = async (
+export async function newMaterialLoan(
     reservationId: number,
     userId: number,
     materialName: string
-) => {
+) {
     const session = await auth();
     if (!session || !session.user || !session.user.id) {
         return null;
@@ -19,4 +19,4 @@ export const newMaterialLoan = async (
         reservationId,
         materialName
     );
-};
+}
