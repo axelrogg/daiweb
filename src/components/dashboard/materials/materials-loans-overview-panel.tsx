@@ -21,14 +21,14 @@ export const MaterialLoansOverviewPanel = async () => {
             </p>
             <div className="flex flex-row items-center justify-between">
                 <Button asChild>
-                    <Link href="/dashboard/mis-prestamos">Ver detalles</Link>
+                    <Link href="/dashboard/materiales/mis-prestamos">Ver detalles</Link>
                 </Button>
 
                 {loansNumber === 5 ? (
                     <Button disabled>Pedir materiales</Button>
                 ) : (
                     <Button asChild>
-                        <Link href="/dashboard/pedir-material">
+                        <Link href="/dashboard/materiales/pedir-material">
                             Pedir materiales
                         </Link>
                     </Button>
