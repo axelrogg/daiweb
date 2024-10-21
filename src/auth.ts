@@ -151,7 +151,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return token;
         },
         session({ session, token }) {
-            log.debug({ session, token }, "Session callback triggered");
             session.user.id = token.id as string;
             log.info(
                 { sessionId: session.user.id },
