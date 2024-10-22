@@ -1,4 +1,4 @@
-import { NavBar } from "@/components/layouts/complements/navbar";
+import { DefaultNavBar } from "@/components/navbar/default-navbar";
 import { Footer } from "@/components/layouts/complements/footer";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { LayoutDashboardIcon } from "lucide-react";
@@ -7,7 +7,7 @@ export default async function HomePage() {
     return (
         <div className="flex min-h-dvh flex-col">
             <div className="lg:mx-20 2xl:mx-80">
-                <NavBar />
+                <DefaultNavBar />
             </div>
             <div className="flex w-full w-full flex-col items-center justify-center space-y-1 divide-solid bg-line-in-motion bg-cover">
                 <div className="flex h-[90svh] flex-col items-center justify-center space-y-3 px-4">

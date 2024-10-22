@@ -1,4 +1,4 @@
-import { DashboardNavBar } from "./complements/dashboard-navbar";
+import { DashboardNavBar } from "@/components/navbar/dashboard-navbar";
 import { Footer } from "./complements/footer";
 
 export const DashboardLayout = ({

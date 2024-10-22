@@ -3,10 +3,10 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboardIcon } from "lucide-react";
-import { dashboardContentBarItems } from "./dashboard-content-bar-item";
+import { dashboardContentBarItems } from "@/components/navbar/dashboard-content-bar-item";
 import { URLPath } from "@/lib/utils/url-path";
 
-export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
+export const DashboardContentMenu = ({ isStaff }: { isStaff?: boolean }) => {
     const pathname = usePathname();
     const currentURLPath = new URLPath(pathname);
 
@@ -27,8 +27,7 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
 
                 const itemURLPath = new URLPath(item.href);
                 const boldify =
-                    itemURLPath.toString() ===
-                    currentURLPath.toString();
+                    itemURLPath.toString() === currentURLPath.toString();
 
                 return (
                     <div key={idx}>
@@ -36,11 +35,7 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                             <Link href={item.href}>
                                 <div className="my-2 flex flex-row items-center rounded-lg px-2 py-2 hover:bg-slate-100">
                                     {item.icon}
-                                    <p
-                                        className={
-                                            boldify ? "font-bold" : ""
-                                        }
-                                    >
+                                    <p className={boldify ? "font-bold" : ""}>
                                         {item.title}
                                     </p>
                                 </div>
@@ -58,7 +53,7 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                                         >
                                             <Link href={child.href}>
                                                 <p
-                                                    className={`ml-4 ${boldifyChild ? "font-bold" : ""}`}
+                                                    className={`ml-4 text-left ${boldifyChild ? "font-bold" : ""}`}
                                                 >
                                                     {child.title}
                                                 </p>

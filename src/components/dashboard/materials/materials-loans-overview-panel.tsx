@@ -21,7 +21,9 @@ export const MaterialLoansOverviewPanel = async () => {
             </p>
             <div className="flex flex-row items-center justify-between">
                 <Button asChild>
-                    <Link href="/dashboard/materiales/mis-prestamos">Ver detalles</Link>
+                    <Link href="/dashboard/materiales/mis-prestamos">
+                        Ver detalles
+                    </Link>
                 </Button>
 
                 {loansNumber === 5 ? (

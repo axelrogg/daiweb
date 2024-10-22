@@ -83,7 +83,9 @@ export const MulticodeScanner = ({
                 );
                 return;
             } else if (error.name === "OverconstrainedError") {
-                alert("Lo sentimos, no podemos acceder a la cámara o micrófono con las configuraciones actuales. Por favor, ajusta tus preferencias o intenta con diferentes ajustes para continuar.");
+                alert(
+                    "Lo sentimos, no podemos acceder a la cámara o micrófono con las configuraciones actuales. Por favor, ajusta tus preferencias o intenta con diferentes ajustes para continuar."
+                );
                 return;
             } else {
                 alert("Un error desconocido ocurrió: " + error.name);
