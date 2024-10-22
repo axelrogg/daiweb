@@ -8,6 +8,8 @@ import { URLPath } from "@/lib/utils/url-path";
 
 export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
     const pathname = usePathname();
+    const currentURLPath = new URLPath(pathname);
+
     return (
         <>
             <Link href="/dashboard">
@@ -23,11 +25,10 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                     return;
                 }
 
-                const currentURLPath = new URLPath(pathname);
                 const itemURLPath = new URLPath(item.href);
-                const boldifyParent =
-                    itemURLPath.parent.toString() ===
-                    currentURLPath.parent.toString();
+                const boldify =
+                    itemURLPath.toString() ===
+                    currentURLPath.toString();
 
                 return (
                     <div key={idx}>
@@ -37,7 +38,7 @@ export const DashboardContentBar = ({ isStaff }: { isStaff?: boolean }) => {
                                     {item.icon}
                                     <p
                                         className={
-                                            boldifyParent ? "font-bold" : ""
+                                            boldify ? "font-bold" : ""
                                         }
                                     >
                                         {item.title}
