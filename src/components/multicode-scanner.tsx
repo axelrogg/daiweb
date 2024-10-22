@@ -82,10 +82,11 @@ export const MulticodeScanner = ({
                     "El permiso para acceder a la cámara fue denegado. Por favor, permite el acceso a la cámara en la configuración de tu navegador."
                 );
                 return;
-            } else {
-                console.error(error);
-                alert("Un error desconocido ocurrió: " + error.message);
+            } else if (error.name === "OverconstrainedError") {
+                alert("Lo sentimos, no podemos acceder a la cámara o micrófono con las configuraciones actuales. Por favor, ajusta tus preferencias o intenta con diferentes ajustes para continuar.");
                 return;
+            } else {
+                alert("Un error desconocido ocurrió: " + error.name);
             }
         }
     }
