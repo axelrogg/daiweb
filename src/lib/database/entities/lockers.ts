@@ -1,6 +1,31 @@
 import sql from "@/lib/database/psql";
 
 class Locker {
+    async userLockerFromForm(email: string) {
+        try {
+            const locker = await sql<
+                {
+                    number: number;
+                    campus: "cuvi" | "ciudad";
+                    email: string;
+                }[]
+            >`
+                select
+                    number, campus, email
+                from
+                    locker_form_table
+                where
+                    email = ${email}
+                `;
+            if (locker.length === 0) {
+                return null;
+            }
+            return locker[0];
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
     async userLocker(userId: number) {
         try {
             const lockerInfo = await sql<

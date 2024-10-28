@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
             name,
             pictureUri
         );
-        log.info(
+        log.debug(
             {
                 requestId: request.headers.get("x-request-id") || null,
                 userId,
@@ -76,8 +76,8 @@ export async function POST(request: NextRequest) {
             "New user was created successfully"
         );
         return NextResponse.json(
-            { message: "User created successfully", userId: userId },
-            { status: 201 } // 200 Created
+            { message: "New user was created successfully", userId: userId },
+            { status: 201 } // 201 Created
         );
     } catch (error: any) {
         log.error(

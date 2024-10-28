@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import BASE_URL from "./lib/utils/base-url";
+import DAI_BASE_URL from "./lib/utils/base-url";
 import { logger } from "./lib/logging/logger";
 
 const log = logger.child({ module: "/auth" });
@@ -40,10 +40,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 return false;
             }
 
-            let exists = false;
+            let userExists = false;
+            let userId = null;
             try {
                 const response = await fetch(
-                    `${BASE_URL}/api/users/google/${googleUserId}`
+                    `${DAI_BASE_URL}/api/users/google/${googleUserId}`
                 );
 
                 if (response.status === 500 || response.status === 400) {
@@ -55,12 +56,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 }
 
                 if (response.status === 200) {
+                    userExists = true;
+                    userId = (await response.json()).userId;
                     log.info(
                         { googleUserId },
                         "User found in database, sign-in successful"
                     );
-                    exists = true;
-                    return true;
                 }
             } catch (error: any) {
                 log.error(
@@ -70,15 +71,51 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 return false;
             }
 
-            log.info(
+            try {
+                const response = await fetch(
+                    DAI_BASE_URL + "/api/users/locker",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            email: profileEmail,
+                            userId: userId,
+                        }),
+                    }
+                );
+                if (response.status === 400 || response.status === 500) {
+                    log.error(
+                        { googleUserId, responseStatus: response.status },
+                        "Error checking locker assignment to user"
+                    );
+                    return true;
+                }
+                if (response.status === 201) {
+                    const data = await response.json();
+                    log.info(data, "Locker was assigned successfully to user");
+                    return true;
+                }
+            } catch (error: any) {
+                log.error(
+                    { googleUserId, error: error.message },
+                    "Exception occurred while assigning locker"
+                );
+                return false;
+            }
+
+            log.debug(
                 { googleUserId, email: profileEmail },
                 "User not found, creating a new user"
             );
+
+            if (userExists) {
+                return true;
+            }
+
             // Si estamos aquí es porque el usuario no existe en nuestra base
             // de datos. Vamos a crearlo.
 
             try {
-                const response = await fetch(BASE_URL + "/api/users", {
+                const response = await fetch(DAI_BASE_URL + "/api/users", {
                     method: "POST",
                     body: JSON.stringify({
                         externalId: googleUserId,
@@ -95,13 +132,44 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return false;
                 }
                 if (response.status === 201) {
+                    userId = (await response.json()).userId;
                     log.info({ googleUserId }, "New user created successfully");
-                    return true;
                 }
             } catch (error: any) {
                 log.error(
                     { googleUserId, error: error.message },
                     "Exception occurred while creating user in signIn callback"
+                );
+                return false;
+            }
+
+            try {
+                const response = await fetch(
+                    DAI_BASE_URL + "/api/users/locker",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            email: profileEmail,
+                            userId: userId,
+                        }),
+                    }
+                );
+                if (response.status === 400 || response.status === 500) {
+                    log.error(
+                        { googleUserId, responseStatus: response.status },
+                        "Error checking locker assignment to user"
+                    );
+                    return true;
+                }
+                if (response.status === 201) {
+                    const data = await response.json();
+                    log.info(data, "Locker was assigned successfully to user");
+                    return true;
+                }
+            } catch (error: any) {
+                log.error(
+                    { googleUserId, error: error.message },
+                    "Exception occurred while assigning locker"
                 );
                 return false;
             }
@@ -111,14 +179,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             if (!profile) {
                 log.debug(
                     { token },
-                    "No profile found, returning existing token"
+                    "No profile found in JWT, returning existing token"
                 );
                 return token;
             }
 
             try {
                 const response = await fetch(
-                    `${BASE_URL}/api/users/google/${profile.sub}`
+                    `${DAI_BASE_URL}/api/users/google/${profile.sub}`
                 );
 
                 if ([400, 404, 500].includes(response.status)) {
@@ -151,6 +219,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return token;
         },
         session({ session, token }) {
+            log.debug({ session, token }, "Session callback triggered");
             session.user.id = token.id as string;
             log.info(
                 { sessionId: session.user.id },
