@@ -2,6 +2,7 @@ import sql from "@/lib/database/psql";
 import { UserInfo } from "@/types/actions";
 
 export class User {
+
     async accountId(externalId: string) {
         try {
             const user = await sql<{ id: number }[]>`
@@ -57,15 +58,14 @@ export class User {
         }
     }
 
-    async verify(id: number) {
+    async verify(userId: number) {
         try {
             await sql`
                 update user_profiles
                 set is_verified = true
-                where id = ${id}
+                where id = ${userId}
             `;
         } catch (error: any) {
-            console.error(error);
             throw error;
         }
     }
