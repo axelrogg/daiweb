@@ -28,7 +28,7 @@ export const NavBarBase = ({ children }: { children: React.ReactNode }) => (
                 ))}
             </NavigationMenuList>
         </NavigationMenu>
-        
+
         {children}
     </nav>
 );
