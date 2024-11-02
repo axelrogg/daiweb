@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import DAI_BASE_URL from "./lib/utils/base-url";
 import { logger } from "./lib/logging/logger";
+import environment from "./lib/environment";
 
 const log = logger.child({ module: "/auth" });
 
@@ -145,6 +146,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             try {
                 const response = await fetch(
+                    DAI_BASE_URL + "/api/email/welcome-to-dai",
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            name: name,
+                            email: profileEmail,
+                        }),
+                        headers: {
+                            Authorization: `Bearer ${environment.EMAIL_SERVICE_SECRET}`,
+                        },
+                    }
+                );
+                const data = await response.json();
+                if (response.status === 200) {
+                    log.info(data, "Email sent successfully");
+                } else {
+                    log.error(
+                        { googleUserId, data, responseStatus: response.status },
+                        "Could not sent welcome to DAI email"
+                    );
+                }
+            } catch (error: any) {
+                log.error(
+                    { googleUserId, error: error.message },
+                    "Exception ocurred while sending welcome to DAI email"
+                );
+            }
+
+            try {
+                const response = await fetch(
                     DAI_BASE_URL + "/api/users/locker",
                     {
                         method: "POST",
@@ -157,13 +188,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 if (response.status === 400 || response.status === 500) {
                     log.error(
                         { googleUserId, responseStatus: response.status },
-                        "Error checking locker assignment to user"
+                        "Error checking locker assignment"
                     );
                     return true;
                 }
                 if (response.status === 201) {
                     const data = await response.json();
-                    log.info(data, "Locker was assigned successfully to user");
+                    log.info(data, "Locker was assigned successfully");
                     return true;
                 }
             } catch (error: any) {
