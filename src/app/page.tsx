@@ -1,5 +1,5 @@
-import { DefaultNavBar } from "@/components/navbar/default-navbar";
-import { Footer } from "@/components/layouts/complements/footer";
+import { DefaultNavBar } from "@components/navbar/default-navbar";
+import { Footer } from "@components/layouts/complements/footer";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { LayoutDashboardIcon } from "lucide-react";
 

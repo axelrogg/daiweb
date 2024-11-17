@@ -1,10 +1,10 @@
-import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
-import { BorrowMaterialForm } from "@/components/dashboard/materials/borrow-material-form";
+import { UnverifiedCard } from "@components/dashboard/cards/unverified-card";
+import { BorrowMaterialForm } from "@components/dashboard/materials/borrow-material-form";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { userInfo } from "@/lib/actions/user/user-info";
 import { CircleHelpIcon } from "lucide-react";
 

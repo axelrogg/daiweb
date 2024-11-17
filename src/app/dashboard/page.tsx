@@ -5,16 +5,16 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
-import { MyLoans } from "@/components/dashboard/cards/my-loans";
-import { MyLocker } from "@/components/dashboard/cards/my-locker";
-import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
+} from "@components/ui/hover-card";
+import { NoUserInfo } from "@components/dashboard/materials/no-user-info";
+import { MyLoans } from "@components/dashboard/cards/my-loans";
+import { MyLocker } from "@components/dashboard/cards/my-locker";
+import { UnverifiedCard } from "@components/dashboard/cards/unverified-card";
 
 export default async function DashboardPage() {
     const user = await userInfo();
