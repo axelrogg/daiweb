@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { userLockerAction } from "@/lib/actions/lockers/user-locker";
 import { CircleHelpIcon, KeyRoundIcon } from "lucide-react";
 import Link from "next/link";

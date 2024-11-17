@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { PropsWithChildren } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 
 export const DashboardCard = ({
     title,

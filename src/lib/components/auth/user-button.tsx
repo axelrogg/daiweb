@@ -4,11 +4,11 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { GhostIcon, UserIcon } from "lucide-react";
-import { Separator } from "../ui/separator";
+import { Separator } from "@components/ui/separator";
 import { signOut } from "@/auth";
-import { Button } from "../ui/button";
+import { Button } from "@components/ui/button";
 import Link from "next/link";
 
 export const UserButton = async () => {

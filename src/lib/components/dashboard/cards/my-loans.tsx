@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { CircleHelpIcon } from "lucide-react";
 import { MaterialLoansOverviewPanel } from "../materials/materials-loans-overview-panel";
 

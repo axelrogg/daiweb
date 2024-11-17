@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Callout, CalloutDescription } from "@/components/ui/callout";
+import { Callout, CalloutDescription } from "@components/ui/callout";
 
 export const UnverifiedCard = () => (
     <Callout variant="warning" className="max-w-lg">
