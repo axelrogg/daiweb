@@ -5,11 +5,11 @@ import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@components/ui/button";
+import { Input } from "@components/ui/input";
+import { useToast } from "@components/ui/use-toast";
 import { newMaterialReservation } from "@/lib/actions/materials/new-material-reservation";
-import { ToastAction } from "@/components/ui/toast";
+import { ToastAction } from "@components/ui/toast";
 import {
     Form,
     FormControl,
@@ -18,14 +18,14 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
+} from "@components/ui/form";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
+} from "@components/ui/select";
 import { activeLoansCount } from "@/lib/actions/materials/active-loans-count";
 
 export const BorrowMaterialForm = () => {

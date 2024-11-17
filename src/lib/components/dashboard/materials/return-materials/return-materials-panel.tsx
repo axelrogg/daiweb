@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MulticodeScanner } from "@/components/multicode-scanner";
-import { Button } from "@/components/ui/button";
+import { MulticodeScanner } from "@components/multicode-scanner";
+import { Button } from "@components/ui/button";
 import { MaterialLoans } from "@/types/actions";
 import { activeLoans } from "@/lib/actions/materials/active-loans";
 import { DataTable } from "../lend-materials/lend-materials-data-table";

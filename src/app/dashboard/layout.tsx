@@ -1,6 +1,6 @@
-import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
-import { DashboardContentMenu } from "@/components/navbar/dashboard-content-menu";
-import { DashboardLayout } from "@/components/layouts/dashboard-layout";
+import { NoUserInfo } from "@components/dashboard/materials/no-user-info";
+import { DashboardContentMenu } from "@components/navbar/dashboard-content-menu";
+import { DashboardLayout } from "@components/layouts/dashboard-layout";
 import { userInfo } from "@/lib/actions/user/user-info";
 
 export default async function Layout({

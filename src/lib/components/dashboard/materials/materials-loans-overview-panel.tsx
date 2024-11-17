@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { activeLoansCount } from "@/lib/actions/materials/active-loans-count";
-import { DashboardOverviewRingChart } from "@/components/dashboard-overview/dashboard-overview-ring-chart";
-import { Button } from "@/components/ui/button";
+import { DashboardOverviewRingChart } from "@components/dashboard-overview/dashboard-overview-ring-chart";
+import { Button } from "@components/ui/button";
 
 export const MaterialLoansOverviewPanel = async () => {
     const loansNumber = await activeLoansCount();

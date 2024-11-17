@@ -3,15 +3,15 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@components/ui/dropdown-menu";
 import { readableDate } from "@/lib/utils/date";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@components/ui/use-toast";
 import { newMaterialReturn } from "@/lib/actions/materials/new-material-return";
 import { MaterialLoan } from "@/types/actions";
 

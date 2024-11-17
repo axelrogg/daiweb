@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboardIcon } from "lucide-react";
-import { dashboardContentBarItems } from "@/components/navbar/dashboard-content-bar-item";
+import { dashboardContentBarItems } from "@components/navbar/dashboard-content-bar-item";
 import { URLPath } from "@/lib/utils/url-path";
 
 export const DashboardContentMenu = ({ isStaff }: { isStaff?: boolean }) => {

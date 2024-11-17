@@ -9,9 +9,9 @@ import {
 } from "../ui/sheet";
 import { NavBarBase } from "./navbar-base";
 import { navBarItems } from "./navbar-items";
-import { MainLogo } from "../layouts/complements/main-logo";
+import { MainLogo } from "@components/layouts/complements/main-logo";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@components/ui/button";
 
 export const DefaultNavBar = () => (
     <NavBarBase>

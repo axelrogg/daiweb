@@ -12,21 +12,21 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
+} from "@components/ui/form";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from "@components/ui/select";
+import { Input } from "@components/ui/input";
+import { Button } from "@components/ui/button";
 import { CircleCheckIcon, CircleXIcon } from "lucide-react";
 import { availableLockersAction } from "@/lib/actions/lockers/available-lockers";
 import { assignNewLocker } from "@/lib/actions/lockers/assign-new-locker";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@components/ui/use-toast";
+import { ToastAction } from "@components/ui/toast";
 import Link from "next/link";
 
 const campusOptions = ["CUVI", "Ciudad"];

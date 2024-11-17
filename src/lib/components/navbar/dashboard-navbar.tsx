@@ -6,12 +6,12 @@ import {
     SheetDescription,
     SheetTitle,
     SheetTrigger,
-} from "@/components/ui/sheet";
-import { UserButton } from "@/components/auth/user-button";
-import { DashboardContentMenu } from "@/components/navbar/dashboard-content-menu";
+} from "@components/ui/sheet";
+import { UserButton } from "@components/auth/user-button";
+import { DashboardContentMenu } from "@components/navbar/dashboard-content-menu";
 import { userInfo } from "@/lib/actions/user/user-info";
-import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
-import { NavBarBase } from "@/components/navbar/navbar-base";
+import { NoUserInfo } from "@components/dashboard/materials/no-user-info";
+import { NavBarBase } from "@components/navbar/navbar-base";
 
 export const DashboardNavBar = async () => {
     const user = await userInfo();

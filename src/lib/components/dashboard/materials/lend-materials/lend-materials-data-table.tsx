@@ -15,8 +15,8 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table";
-import { LoadingSpinner } from "@/components/loading-spinner";
+} from "@components/ui/table";
+import { LoadingSpinner } from "@components/loading-spinner";
 
 export function DataTable<TData, TValue>({
     columns,

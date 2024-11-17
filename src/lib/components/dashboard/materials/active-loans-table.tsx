@@ -7,7 +7,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table";
+} from "@components/ui/table";
 import { readableDate } from "@/lib/utils/date";
 
 export const ActiveLoansTable = ({

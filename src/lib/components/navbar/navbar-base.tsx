@@ -5,9 +5,9 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
     navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { MainLogo } from "@/components/layouts/complements/main-logo";
-import { navBarItems } from "@/components/navbar/navbar-items";
+} from "@components/ui/navigation-menu";
+import { MainLogo } from "@components/layouts/complements/main-logo";
+import { navBarItems } from "@components/navbar/navbar-items";
 
 export const NavBarBase = ({ children }: { children: React.ReactNode }) => (
     <nav className="mb-2 flex items-center justify-center py-5 lg:justify-between">

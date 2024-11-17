@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Viewport } from "next";
 import type { Metadata } from "next";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@components/ui/toaster";
 import font from "@/lib/config/font";
 
 export const viewport: Viewport = {

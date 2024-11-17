@@ -1,4 +1,4 @@
-import { RingChart } from "../ring-chart";
+import { RingChart } from "@components/ring-chart";
 
 export const DashboardOverviewRingChart = ({
     label,

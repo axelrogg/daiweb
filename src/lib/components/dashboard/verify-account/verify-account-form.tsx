@@ -1,7 +1,7 @@
 "use client";
 
-import { LoadingSpinner } from "@/components/loading-spinner";
-import { Button } from "@/components/ui/button";
+import { LoadingSpinner } from "@components/loading-spinner";
+import { Button } from "@components/ui/button";
 import {
     Form,
     FormControl,
@@ -10,10 +10,10 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
+} from "@components/ui/form";
+import { Input } from "@components/ui/input";
+import { ToastAction } from "@components/ui/toast";
+import { useToast } from "@components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useState } from "react";

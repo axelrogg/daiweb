@@ -1,4 +1,4 @@
-import { VerifyAccountForm } from "@/components/dashboard/verify-account/verify-account-form";
+import { VerifyAccountForm } from "@components/dashboard/verify-account/verify-account-form";
 import { userInfo } from "@/lib/actions/user/user-info";
 
 export default async function VerifyAccountPage() {

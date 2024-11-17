@@ -1,5 +1,5 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@components/ui/input";
+import { Label } from "@components/ui/label";
 import { userInfo } from "@/lib/actions/user/user-info";
 import { readableDate } from "@/lib/utils/date";
 import { GhostIcon } from "lucide-react";
