@@ -209,7 +209,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         async jwt({ token, profile }) {
             if (!profile) {
                 log.debug(
-                    { token },
+                    { token: token },
                     "No profile found in JWT, returning existing token"
                 );
                 return token;
@@ -250,10 +250,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return token;
         },
         session({ session, token }) {
-            log.debug({ session, token }, "Session callback triggered");
             session.user.id = token.id as string;
             log.info(
-                { sessionId: session.user.id },
+                {
+                    session: session,
+                    token: token,
+                },
                 "Session user ID set from JWT token"
             );
             return session;
