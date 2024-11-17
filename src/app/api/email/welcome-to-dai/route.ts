@@ -1,5 +1,3 @@
-import { WelcomeToDAITemplate } from "@/components/email-templates/welcome-to-dai";
-import emailService from "@/lib/email/email-service";
 import environment from "@/lib/environment";
 import { logger } from "@/lib/logging/logger";
 import { NextRequest, NextResponse } from "next/server";
