@@ -2,7 +2,6 @@ import sql from "@/lib/database/psql";
 import { UserInfo } from "@/types/actions";
 
 export class User {
-
     async accountId(externalId: string) {
         try {
             const user = await sql<{ id: number }[]>`

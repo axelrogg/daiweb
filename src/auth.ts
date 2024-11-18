@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             if (!emailVerified || !googleUserId) {
                 log.warn(
-                    { email: profileEmail, googleUserId, emailVerified },
+                    { email: profileEmail, googleUserId: googleUserId, emailVerified: emailVerified },
                     "Email not verified or missing Google user ID"
                 );
                 return false;
@@ -71,37 +71,41 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 return false;
             }
 
-            try {
-                const response = await fetch(
-                    DAI_BASE_URL + "/api/users/locker",
-                    {
-                        method: "POST",
-                        body: JSON.stringify({
-                            email: profileEmail,
-                            userId: userId,
-                        }),
+            if (userId) {
+                try {
+                    const response = await fetch(
+                        DAI_BASE_URL + "/api/users/locker",
+                        {
+                            method: "POST",
+                            body: JSON.stringify({
+                                email: profileEmail,
+                                userId: userId,
+                            }),
+                        }
+                    );
+                    if (response.status === 400 || response.status === 500) {
+                        log.error(
+                            { googleUserId, responseStatus: response.status },
+                            "Error checking locker assignment to user"
+                        );
+                        return true;
                     }
-                );
-                if (response.status === 400 || response.status === 500) {
+                    if (response.status === 201) {
+                        const data = await response.json();
+                        log.info(
+                            data,
+                            "Locker was assigned successfully to user"
+                        );
+                        return true;
+                    }
+                } catch (error: any) {
                     log.error(
-                        { googleUserId, responseStatus: response.status },
-                        "Error checking locker assignment to user"
+                        { googleUserId, error: error.message },
+                        "Exception occurred while assigning locker"
                     );
                     return true;
                 }
-                if (response.status === 201) {
-                    const data = await response.json();
-                    log.info(data, "Locker was assigned successfully to user");
-                    return true;
-                }
-            } catch (error: any) {
-                log.error(
-                    { googleUserId, error: error.message },
-                    "Exception occurred while assigning locker"
-                );
-                return false;
             }
-
             log.debug(
                 { googleUserId, email: profileEmail },
                 "User not found, creating a new user"
@@ -171,7 +175,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     { googleUserId, error: error.message },
                     "Exception occurred while assigning locker"
                 );
-                return false;
+                return true;
             }
             return false;
         },
