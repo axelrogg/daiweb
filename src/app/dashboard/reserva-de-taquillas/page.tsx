@@ -1,10 +1,10 @@
-import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
-import { LockerReservationForm } from "@/components/dashboard/lockers/locker-reservation-form";
+import { UnverifiedCard } from "@components/dashboard/cards/unverified-card";
+import { LockerReservationForm } from "@components/dashboard/lockers/locker-reservation-form";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { userLockerAction } from "@/lib/actions/lockers/user-locker";
 import { userInfo } from "@/lib/actions/user/user-info";
 import { CircleHelpIcon } from "lucide-react";

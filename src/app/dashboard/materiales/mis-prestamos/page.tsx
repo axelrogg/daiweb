@@ -1,13 +1,13 @@
-import { ActiveLoansTable } from "@/components/dashboard/materials/active-loans-table";
+import { ActiveLoansTable } from "@components/dashboard/materials/active-loans-table";
 import { activeLoans } from "@/lib/actions/materials/active-loans";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { CircleHelpIcon } from "lucide-react";
 import { userInfo } from "@/lib/actions/user/user-info";
-import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
+import { UnverifiedCard } from "@components/dashboard/cards/unverified-card";
 
 export default async function Page() {
     const user = await userInfo();

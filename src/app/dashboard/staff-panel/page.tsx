@@ -1,13 +1,13 @@
-import { UnverifiedCard } from "@/components/dashboard/cards/unverified-card";
-import { LendMaterialsPanel } from "@/components/dashboard/materials/lend-materials/lend-materials-panel";
-import { NoUserInfo } from "@/components/dashboard/materials/no-user-info";
-import { ReturnMaterialsPanel } from "@/components/dashboard/materials/return-materials/return-materials-panel";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { UnverifiedCard } from "@components/dashboard/cards/unverified-card";
+import { LendMaterialsPanel } from "@components/dashboard/materials/lend-materials/lend-materials-panel";
+import { NoUserInfo } from "@components/dashboard/materials/no-user-info";
+import { ReturnMaterialsPanel } from "@components/dashboard/materials/return-materials/return-materials-panel";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@components/ui/popover";
 import { userInfo } from "@/lib/actions/user/user-info";
 import { CircleHelpIcon } from "lucide-react";
 import Link from "next/link";

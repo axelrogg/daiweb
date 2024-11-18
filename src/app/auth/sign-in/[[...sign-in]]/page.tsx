@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { signIn } from "@/auth";
-import { DefaultLayout } from "@/components/layouts/default-layout";
-import { MainLogo } from "@/components/layouts/complements/main-logo";
+import { DefaultLayout } from "@components/layouts/default-layout";
+import { MainLogo } from "@components/layouts/complements/main-logo";
 
 export default function SignInPage() {
     return (

@@ -1,4 +1,4 @@
-import { GuideInfoCard } from "@/components/guides/guide-info-card";
+import { GuideInfoCard } from "@components/guides/guide-info-card";
 import { CompassIcon, PocketKnifeIcon } from "lucide-react";
 
 export default function Guides() {
