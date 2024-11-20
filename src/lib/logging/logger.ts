@@ -6,4 +6,12 @@ export const logger: Logger =
         ? // JSON in production
           pino({ level: "warn" })
         : // Pretty print in development
-          pino({ level: "debug" });
+          pino({
+              transport: {
+                  target: "pino-pretty",
+                  options: {
+                      colorize: true,
+                  },
+              },
+              level: "debug",
+          });
